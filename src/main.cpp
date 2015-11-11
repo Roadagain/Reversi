@@ -9,7 +9,7 @@ int main()
     initscr();
     cbreak();
     noecho();
-    Colors.init();
+    Colors::init();
 
     Board().print();
     getch();
