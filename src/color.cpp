@@ -15,5 +15,13 @@ void Colors::init()
     }
 
     start_color();
+
+    register_color(BOARD);
 }
+
+void Colors::register_color(Color color)
+{
+    init_pair(color.number, color.foreground, color.background);
+}
+
 }
