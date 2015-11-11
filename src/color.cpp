@@ -5,6 +5,8 @@
 namespace roadagain
 {
 
+Color Colors::BOARD = { BOARD_NUM, COLOR_BLACK, COLOR_GREEN };
+
 void Colors::init()
 {
     if (has_colors() == false){

@@ -6,10 +6,19 @@
 namespace roadagain
 {
 
+struct Color
+{
+    const short number;
+    const int foreground;
+    const int background;
+};
+
 class Colors
 {
 public:
     static void init();
+
+    static const Color BOARD;
 };
 
 }
