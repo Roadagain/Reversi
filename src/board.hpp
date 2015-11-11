@@ -10,6 +10,8 @@ public:
     Board();
     ~Board();
 
+    void print(int y = 0, int x = 0);
+
     static const int ROW = 8;
     static const int COL = 8;
 
