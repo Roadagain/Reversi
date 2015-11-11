@@ -1,6 +1,7 @@
 #include <ncurses.h>
 
 #include "board.hpp"
+#include "color.hpp"
 using namespace roadagain;
 
 int main()
@@ -8,6 +9,7 @@ int main()
     initscr();
     cbreak();
     noecho();
+    Colors.init();
 
     Board().print();
     getch();
