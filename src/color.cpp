@@ -19,7 +19,7 @@ void Colors::init()
     register_color(BOARD);
 }
 
-void Colors::register_color(Color color)
+void Colors::register_color(const Color& color)
 {
     init_pair(color.number, color.foreground, color.background);
 }

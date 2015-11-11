@@ -23,7 +23,7 @@ public:
     static const Color BOARD;
 
 private:
-    static void register_color(Color color);
+    static void register_color(const Color& color);
     static const int BOARD_NUMBER;
 };
 
