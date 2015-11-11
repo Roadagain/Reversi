@@ -15,8 +15,6 @@ public:
 
 private:
     int** matrix_;
-    const int row_;
-    const int col_;
 };
 
 }
