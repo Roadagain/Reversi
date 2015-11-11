@@ -1,4 +1,4 @@
-#include "print_board.hpp"
+#include "board.hpp"
 
 namespace roadagain
 {
