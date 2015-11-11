@@ -1,6 +1,7 @@
 #include <ncurses.h>
 
 #include "board.hpp"
+#include "color.hpp"
 
 namespace roadagain
 {
@@ -23,6 +24,7 @@ Board::~Board()
 
 void Board::print(int y, int x)
 {
+    Colors::change_color(Colors::BOARD);
     for (int i = 0; i < ROW * 2 + 1; i++){
         move(y + i, x);
         for (int j = 0; j < COL * 2 + 1; j++){
