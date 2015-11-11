@@ -3,17 +3,17 @@
 namespace roadagain
 {
 
-Board::Board(int row, int col) : row_(row), col_(col)
+Board::Board()
 {
-    matrix_ = new int*[row]();
-    for (int i = 0; i < row; i++){
-        matrix_[i] = new int[col_]();
+    matrix_ = new int*[ROW]();
+    for (int i = 0; i < ROW; i++){
+        matrix_[i] = new int[COL]();
     }
 }
 
 Board::~Board()
 {
-    for (int i = 0; i < row_; i++){
+    for (int i = 0; i < ROW; i++){
         delete[] matrix_[i];
     }
     delete[] matrix_;

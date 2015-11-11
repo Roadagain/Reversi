@@ -7,8 +7,11 @@ namespace roadagain
 class Board
 {
 public:
-    Board(int row, int col);
+    Board();
     ~Board();
+
+    static const int ROW = 8;
+    static const int COL = 8;
 
 private:
     int** matrix_;
