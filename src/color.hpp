@@ -18,6 +18,8 @@ class Colors
 public:
     static void init();
 
+    static void change_color(const Color& color);
+
     static const Color BOARD;
 
 private:

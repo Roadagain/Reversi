@@ -24,4 +24,9 @@ void Colors::register_color(Color color)
     init_pair(color.number, color.foreground, color.background);
 }
 
+void Colors::change_color(const Color& color)
+{
+    attron(COLOR_PAIR(color.number));
+}
+
 }
