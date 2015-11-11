@@ -19,6 +19,9 @@ public:
     static void init();
 
     static const Color BOARD;
+
+private:
+    static const int BOARD_NUMBER;
 };
 
 }
