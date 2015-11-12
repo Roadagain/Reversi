@@ -30,7 +30,7 @@ void Colors::register_color(const Color& color)
 
 void Colors::change_color(const Color& color)
 {
-    attron(COLOR_PAIR(color.number));
+    attrset(COLOR_PAIR(color.number));
 }
 
 }
