@@ -1,6 +1,8 @@
 #ifndef INCLUDE_ROADAGAIN_GAME_HPP
 #define INCLUDE_ROADAGAIN_GAME_HPP
 
+#include <utility>
+
 #include "board.hpp"
 
 namespace roadagain
@@ -13,6 +15,7 @@ public:
     ~Reversi();
 
     void start();
+    std::pair<int, int> put();
 
 private:
     Board *board_;
