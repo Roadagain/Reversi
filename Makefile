@@ -16,5 +16,8 @@ all: $(OBJ)
 clean:
 	rm -f $(OBJ) $(EXE)
 
+.PHONY: rebuild
+rebuild: clean all
+
 .cpp.o:
 	$(CXX) $(CXXFLAGS) $^
