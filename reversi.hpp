@@ -18,4 +18,6 @@ private:
     int white_;
 };
 
+}
+
 #endif

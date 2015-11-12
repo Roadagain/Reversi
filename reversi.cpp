@@ -1,4 +1,4 @@
-#include "game.hpp"
+#include "reversi.hpp"
 
 namespace roadagain
 {
