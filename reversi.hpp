@@ -12,6 +12,8 @@ public:
     Reversi();
     ~Reversi();
 
+    void start();
+
 private:
     Board *board_;
     int black_;
