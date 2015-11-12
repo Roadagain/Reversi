@@ -7,6 +7,8 @@ namespace roadagain
 
 const int Colors::BOARD_NUMBER = 1;
 const Color Colors::BOARD = { BOARD_NUMBER, COLOR_BLACK, COLOR_GREEN };
+const Color Colors::BLACK = { BLACK_NUMBER, COLOR_BLACK, COLOR_BLACK };
+const Color Colors::WHITE = { WHITE_NUMBER, COLOR_WHITE, COLOR_WHITE };
 
 void Colors::init()
 {
