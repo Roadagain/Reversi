@@ -67,7 +67,7 @@ void Board::print_stone(int y, int x)
         stone = '\0';
         break;
     }
-    addch(stone);
+    mvaddch(y * 2 + 1, x * 2 + 1, stone);
     Colors::change_color(Colors::BOARD);
 }
 
