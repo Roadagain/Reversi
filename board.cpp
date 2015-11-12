@@ -53,4 +53,9 @@ void Board::set_stone(int y, int x, BoardState state)
     matrix_[y][x] = state;
 }
 
+BoardState* Board::operator[](int index) const
+{
+    return (matrix_[index]);
+}
+
 }
