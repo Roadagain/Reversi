@@ -21,6 +21,8 @@ void Colors::init()
     start_color();
 
     register_color(BOARD);
+    register_color(BLACK);
+    register_color(WHITE);
 }
 
 void Colors::register_color(const Color& color)
