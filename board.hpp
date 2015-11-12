@@ -4,6 +4,13 @@
 namespace roadagain
 {
 
+enum BoardState
+{
+    EMPTY,
+    BLACK,
+    WHITE
+};
+
 class Board
 {
 public:
@@ -16,7 +23,7 @@ public:
     static const int COL = 8;
 
 private:
-    int** matrix_;
+    BoardState** matrix_;
 };
 
 }

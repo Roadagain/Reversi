@@ -8,9 +8,9 @@ namespace roadagain
 
 Board::Board()
 {
-    matrix_ = new int*[ROW]();
+    matrix_ = new BoardState*[ROW]();
     for (int i = 0; i < ROW; i++){
-        matrix_[i] = new int[COL]();
+        matrix_[i] = new BoardState[COL]();
     }
 }
 
