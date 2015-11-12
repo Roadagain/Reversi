@@ -2,6 +2,7 @@
 
 #include "board.hpp"
 #include "color.hpp"
+#include "reversi.hpp"
 using namespace roadagain;
 
 int main()
@@ -11,7 +12,7 @@ int main()
     noecho();
     Colors::init();
 
-    Board().print();
+    Reversi().start();
     getch();
 
     endwin();
