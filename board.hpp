@@ -4,6 +4,13 @@
 namespace roadagain
 {
 
+enum BoardState
+{
+    EMPTY,
+    BLACK,
+    WHITE
+};
+
 class Board
 {
 public:
@@ -11,12 +18,15 @@ public:
     ~Board();
 
     void print(int y = 0, int x = 0);
+    void print_stone(int y, int x);
+
+    void set_stone(int y, int x, BoardState state);
 
     static const int ROW = 8;
     static const int COL = 8;
 
 private:
-    int** matrix_;
+    BoardState** matrix_;
 };
 
 }

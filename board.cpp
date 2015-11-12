@@ -8,10 +8,14 @@ namespace roadagain
 
 Board::Board()
 {
-    matrix_ = new int*[ROW]();
+    matrix_ = new BoardState*[ROW]();
     for (int i = 0; i < ROW; i++){
-        matrix_[i] = new int[COL]();
+        matrix_[i] = new BoardState[COL]();
     }
+    matrix_[ROW / 2 - 1][COL / 2 - 1] = WHITE;
+    matrix_[ROW / 2][COL / 2] = WHITE;
+    matrix_[ROW / 2 - 1][COL / 2] = BLACK;
+    matrix_[ROW / 2][COL / 2 - 1] = BLACK;
 }
 
 Board::~Board()
@@ -32,10 +36,44 @@ void Board::print(int y, int x)
                 addch(j % 2 == 0 ? '+' : '-');
             }
             else {
-                addch(j % 2 == 0 ? '|' : ' ');
+                if (j % 2 == 0){
+                    addch('|');
+                }
+                else {
+                    print_stone(i / 2, j / 2);
+                }
             }
         }
     }
+}
+
+void Board::print_stone(int y, int x)
+{
+    char stone;
+    switch (matrix_[y][x]){
+      case EMPTY:
+        Colors::change_color(Colors::BOARD);
+        stone = ' ';
+        break;
+      case BLACK:
+        Colors::change_color(Colors::BLACK);
+        stone = 'o';
+        break;
+      case WHITE:
+        Colors::change_color(Colors::WHITE);
+        stone = 'x';
+        break;
+      default:
+        stone = '\0';
+        break;
+    }
+    mvaddch(y * 2 + 1, x * 2 + 1, stone);
+    Colors::change_color(Colors::BOARD);
+}
+
+void Board::set_stone(int y, int x, BoardState state)
+{
+    matrix_[y][x] = state;
 }
 
 }
