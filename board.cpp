@@ -40,7 +40,7 @@ void Board::print(int y, int x)
                     addch('|');
                 }
                 else {
-                    print_stone(i, j);
+                    print_stone(i / 2, j / 2);
                 }
             }
         }
