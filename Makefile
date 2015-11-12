@@ -12,5 +12,9 @@ EXE = reversi
 all: $(OBJ)
 	$(CXX) -o $(EXE) $(OBJ) -lncurses
 
+.PHONY: clean
+clean:
+	rm -f $(OBJ) $(EXE)
+
 .cpp.o:
 	$(CXX) $(CXXFLAGS) $^
