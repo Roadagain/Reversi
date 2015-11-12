@@ -49,7 +49,7 @@ void Board::print(int y, int x)
 
 void Board::print_stone(int y, int x)
 {
-    char stone = '\0';
+    char stone;
     switch (matrix_[y][x]){
       case EMPTY:
         Colors::change_color(Colors::BOARD);
@@ -62,6 +62,9 @@ void Board::print_stone(int y, int x)
       case WHITE:
         Colors::change_color(Colors::WHITE);
         stone = 'x';
+        break;
+      default:
+        stone = '\0';
         break;
     }
     addch(stone);
