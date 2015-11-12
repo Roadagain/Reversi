@@ -12,8 +12,9 @@ int main()
     noecho();
     Colors::init();
 
-    Reversi().start();
-    getch();
+    Reversi reversi;
+    reversi.start();
+    reversi.put();
 
     endwin();
     return (0);
