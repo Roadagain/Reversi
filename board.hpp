@@ -18,6 +18,7 @@ public:
     ~Board();
 
     void print(int y = 0, int x = 0);
+    void print_stone(int y, int x);
 
     void set_stone(int y, int x, BoardState state);
 
