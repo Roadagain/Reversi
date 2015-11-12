@@ -2,10 +2,15 @@
 
 CXX = g++
 CXXFLAGS = -c -O3 -Wall -Wextra
-SRCDIR = src
-SRC = $(wildcard $(SRCDIR)/*.cpp)
-BUILDDIR = build
-OBJ = $(patsubst $(SRCDIR)/%, $(BUILDDIR)/%, $(patsubst %.cpp, %.o, $(SRC)))
+SRC = $(wildcard *.cpp)
+OBJ = $(patsubst %.cpp, %.o, $(SRC))
+EXE = reversi
+
+.SUFFIXES: .cpp .o .h .d
 
 .PHONY: all
-all:
+all: $(OBJ)
+	$(CXX) -o $(EXE) $(OBJ) -lncurses
+
+.cpp.o:
+	$(CXX) $(CXXFLAGS) $^
