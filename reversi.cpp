@@ -4,7 +4,7 @@
 namespace roadagain
 {
 
-Reversi::Reversi() : black_(0), white_(0)
+Reversi::Reversi() : black_(2), white_(2)
 {
     board_ = new Board();
 }
