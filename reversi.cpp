@@ -27,9 +27,13 @@ std::pair<int, int> Reversi::put()
     int x = 0;
     char c;
 
+    if (matrix_[y][x] == EMPTY){
+        print_stone(y, x, BLACK);
+    }
 
     c = getch();
     while (c != '\n'){
+        print_stone(y, x, matrix_[y][x]);
         switch (c){
           case 'h':
             x = (x + Board::COL - 1) % Board::COL;
@@ -44,7 +48,9 @@ std::pair<int, int> Reversi::put()
             x = (x + 1) % Board::COL;
             break;
         }
-        print_stone(y, x, BLACK);
+        if (matrix_[y][x] == EMPTY){
+            print_stone(y, x, BLACK);
+        }
         c = getch();
     }
 
