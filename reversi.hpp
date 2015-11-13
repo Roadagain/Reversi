@@ -17,8 +17,11 @@ public:
     void start();
     std::pair<int, int> move();
     void put(const std::pair<int, int>& point);
+    bool reverse(const std::pair<int, int>& point);
 
 private:
+    bool reverse(const std::pair<int, int>& point, int dy, int dx);
+
     int black_;
     int white_;
 };

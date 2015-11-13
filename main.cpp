@@ -14,7 +14,10 @@ int main()
 
     Reversi reversi;
     reversi.start();
-    reversi.put();
+    std::pair<int, int> p = reversi.move();
+    reversi.put(p);
+    reversi.reverse(p);
+    getch();
 
     endwin();
     return (0);

@@ -66,4 +66,50 @@ void Reversi::put(const std::pair<int, int>& point)
     print_stone(y, x, BLACK);
 }
 
+bool Reversi::reverse(const std::pair<int, int>& point)
+{
+    bool success = false;
+
+    static const int dxy[] = { -1, 0, 1 };
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            if (dxy[i] == 0 && dxy[j] == 0){
+                continue;
+            }
+            bool flag = reverse(point, dxy[i], dxy[j]);
+            if (success == false){
+                success = flag;
+            }
+        }
+    }
+
+    return (success);
+}
+
+bool Reversi::reverse(const std::pair<int, int>& point, int dy, int dx)
+{
+    int y = point.first + dy;
+    int x = point.second + dx;
+    int cnt = 0;
+    bool can_reverse = false;
+
+    while (in_board(y, x) == true && matrix_[y][x] == WHITE){
+        cnt++;
+        can_reverse = true;
+        y += dy;
+        x += dx;
+    }
+    if (in_board(y, x) == false || can_reverse == false){
+        return (false);
+    }
+
+    while (cnt-- > 0){
+        y -= dy;
+        x += dx;
+        matrix_[y][x] = BLACK;
+        print_stone(y, x, BLACK);
+    }
+    return (true);
+}
+
 }
