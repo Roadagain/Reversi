@@ -21,7 +21,7 @@ void Reversi::start()
     print();
 }
 
-std::pair<int, int> Reversi::put()
+std::pair<int, int> Reversi::move()
 {
     int y = 0;
     int x = 0;

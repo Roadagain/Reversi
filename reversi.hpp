@@ -15,7 +15,7 @@ public:
     ~Reversi();
 
     void start();
-    std::pair<int, int> put();
+    std::pair<int, int> move();
 
 private:
     int black_;
