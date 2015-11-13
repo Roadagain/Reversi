@@ -26,7 +26,7 @@ public:
     static const int ROW = 8;
     static const int COL = 8;
 
-private:
+protected:
     BoardState** matrix_;
 };
 
