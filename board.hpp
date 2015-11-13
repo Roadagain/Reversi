@@ -19,10 +19,6 @@ public:
 
     void print(int y = 0, int x = 0);
 
-    void set_stone(int y, int x, BoardState state);
-
-    BoardState* operator[](int index) const;
-
     static const int ROW = 8;
     static const int COL = 8;
 
