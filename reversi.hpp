@@ -8,7 +8,7 @@
 namespace roadagain
 {
 
-class Reversi
+class Reversi : public Board
 {
 public:
     Reversi();
@@ -18,7 +18,6 @@ public:
     std::pair<int, int> put();
 
 private:
-    Board *board_;
     int black_;
     int white_;
 };
