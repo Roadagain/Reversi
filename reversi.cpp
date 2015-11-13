@@ -57,4 +57,13 @@ std::pair<int, int> Reversi::move()
     return (std::pair<int, int>(y, x));
 }
 
+void Reversi::put(std::pair<int, int> point)
+{
+    int y = point.first;
+    int x = point.second;
+
+    matrix_[y][x] = BLACK;
+    print_stone(y, x, BLACK);
+}
+
 }
