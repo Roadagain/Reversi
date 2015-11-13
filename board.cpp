@@ -48,4 +48,9 @@ void Board::print(int y, int x)
     }
 }
 
+bool Board::in_board(int y, int x)
+{
+    return (0 <= y && y < ROW && 0 <= x && x < COL);
+}
+
 }
