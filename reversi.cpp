@@ -25,10 +25,11 @@ std::pair<int, int> Reversi::put()
 {
     int y = 0;
     int x = 0;
-    char c = getch();
+    char c;
 
+
+    c = getch();
     while (c != '\n'){
-
         switch (c){
           case 'h':
             x = (x + Board::COL - 1) % Board::COL;
@@ -44,6 +45,7 @@ std::pair<int, int> Reversi::put()
             break;
         }
         print_stone(y, x, BLACK);
+        c = getch();
     }
 
     return (std::pair<int, int>(y, x));
