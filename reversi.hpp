@@ -16,7 +16,7 @@ public:
 
     void start();
     std::pair<int, int> move();
-    void put(std::pair<int, int> point);
+    void put(const std::pair<int, int>& point);
 
 private:
     int black_;
