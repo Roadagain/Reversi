@@ -21,6 +21,16 @@ void Reversi::start()
     print();
 }
 
+void Reversi::play()
+{
+    std::pair<int, int> point;
+
+    for (int i = 0; i < MAX_PUT; i++){
+        std::pair<int, int> point = move();
+        put(point);
+    }
+}
+
 std::pair<int, int> Reversi::move()
 {
     int y = 0;
@@ -64,6 +74,7 @@ void Reversi::put(const std::pair<int, int>& point)
 
     matrix_[y][x] = BLACK;
     print_stone(y, x, BLACK);
+    reverse(point);
 }
 
 bool Reversi::reverse(const std::pair<int, int>& point)
@@ -105,7 +116,7 @@ bool Reversi::reverse(const std::pair<int, int>& point, int dy, int dx)
 
     while (cnt-- > 0){
         y -= dy;
-        x += dx;
+        x -= dx;
         matrix_[y][x] = BLACK;
         print_stone(y, x, BLACK);
     }

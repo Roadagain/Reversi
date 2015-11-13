@@ -15,9 +15,12 @@ public:
     ~Reversi();
 
     void start();
+    void play();
     std::pair<int, int> move();
     void put(const std::pair<int, int>& point);
     bool reverse(const std::pair<int, int>& point);
+
+    static const int MAX_PUT = ROW * COL - 4;
 
 private:
     bool reverse(const std::pair<int, int>& point, int dy, int dx);
