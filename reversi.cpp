@@ -79,7 +79,7 @@ std::pair<int, int> Reversi::move()
     }
 
     c = getch();
-    while (c != '\n'){
+    while (c != '\n' || can_put(std::pair<int, int>(y, x)) == false){
         print_stone(y, x, matrix_[y][x]);
         switch (c){
           case 'h':
