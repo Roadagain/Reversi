@@ -16,14 +16,14 @@ public:
 
     void start();
     void play();
-    std::pair<int, int> move();
-    void put(const std::pair<int, int>& point);
-    bool reverse(const std::pair<int, int>& point);
 
     static const int DEFAULT_STONE = 4;
     static const int MAX_PUT = ROW * COL - DEFAULT_STONE;
 
 private:
+    std::pair<int, int> move();
+    void put(const std::pair<int, int>& point);
+    bool reverse(const std::pair<int, int>& point);
     bool reverse(const std::pair<int, int>& point, int dy, int dx);
 
     int black_;
