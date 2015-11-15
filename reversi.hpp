@@ -28,6 +28,8 @@ private:
 
     int black_;
     int white_;
+    BoardState now_;
+    BoardState next_;
 };
 
 }

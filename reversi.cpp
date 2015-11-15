@@ -8,7 +8,8 @@
 namespace roadagain
 {
 
-Reversi::Reversi() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
+Reversi::Reversi() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2),
+    now_(BLACK), next_(WHITE)
 {
 }
 
@@ -38,7 +39,7 @@ std::pair<int, int> Reversi::move()
     char c;
 
     if (matrix_[y][x] == EMPTY){
-        print_stone(y, x, BLACK);
+        print_stone(y, x, now_);
     }
 
     c = getch();
@@ -59,7 +60,7 @@ std::pair<int, int> Reversi::move()
             break;
         }
         if (matrix_[y][x] == EMPTY){
-            print_stone(y, x, BLACK);
+            print_stone(y, x, now_);
         }
         c = getch();
     }
@@ -72,8 +73,8 @@ void Reversi::put(const std::pair<int, int>& point)
     int y = point.first;
     int x = point.second;
 
-    matrix_[y][x] = BLACK;
-    print_stone(y, x, BLACK);
+    matrix_[y][x] = now_;
+    print_stone(y, x, now_);
     reverse(point);
 }
 
@@ -104,7 +105,7 @@ bool Reversi::reverse(const std::pair<int, int>& point, int dy, int dx)
     int cnt = 0;
     bool can_reverse = false;
 
-    while (in_board(y, x) == true && matrix_[y][x] == WHITE){
+    while (in_board(y, x) == true && matrix_[y][x] == next_){
         cnt++;
         can_reverse = true;
         y += dy;
@@ -117,8 +118,8 @@ bool Reversi::reverse(const std::pair<int, int>& point, int dy, int dx)
     while (cnt-- > 0){
         y -= dy;
         x -= dx;
-        matrix_[y][x] = BLACK;
-        print_stone(y, x, BLACK);
+        matrix_[y][x] = now_;
+        print_stone(y, x, now_);
     }
     return (true);
 }
