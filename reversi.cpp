@@ -33,6 +33,41 @@ void Reversi::play()
     }
 }
 
+bool Reversi::can_put(const std::pair<int, int>& point)
+{
+    static const int* dxy = { -1, 0, 1 };
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            if (dxy[i] == 0 && dxy[j] == 0){
+                continue;
+            }
+            if (can_put(point, dxy[i], dxy[j]) == true){
+                return (true);
+            }
+        }
+    }
+
+    return (false);
+}
+
+bool Reversi::can_put(const std::pair<int, int>& point, int dy, int dx)
+{
+    int y = point.first + dy;
+    int x = point.second + dx;
+
+    if (matrix_[y][x] != EMPTY){
+        return (false);
+    }
+
+    while (in_board(y, x) == true && matrix_[y][x] == next_){
+        can_reverse = true;
+        y += dy;
+        x += dx;
+    }
+
+    return (in_board(y, x) == true && can_reverse == true && matrix_[y][x] == now_);
+}
+
 std::pair<int, int> Reversi::move()
 {
     int y = 0;
