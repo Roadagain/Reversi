@@ -108,6 +108,12 @@ void Reversi::put(const std::pair<int, int>& point)
     int x = point.second;
 
     matrix_[y][x] = now_;
+    if (now_ == BLACK){
+        black_++;
+    }
+    else {
+        white_++;
+    }
     print_stone(y, x, now_);
     reverse(point);
 }
@@ -143,6 +149,14 @@ void Reversi::reverse(const std::pair<int, int>& point, int dy, int dx)
         y -= dy;
         x -= dx;
         matrix_[y][x] = now_;
+        if (now_ == BLACK){
+            black_++;
+            white_--;
+        }
+        else {
+            white_++;
+            black_--;
+        }
         print_stone(y, x, now_);
     }
 }
