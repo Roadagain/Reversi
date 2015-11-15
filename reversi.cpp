@@ -56,10 +56,6 @@ bool Reversi::can_put(const std::pair<int, int>& point, int dy, int dx)
     int y = point.first + dy;
     int x = point.second + dx;
 
-    if (matrix_[y][x] != EMPTY){
-        return (false);
-    }
-
     bool can_reverse = false;
     while (in_board(y, x) == true && matrix_[y][x] == next_){
         can_reverse = true;
