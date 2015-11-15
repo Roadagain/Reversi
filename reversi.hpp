@@ -29,6 +29,8 @@ private:
     bool reverse(const std::pair<int, int>& point, int dy, int dx);
     void change();
 
+    static const int DXY[];
+
     int black_;
     int white_;
     BoardState now_;

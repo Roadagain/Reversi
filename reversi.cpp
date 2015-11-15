@@ -33,15 +33,16 @@ void Reversi::play()
     }
 }
 
+const int Reversi::DXY[] = { -1, 0, 1 };
+
 bool Reversi::can_put(const std::pair<int, int>& point)
 {
-    static const int* dxy = { -1, 0, 1 };
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
-            if (dxy[i] == 0 && dxy[j] == 0){
+            if (DXY[i] == 0 && DXY[j] == 0){
                 continue;
             }
-            if (can_put(point, dxy[i], dxy[j]) == true){
+            if (can_put(point, DXY[i], DXY[j]) == true){
                 return (true);
             }
         }
@@ -118,13 +119,12 @@ bool Reversi::reverse(const std::pair<int, int>& point)
 {
     bool success = false;
 
-    static const int dxy[] = { -1, 0, 1 };
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
-            if (dxy[i] == 0 && dxy[j] == 0){
+            if (DXY[i] == 0 && DXY[j] == 0){
                 continue;
             }
-            bool flag = reverse(point, dxy[i], dxy[j]);
+            bool flag = reverse(point, DXY[i], DXY[j]);
             if (success == false){
                 success = flag;
             }
