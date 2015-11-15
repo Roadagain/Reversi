@@ -25,6 +25,7 @@ private:
     void put(const std::pair<int, int>& point);
     bool reverse(const std::pair<int, int>& point);
     bool reverse(const std::pair<int, int>& point, int dy, int dx);
+    void change();
 
     int black_;
     int white_;

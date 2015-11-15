@@ -29,6 +29,7 @@ void Reversi::play()
     for (int i = 0; i < MAX_PUT; i++){
         std::pair<int, int> point = move();
         put(point);
+        change();
     }
 }
 
@@ -122,6 +123,12 @@ bool Reversi::reverse(const std::pair<int, int>& point, int dy, int dx)
         print_stone(y, x, now_);
     }
     return (true);
+}
+
+void Reversi::change()
+{
+    now_ = next_;
+    next_ = (next_ == BLACK ? WHITE : BLACK);
 }
 
 }
