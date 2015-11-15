@@ -31,6 +31,18 @@ void Reversi::play()
         put(point);
         change();
     }
+    end();
+}
+
+void Reversi::end()
+{
+    ::move(ROW * 2 + 3, 0);
+    if (black_ == white_){
+        printw("Draw");
+    }
+    else {
+        printw("Winner is %s", black_ > white_ ? "White" : "Black");
+    }
 }
 
 const int Reversi::DXY[] = { -1, 0, 1 };

@@ -16,6 +16,7 @@ public:
 
     void start();
     void play();
+    void end();
 
     static const int DEFAULT_STONE = 4;
     static const int MAX_PUT = ROW * COL - DEFAULT_STONE;
