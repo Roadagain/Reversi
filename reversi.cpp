@@ -116,40 +116,31 @@ void Reversi::put(const std::pair<int, int>& point)
     reverse(point);
 }
 
-bool Reversi::reverse(const std::pair<int, int>& point)
+void Reversi::reverse(const std::pair<int, int>& point)
 {
-    bool success = false;
-
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
             if (DXY[i] == 0 && DXY[j] == 0){
                 continue;
             }
-            bool flag = reverse(point, DXY[i], DXY[j]);
-            if (success == false){
-                success = flag;
-            }
+            reverse(point, DXY[i], DXY[j]);
         }
     }
-
-    return (success);
 }
 
-bool Reversi::reverse(const std::pair<int, int>& point, int dy, int dx)
+void Reversi::reverse(const std::pair<int, int>& point, int dy, int dx)
 {
     int y = point.first + dy;
     int x = point.second + dx;
     int cnt = 0;
-    bool can_reverse = false;
 
     while (in_board(y, x) == true && matrix_[y][x] == next_){
         cnt++;
-        can_reverse = true;
         y += dy;
         x += dx;
     }
-    if (in_board(y, x) == false || can_reverse == false || matrix_[y][x] == EMPTY){
-        return (false);
+    if (in_board(y, x) == false || matrix_[y][x] == EMPTY){
+        return;
     }
 
     while (cnt-- > 0){
@@ -158,7 +149,6 @@ bool Reversi::reverse(const std::pair<int, int>& point, int dy, int dx)
         matrix_[y][x] = now_;
         print_stone(y, x, now_);
     }
-    return (true);
 }
 
 void Reversi::change()

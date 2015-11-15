@@ -25,8 +25,8 @@ private:
     bool can_put(const std::pair<int, int>& point, int dy, int dx);
     std::pair<int, int> move();
     void put(const std::pair<int, int>& point);
-    bool reverse(const std::pair<int, int>& point);
-    bool reverse(const std::pair<int, int>& point, int dy, int dx);
+    void reverse(const std::pair<int, int>& point);
+    void reverse(const std::pair<int, int>& point, int dy, int dx);
     void change();
 
     static const int DXY[];
