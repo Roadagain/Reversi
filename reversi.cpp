@@ -60,6 +60,7 @@ bool Reversi::can_put(const std::pair<int, int>& point, int dy, int dx)
         return (false);
     }
 
+    bool can_reverse = false;
     while (in_board(y, x) == true && matrix_[y][x] == next_){
         can_reverse = true;
         y += dy;
