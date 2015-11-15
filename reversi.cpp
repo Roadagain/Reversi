@@ -147,7 +147,7 @@ bool Reversi::reverse(const std::pair<int, int>& point, int dy, int dx)
         y += dy;
         x += dx;
     }
-    if (in_board(y, x) == false || can_reverse == false){
+    if (in_board(y, x) == false || can_reverse == false || matrix_[y][x] == EMPTY){
         return (false);
     }
 
