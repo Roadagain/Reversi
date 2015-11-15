@@ -19,7 +19,7 @@ Reversi::~Reversi()
 
 void Reversi::start()
 {
-    print();
+    print(START_Y, START_X);
 }
 
 void Reversi::play()
