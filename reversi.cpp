@@ -90,7 +90,9 @@ std::pair<int, int> Reversi::move()
 
     c = getch();
     while (c != '\n' || can_put(std::pair<int, int>(y, x)) == false){
-        print_stone(y, x, matrix_[y][x]);
+        if (matrix_[y][x] == EMPTY){
+            clear_stone(y, x);
+        }
         switch (c){
           case 'h':
             x = (x + Board::COL - 1) % Board::COL;
@@ -169,7 +171,7 @@ void Reversi::reverse(const std::pair<int, int>& point, int dy, int dx)
             white_++;
             black_--;
         }
-        print_stone(y, x, now_);
+        print_stone(y, x, now_, false);
     }
 }
 
