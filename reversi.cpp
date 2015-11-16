@@ -67,6 +67,9 @@ bool Reversi::can_put()
 
 bool Reversi::can_put(const std::pair<int, int>& point)
 {
+    if (matrix_[point.first][point.second] != EMPTY){
+        return (false);
+    }
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
             if (DXY[i] == 0 && DXY[j] == 0){
