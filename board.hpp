@@ -18,14 +18,13 @@ public:
     ~Board();
 
     void print(int y = 0, int x = 0);
-    void print_stone(int y, int x);
 
-    void set_stone(int y, int x, BoardState state);
+    bool in_board(int y, int x);
 
     static const int ROW = 8;
     static const int COL = 8;
 
-private:
+protected:
     BoardState** matrix_;
 };
 

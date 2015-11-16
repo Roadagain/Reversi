@@ -10,9 +10,12 @@ int main()
     initscr();
     cbreak();
     noecho();
+    curs_set(0);
     Colors::init();
 
-    Reversi().start();
+    Reversi reversi;
+    reversi.start();
+    reversi.play();
     getch();
 
     endwin();

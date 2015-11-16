@@ -2,6 +2,7 @@
 
 #include "board.hpp"
 #include "color.hpp"
+#include "print.hpp"
 
 namespace roadagain
 {
@@ -30,8 +31,8 @@ void Board::print(int y, int x)
 {
     Colors::change_color(Colors::BOARD);
     for (int i = 0; i < ROW * 2 + 1; i++){
-        move(y + i, x);
         for (int j = 0; j < COL * 2 + 1; j++){
+            move(y + i, x + j);
             if (i % 2 == 0){
                 addch(j % 2 == 0 ? '+' : '-');
             }
@@ -40,40 +41,16 @@ void Board::print(int y, int x)
                     addch('|');
                 }
                 else {
-                    print_stone(i / 2, j / 2);
+                    print_stone(i / 2, j / 2, matrix_[i / 2][j / 2], false);
                 }
             }
         }
     }
 }
 
-void Board::print_stone(int y, int x)
+bool Board::in_board(int y, int x)
 {
-    char stone;
-    switch (matrix_[y][x]){
-      case EMPTY:
-        Colors::change_color(Colors::BOARD);
-        stone = ' ';
-        break;
-      case BLACK:
-        Colors::change_color(Colors::BLACK);
-        stone = 'o';
-        break;
-      case WHITE:
-        Colors::change_color(Colors::WHITE);
-        stone = 'x';
-        break;
-      default:
-        stone = '\0';
-        break;
-    }
-    mvaddch(y * 2 + 1, x * 2 + 1, stone);
-    Colors::change_color(Colors::BOARD);
-}
-
-void Board::set_stone(int y, int x, BoardState state)
-{
-    matrix_[y][x] = state;
+    return (0 <= y && y < ROW && 0 <= x && x < COL);
 }
 
 }
