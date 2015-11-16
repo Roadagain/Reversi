@@ -34,6 +34,9 @@ void Reversi::play()
             }
         }
         std::pair<int, int> point = move();
+        if (point.first == -1 && point.second == -1){
+            break;
+        }
         put(point);
         change();
     }
@@ -133,6 +136,8 @@ std::pair<int, int> Reversi::move()
           case 'l':
             x = (x + 1) % Board::COL;
             break;
+          case ' ':
+            return (std::pair<int, int>(-1, -1));
         }
         if (matrix_[y][x] == EMPTY){
             print_stone(y, x, now_);
