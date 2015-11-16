@@ -44,10 +44,10 @@ void Reversi::end()
 {
     ::move(END_Y + 2, START_X);
     if (black_ == white_){
-        printw("Draw");
+        printw(" Draw ");
     }
     else {
-        printw("Winner is %s", black_ > white_ ? "White" : "Black");
+        printw(" Winner is %s ", black_ > white_ ? "White" : "Black");
     }
 }
 
