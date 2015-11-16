@@ -138,7 +138,7 @@ void Reversi::put(const std::pair<int, int>& point)
     else {
         white_++;
     }
-    print_stone(y, x, now_);
+    print_stone(y, x, now_, false);
     reverse(point);
 }
 
