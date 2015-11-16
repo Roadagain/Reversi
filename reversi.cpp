@@ -29,6 +29,9 @@ void Reversi::play()
     for (int i = 0; i < MAX_PUT; i++){
         if (can_put() == false){
             change();
+            if (can_put() == false){
+                break;
+            }
         }
         std::pair<int, int> point = move();
         put(point);
