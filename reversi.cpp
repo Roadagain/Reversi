@@ -27,6 +27,9 @@ void Reversi::play()
     std::pair<int, int> point;
 
     for (int i = 0; i < MAX_PUT; i++){
+        if (can_put() == false){
+            change();
+        }
         std::pair<int, int> point = move();
         put(point);
         change();
@@ -46,6 +49,18 @@ void Reversi::end()
 }
 
 const int Reversi::DXY[] = { -1, 0, 1 };
+
+bool Reversi::can_put()
+{
+    for (int i = 0; i < ROW; i++){
+        for (int j = 0; j < COL; j++){
+            if (can_put(std::pair<int, int>(i, j)) == true){
+                return (true);
+            }
+        }
+    }
+    return (false);
+}
 
 bool Reversi::can_put(const std::pair<int, int>& point)
 {

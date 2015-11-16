@@ -27,6 +27,7 @@ public:
     static const int MAX_PUT = ROW * COL - DEFAULT_STONE;
 
 private:
+    bool can_put();
     bool can_put(const std::pair<int, int>& point);
     bool can_put(const std::pair<int, int>& point, int dy, int dx);
     std::pair<int, int> move();
