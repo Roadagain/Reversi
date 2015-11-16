@@ -42,7 +42,7 @@ void Reversi::play()
 
 void Reversi::end()
 {
-    ::move(ROW * 2 + 3, 0);
+    ::move(END_Y + 2, START_X);
     if (black_ == white_){
         printw("Draw");
     }
