@@ -31,24 +31,32 @@ void print_stone(int y, int x, BoardState state, bool coordinate)
     mvaddch(y * 2 + 1 + Reversi::START_Y, x * 2 + 1 + Reversi::START_X, stone);
     Colors::change_color(Colors::BOARD);
     if (coordinate == true){
-        mvaddch(y * 2 + 1 + Reversi::START_Y, 0, '1' + y);
-        mvaddch(y * 2 + 1 + Reversi::START_X, Reversi::END_X + 1, '1' + y);
-        mvaddch(0, x * 2 + 1 + Reversi::START_X, 'a' + x);
-        mvaddch(Reversi::END_Y + 1, x * 2 + 1 + Reversi::START_X, 'a' + x);
+        print_coordinate(y, x);
     }
     else {
-        attron(COLOR_PAIR(0));
-        mvaddch(y * 2 + 1 + Reversi::START_Y, 0, ' ');
-        mvaddch(y * 2 + 1 + Reversi::START_X, Reversi::END_X + 1, ' ');
-        mvaddch(0, x * 2 + 1 + Reversi::START_X, ' ');
-        mvaddch(Reversi::END_Y + 1, x * 2 + 1 + Reversi::START_X, ' ');
-        Colors::change_color(Colors::BOARD);
+        clear_coordinate(y, x);
     }
 }
 
 void clear_stone(int y, int x)
 {
     print_stone(y, x, EMPTY, false);
+}
+
+void print_coordinate(int y, int x)
+{
+    mvaddch(y * 2 + 1 + Reversi::START_Y, 0, '1' + y);
+    mvaddch(y * 2 + 1 + Reversi::START_X, Reversi::END_X + 1, '1' + y);
+    mvaddch(0, x * 2 + 1 + Reversi::START_X, 'a' + x);
+    mvaddch(Reversi::END_Y + 1, x * 2 + 1 + Reversi::START_X, 'a' + x);
+}
+
+void clear_coordinate(int y, int x)
+{
+    mvaddch(y * 2 + 1 + Reversi::START_Y, 0, ' ');
+    mvaddch(y * 2 + 1 + Reversi::START_Y, Reversi::END_X + 1, ' ');
+    mvaddch(0, x * 2 + 1 + Reversi::START_X, ' ');
+    mvaddch(Reversi::END_Y + 1, x * 2 + 1 + Reversi::START_X, ' ');
 }
 
 }

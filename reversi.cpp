@@ -87,11 +87,17 @@ std::pair<int, int> Reversi::move()
     if (matrix_[y][x] == EMPTY){
         print_stone(y, x, now_);
     }
+    else {
+        print_coordinate(y, x);
+    }
 
     c = getch();
     while (c != '\n' || can_put(std::pair<int, int>(y, x)) == false){
         if (matrix_[y][x] == EMPTY){
             clear_stone(y, x);
+        }
+        else {
+            clear_coordinate(y, x);
         }
         switch (c){
           case 'h':
@@ -110,8 +116,12 @@ std::pair<int, int> Reversi::move()
         if (matrix_[y][x] == EMPTY){
             print_stone(y, x, now_);
         }
+        else {
+            print_coordinate(y, x);
+        }
         c = getch();
     }
+    clear_stone(y, x);
 
     return (std::pair<int, int>(y, x));
 }
