@@ -9,7 +9,9 @@ EXE = reversi
 .SUFFIXES: .cpp .o .h .d
 
 .PHONY: all
-all: $(OBJ)
+all: $(EXE)
+
+$(EXE): $(OBJ)
 	$(CXX) -o $(EXE) $(OBJ) -lncurses
 
 .PHONY: clean
