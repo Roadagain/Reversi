@@ -31,17 +31,17 @@ void Board::print(int y, int x)
 {
     Colors::change_color(Colors::BOARD);
     for (int i = 0; i < ROW * 2 + 1; i++){
-        for (int j = 0; j < COL * 2 + 1; j++){
+        for (int j = 0; j < COL * 3 + 1; j++){
             move(y + i, x + j);
             if (i % 2 == 0){
-                addch(j % 2 == 0 ? '+' : '-');
+                addch(j % 3 == 0 ? '+' : '-');
             }
             else {
-                if (j % 2 == 0){
+                if (j % 3 == 0){
                     addch('|');
                 }
                 else {
-                    print_stone(i / 2, j / 2, matrix_[i / 2][j / 2], false);
+                    print_stone(i / 2, j / 3, matrix_[i / 2][j / 3], false);
                 }
             }
         }

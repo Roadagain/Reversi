@@ -50,7 +50,7 @@ void Reversi::end()
         printw(" Draw ");
     }
     else {
-        printw(" Winner is %s ", black_ > white_ ? "White" : "Black");
+        printw(" Winner is %s ", black_ > white_ ? "Black" : "White");
     }
 }
 
