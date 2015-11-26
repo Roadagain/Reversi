@@ -28,9 +28,9 @@ void Reversi::play()
     std::pair<int, int> point;
 
     for (int i = 0; i < Board::MAX_PUT; i++){
-        if (board_->can_put(now_) == false){
+        if (!board_->can_put(now_)){
             change();
-            if (board_->can_put(now_) == false){
+            if (!board_->can_put(now_)){
                 break;
             }
         }
@@ -66,7 +66,7 @@ std::pair<int, int> Reversi::move()
     int x = 0;
     char c;
 
-    if (board_->empty(y, x) == true){
+    if (board_->empty(y, x)){
         print_stone(y, x, now_);
     }
     else {
@@ -74,8 +74,8 @@ std::pair<int, int> Reversi::move()
     }
 
     c = getch();
-    while (c != '\n' || board_->can_put(y, x, now_) == false){
-        if (board_->empty(y, x) == true){
+    while (c != '\n' || !board_->can_put(y, x, now_)){
+        if (board_->empty(y, x)){
             clear_stone(y, x);
         }
         else {
@@ -97,7 +97,7 @@ std::pair<int, int> Reversi::move()
           case ' ':
             return (std::pair<int, int>(-1, -1));
         }
-        if (board_->empty(y, x) == true){
+        if (board_->empty(y, x)){
             print_stone(y, x, now_);
         }
         else {

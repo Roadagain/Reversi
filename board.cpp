@@ -91,12 +91,12 @@ void Board::reverse(int y, int x, BoardState stone, int dy, int dx)
 
     y += dy;
     x += dx;
-    while (in_board(y, x) == true && matrix_[y][x] != EMPTY && matrix_[y][x] != stone){
+    while (in_board(y, x) && matrix_[y][x] != EMPTY && matrix_[y][x] != stone){
         cnt++;
         y += dy;
         x += dx;
     }
-    if (in_board(y, x) == false || matrix_[y][x] == EMPTY){
+    if (!in_board(y, x) || matrix_[y][x] == EMPTY){
         return;
     }
 
@@ -143,7 +143,7 @@ bool Board::can_put(BoardState stone)
 {
     for (int i = 0; i < ROW; i++){
         for (int j = 0; j < COL; j++){
-            if (can_put(i, j, stone) == true){
+            if (can_put(i, j, stone)){
                 return (true);
             }
         }
@@ -161,7 +161,7 @@ bool Board::can_put(int y, int x, BoardState stone)
             if (DXY[i] == 0 && DXY[j] == 0){
                 continue;
             }
-            if (can_put(y, x, stone, DXY[i], DXY[j]) == true){
+            if (can_put(y, x, stone, DXY[i], DXY[j])){
                 return (true);
             }
         }
@@ -175,13 +175,13 @@ bool Board::can_put(int y, int x, BoardState stone, int dy, int dx)
     bool can_reverse = false;
     y += dy;
     x += dx;
-    while (in_board(y, x) == true && matrix_[y][x] != EMPTY && matrix_[y][x] != stone){
+    while (in_board(y, x) && matrix_[y][x] != EMPTY && matrix_[y][x] != stone){
         can_reverse = true;
         y += dy;
         x += dx;
     }
 
-    return (in_board(y, x) == true && can_reverse == true && matrix_[y][x] == stone);
+    return (in_board(y, x) && can_reverse && matrix_[y][x] == stone);
 }
 
 }

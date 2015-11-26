@@ -31,7 +31,7 @@ void print_stone(int y, int x, BoardState state, bool coordinate)
     mvaddch(y * 2 + 1 + Board::START_Y, x * 3 + 1 + Board::START_X, stone);
     addch(stone);
     Colors::change_color(Colors::BOARD);
-    if (coordinate == true){
+    if (coordinate){
         print_coordinate(y, x);
     }
     else {
