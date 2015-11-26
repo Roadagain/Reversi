@@ -28,10 +28,10 @@ void print_stone(int y, int x, BoardState state, bool coordinate)
         stone = '\0';
         break;
     }
-    mvaddch(y * 2 + 1 + Reversi::START_Y, x * 3 + 1 + Reversi::START_X, stone);
+    mvaddch(y * 2 + 1 + Board::START_Y, x * 3 + 1 + Board::START_X, stone);
     addch(stone);
     Colors::change_color(Colors::BOARD);
-    if (coordinate == true){
+    if (coordinate){
         print_coordinate(y, x);
     }
     else {
@@ -46,19 +46,19 @@ void clear_stone(int y, int x)
 
 void print_coordinate(int y, int x)
 {
-    mvaddch(y * 2 + 1 + Reversi::START_Y, 0, '1' + y);
-    mvaddch(y * 2 + 1 + Reversi::START_X, Reversi::END_X + 1, '1' + y);
-    mvaddch(0, x * 3 + 1 + Reversi::START_X, 'a' + x);
-    mvaddch(Reversi::END_Y + 1, x * 3 + 2 + Reversi::START_X, 'a' + x);
+    mvaddch(y * 2 + 1 + Board::START_Y, 0, '1' + y);
+    mvaddch(y * 2 + 1 + Board::START_X, Board::END_X + 1, '1' + y);
+    mvaddch(0, x * 3 + 1 + Board::START_X, 'a' + x);
+    mvaddch(Board::END_Y + 1, x * 3 + 2 + Board::START_X, 'a' + x);
 }
 
 void clear_coordinate(int y, int x)
 {
     attrset(0);
-    mvaddch(y * 2 + 1 + Reversi::START_Y, 0, ' ');
-    mvaddch(y * 2 + 1 + Reversi::START_Y, Reversi::END_X + 1, ' ');
-    mvaddch(0, x * 3 + 1 + Reversi::START_X, ' ');
-    mvaddch(Reversi::END_Y + 1, x * 3 + 2 + Reversi::START_X, ' ');
+    mvaddch(y * 2 + 1 + Board::START_Y, 0, ' ');
+    mvaddch(y * 2 + 1 + Board::START_Y, Board::END_X + 1, ' ');
+    mvaddch(0, x * 3 + 1 + Board::START_X, ' ');
+    mvaddch(Board::END_Y + 1, x * 3 + 2 + Board::START_X, ' ');
     Colors::change_color(Colors::BOARD);
 }
 
