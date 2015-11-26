@@ -29,16 +29,16 @@ public:
     bool can_put(BoardState stone);
     bool can_put(int y, int x, BoardState stone);
 
-    static const int ROW = 8;
-    static const int COL = 8;
+    static const int ROW;
+    static const int COL;
 
-    static const int DEFAULT_STONE = 4;
-    static const int MAX_PUT = ROW * COL - DEFAULT_STONE;
+    static const int DEFAULT_STONE;
+    static const int MAX_PUT;
 
-    static const int START_Y = 1;
-    static const int START_X = 1;
-    static const int END_Y = START_Y + ROW * 2;
-    static const int END_X = START_Y + COL * 3;
+    static const int START_Y;
+    static const int START_X;
+    static const int END_Y;
+    static const int END_X;
 
     static const int DXY[];
 
