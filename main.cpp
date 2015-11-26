@@ -14,7 +14,6 @@ int main()
     Colors::init();
 
     Reversi reversi;
-    reversi.start();
     reversi.play();
     getch();
 

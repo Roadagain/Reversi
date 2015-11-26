@@ -25,8 +25,9 @@ void Reversi::start()
 
 void Reversi::play()
 {
-    std::pair<int, int> point;
+    start();
 
+    std::pair<int, int> point;
     for (int i = 0; i < Board::MAX_PUT; i++){
         if (!board_->can_put(now_)){
             change();
