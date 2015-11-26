@@ -42,7 +42,7 @@ public:
 
     static const int DXY[];
 
-protected:
+private:
     void reverse(int y, int x, BoardState stone, int dy, int dx);
     bool can_put(int y, int x, BoardState stone, int dy, int dx);
 
