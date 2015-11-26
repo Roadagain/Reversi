@@ -22,7 +22,10 @@ public:
     void put(int y, int x, BoardState stone);
     void reverse(int y, int x, BoardState stone);
 
+    BoardState winner();
+
     bool in_board(int y, int x);
+    bool empty(int y, int x);
     bool can_put(BoardState stone);
     bool can_put(int y, int x, BoardState stone);
 

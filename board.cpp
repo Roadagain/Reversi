@@ -106,9 +106,27 @@ void Board::reverse(int y, int x, BoardState stone, int dy, int dx)
     }
 }
 
+BoardState Board::winner()
+{
+    if (black_ > white_){
+        return (BLACK);
+    }
+    else if (white_ > black_){
+        return (WHITE);
+    }
+    else {
+        return (EMPTY);
+    }
+}
+
 bool Board::in_board(int y, int x)
 {
     return (0 <= y && y < ROW && 0 <= x && x < COL);
+}
+
+bool Board::empty(int y, int x)
+{
+    return (matrix_[y][x] == EMPTY);
 }
 
 bool Board::can_put(BoardState stone)

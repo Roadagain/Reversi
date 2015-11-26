@@ -10,25 +10,27 @@ namespace roadagain
 
 Reversi::Reversi() : now_(BLACK), next_(WHITE)
 {
+    board_ = new Board();
 }
 
 Reversi::~Reversi()
 {
+    delete board_;
 }
 
 void Reversi::start()
 {
-    print(START_Y, START_X);
+    board_->print(START_Y, START_X);
 }
 
 void Reversi::play()
 {
     std::pair<int, int> point;
 
-    for (int i = 0; i < MAX_PUT; i++){
-        if (can_put(now_) == false){
+    for (int i = 0; i < Board::MAX_PUT; i++){
+        if (board_->can_put(now_) == false){
             change();
-            if (can_put(now_) == false){
+            if (board_->can_put(now_) == false){
                 break;
             }
         }
@@ -36,7 +38,7 @@ void Reversi::play()
         if (point.first == -1 && point.second == -1){
             break;
         }
-        put(point.first, point.second, now_);
+        board_->put(point.first, point.second, now_);
         change();
     }
     end();
@@ -45,11 +47,16 @@ void Reversi::play()
 void Reversi::end()
 {
     ::move(END_Y + 2, START_X);
-    if (black_ == white_){
+    switch (board_->winner()){
+      case BLACK:
+        printw(" Winner is Black ");
+        break;
+      case WHITE:
+        printw(" Winner is White ");
+        break;
+      default:
         printw(" Draw ");
-    }
-    else {
-        printw(" Winner is %s ", black_ > white_ ? "Black" : "White");
+        break;
     }
 }
 
@@ -59,7 +66,7 @@ std::pair<int, int> Reversi::move()
     int x = 0;
     char c;
 
-    if (matrix_[y][x] == EMPTY){
+    if (board_->empty(y, x) == true){
         print_stone(y, x, now_);
     }
     else {
@@ -67,8 +74,8 @@ std::pair<int, int> Reversi::move()
     }
 
     c = getch();
-    while (c != '\n' || can_put(y, x, now_) == false){
-        if (matrix_[y][x] == EMPTY){
+    while (c != '\n' || board_->can_put(y, x, now_) == false){
+        if (board_->empty(y, x) == true){
             clear_stone(y, x);
         }
         else {
@@ -90,7 +97,7 @@ std::pair<int, int> Reversi::move()
           case ' ':
             return (std::pair<int, int>(-1, -1));
         }
-        if (matrix_[y][x] == EMPTY){
+        if (board_->empty(y, x) == true){
             print_stone(y, x, now_);
         }
         else {
