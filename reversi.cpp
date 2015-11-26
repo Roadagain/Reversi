@@ -20,7 +20,7 @@ Reversi::~Reversi()
 
 void Reversi::start()
 {
-    board_->print(START_Y, START_X);
+    board_->print();
 }
 
 void Reversi::play()
@@ -46,7 +46,7 @@ void Reversi::play()
 
 void Reversi::end()
 {
-    ::move(END_Y + 2, START_X);
+    ::move(Board::END_Y + 2, Board::START_X);
     switch (board_->winner()){
       case BLACK:
         printw(" Winner is Black ");
