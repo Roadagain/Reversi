@@ -48,6 +48,11 @@ void Board::print(int y, int x)
     }
 }
 
+void Board::put(int y, int x, BoardState stone)
+{
+    matrix_[y][x] = stone;
+}
+
 bool Board::in_board(int y, int x)
 {
     return (0 <= y && y < ROW && 0 <= x && x < COL);

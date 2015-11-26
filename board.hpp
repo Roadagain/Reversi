@@ -19,6 +19,8 @@ public:
 
     void print(int y = 0, int x = 0);
 
+    void put(int y, int x, BoardState stone);
+
     bool in_board(int y, int x);
 
     static const int ROW = 8;

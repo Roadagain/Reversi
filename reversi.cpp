@@ -157,7 +157,7 @@ void Reversi::put(const std::pair<int, int>& point)
     int y = point.first;
     int x = point.second;
 
-    matrix_[y][x] = now_;
+    Board::put(y, x, now_);
     if (now_ == BLACK){
         black_++;
     }
