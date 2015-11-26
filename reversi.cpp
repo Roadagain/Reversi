@@ -8,8 +8,7 @@
 namespace roadagain
 {
 
-Reversi::Reversi() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2),
-    now_(BLACK), next_(WHITE)
+Reversi::Reversi() : now_(BLACK), next_(WHITE)
 {
 }
 

@@ -7,7 +7,7 @@
 namespace roadagain
 {
 
-Board::Board()
+Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
 {
     matrix_ = new BoardState*[ROW]();
     for (int i = 0; i < ROW; i++){

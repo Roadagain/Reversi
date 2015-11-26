@@ -26,8 +26,13 @@ public:
     static const int ROW = 8;
     static const int COL = 8;
 
+    static const int DEFAULT_STONE = 4;
+    static const int MAX_PUT = ROW * COL - DEFAULT_STONE;
+
 protected:
     BoardState** matrix_;
+    int black_;
+    int white_;
 };
 
 }
