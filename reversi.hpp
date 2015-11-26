@@ -25,9 +25,6 @@ public:
 
 private:
     std::pair<int, int> move();
-    void put(const std::pair<int, int>& point);
-    void reverse(const std::pair<int, int>& point);
-    void reverse(const std::pair<int, int>& point, int dy, int dx);
     void change();
 
     BoardState now_;

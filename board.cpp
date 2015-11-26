@@ -53,6 +53,57 @@ void Board::print(int y, int x)
 void Board::put(int y, int x, BoardState stone)
 {
     matrix_[y][x] = stone;
+    if (stone == BLACK){
+        black_++;
+    }
+    else {
+        white_++;
+    }
+    print_stone(y, x, stone, false);
+    reverse(y, x, stone);
+}
+
+void Board::reverse(int y, int x, BoardState stone)
+{
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            if (DXY[i] == 0 && DXY[j] == 0){
+                continue;
+            }
+            reverse(y, x, stone, DXY[i], DXY[j]);
+        }
+    }
+}
+
+void Board::reverse(int y, int x, BoardState stone, int dy, int dx)
+{
+    int cnt = 0;
+
+    y += dy;
+    x += dx;
+    while (in_board(y, x) == true && matrix_[y][x] != EMPTY && matrix_[y][x] != stone){
+        cnt++;
+        y += dy;
+        x += dx;
+    }
+    if (in_board(y, x) == false || matrix_[y][x] == EMPTY){
+        return;
+    }
+
+    while (cnt-- > 0){
+        y -= dy;
+        x -= dx;
+        matrix_[y][x] = stone;
+        if (stone == BLACK){
+            black_++;
+            white_--;
+        }
+        else {
+            white_++;
+            black_--;
+        }
+        print_stone(y, x, stone, false);
+    }
 }
 
 bool Board::in_board(int y, int x)

@@ -20,6 +20,7 @@ public:
     void print(int y = 0, int x = 0);
 
     void put(int y, int x, BoardState stone);
+    void reverse(int y, int x, BoardState stone);
 
     bool in_board(int y, int x);
     bool can_put(BoardState stone);
@@ -34,6 +35,7 @@ public:
     static const int DXY[];
 
 protected:
+    void reverse(int y, int x, BoardState stone, int dy, int dx);
     bool can_put(int y, int x, BoardState stone, int dy, int dx);
 
     BoardState** matrix_;

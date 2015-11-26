@@ -36,7 +36,7 @@ void Reversi::play()
         if (point.first == -1 && point.second == -1){
             break;
         }
-        put(point);
+        put(point.first, point.second, now_);
         change();
     }
     end();
@@ -101,65 +101,6 @@ std::pair<int, int> Reversi::move()
     clear_stone(y, x);
 
     return (std::pair<int, int>(y, x));
-}
-
-void Reversi::put(const std::pair<int, int>& point)
-{
-    int y = point.first;
-    int x = point.second;
-
-    Board::put(y, x, now_);
-    if (now_ == BLACK){
-        black_++;
-    }
-    else {
-        white_++;
-    }
-    print_stone(y, x, now_, false);
-    reverse(point);
-}
-
-void Reversi::reverse(const std::pair<int, int>& point)
-{
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-            if (DXY[i] == 0 && DXY[j] == 0){
-                continue;
-            }
-            reverse(point, DXY[i], DXY[j]);
-        }
-    }
-}
-
-void Reversi::reverse(const std::pair<int, int>& point, int dy, int dx)
-{
-    int y = point.first + dy;
-    int x = point.second + dx;
-    int cnt = 0;
-
-    while (in_board(y, x) == true && matrix_[y][x] == next_){
-        cnt++;
-        y += dy;
-        x += dx;
-    }
-    if (in_board(y, x) == false || matrix_[y][x] == EMPTY){
-        return;
-    }
-
-    while (cnt-- > 0){
-        y -= dy;
-        x -= dx;
-        matrix_[y][x] = now_;
-        if (now_ == BLACK){
-            black_++;
-            white_--;
-        }
-        else {
-            white_++;
-            black_--;
-        }
-        print_stone(y, x, now_, false);
-    }
 }
 
 void Reversi::change()
