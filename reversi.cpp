@@ -26,9 +26,9 @@ void Reversi::play()
     std::pair<int, int> point;
 
     for (int i = 0; i < MAX_PUT; i++){
-        if (can_put() == false){
+        if (can_put(now_) == false){
             change();
-            if (can_put() == false){
+            if (can_put(now_) == false){
                 break;
             }
         }
@@ -53,54 +53,6 @@ void Reversi::end()
     }
 }
 
-const int Reversi::DXY[] = { -1, 0, 1 };
-
-bool Reversi::can_put()
-{
-    for (int i = 0; i < ROW; i++){
-        for (int j = 0; j < COL; j++){
-            if (can_put(std::pair<int, int>(i, j)) == true){
-                return (true);
-            }
-        }
-    }
-    return (false);
-}
-
-bool Reversi::can_put(const std::pair<int, int>& point)
-{
-    if (matrix_[point.first][point.second] != EMPTY){
-        return (false);
-    }
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-            if (DXY[i] == 0 && DXY[j] == 0){
-                continue;
-            }
-            if (can_put(point, DXY[i], DXY[j]) == true){
-                return (true);
-            }
-        }
-    }
-
-    return (false);
-}
-
-bool Reversi::can_put(const std::pair<int, int>& point, int dy, int dx)
-{
-    int y = point.first + dy;
-    int x = point.second + dx;
-
-    bool can_reverse = false;
-    while (in_board(y, x) == true && matrix_[y][x] == next_){
-        can_reverse = true;
-        y += dy;
-        x += dx;
-    }
-
-    return (in_board(y, x) == true && can_reverse == true && matrix_[y][x] == now_);
-}
-
 std::pair<int, int> Reversi::move()
 {
     int y = 0;
@@ -115,7 +67,7 @@ std::pair<int, int> Reversi::move()
     }
 
     c = getch();
-    while (c != '\n' || can_put(std::pair<int, int>(y, x)) == false){
+    while (c != '\n' || can_put(y, x, now_) == false){
         if (matrix_[y][x] == EMPTY){
             clear_stone(y, x);
         }

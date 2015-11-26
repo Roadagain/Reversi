@@ -7,6 +7,8 @@
 namespace roadagain
 {
 
+const int Board::DXY[] = { -1, 0, 1 };
+
 Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
 {
     matrix_ = new BoardState*[ROW]();
@@ -56,6 +58,51 @@ void Board::put(int y, int x, BoardState stone)
 bool Board::in_board(int y, int x)
 {
     return (0 <= y && y < ROW && 0 <= x && x < COL);
+}
+
+bool Board::can_put(BoardState stone)
+{
+    for (int i = 0; i < ROW; i++){
+        for (int j = 0; j < COL; j++){
+            if (can_put(i, j, stone) == true){
+                return (true);
+            }
+        }
+    }
+    return (false);
+}
+
+bool Board::can_put(int y, int x, BoardState stone)
+{
+    if (matrix_[y][x] != EMPTY){
+        return (false);
+    }
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            if (DXY[i] == 0 && DXY[j] == 0){
+                continue;
+            }
+            if (can_put(y, x, stone, DXY[i], DXY[j]) == true){
+                return (true);
+            }
+        }
+    }
+
+    return (false);
+}
+
+bool Board::can_put(int y, int x, BoardState stone, int dy, int dx)
+{
+    bool can_reverse = false;
+    y += dy;
+    x += dx;
+    while (in_board(y, x) == true && matrix_[y][x] != EMPTY && matrix_[y][x] != stone){
+        can_reverse = true;
+        y += dy;
+        x += dx;
+    }
+
+    return (in_board(y, x) == true && can_reverse == true && matrix_[y][x] == stone);
 }
 
 }

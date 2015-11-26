@@ -22,6 +22,8 @@ public:
     void put(int y, int x, BoardState stone);
 
     bool in_board(int y, int x);
+    bool can_put(BoardState stone);
+    bool can_put(int y, int x, BoardState stone);
 
     static const int ROW = 8;
     static const int COL = 8;
@@ -29,7 +31,11 @@ public:
     static const int DEFAULT_STONE = 4;
     static const int MAX_PUT = ROW * COL - DEFAULT_STONE;
 
+    static const int DXY[];
+
 protected:
+    bool can_put(int y, int x, BoardState stone, int dy, int dx);
+
     BoardState** matrix_;
     int black_;
     int white_;
