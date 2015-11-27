@@ -4,13 +4,12 @@
 namespace roadagain
 {
 
-Enemy::Enemy(Board* board) : board_(board)
+Enemy::Enemy()
 {
 }
 
 Enemy::~Enemy()
 {
-    delete board_;
 }
 
 }

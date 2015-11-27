@@ -7,11 +7,8 @@ namespace roadagain
 class Enemy
 {
 public:
-    Enemy(Board* board);
+    Enemy();
     ~Enemy();
-
-private:
-    Board* board_;
 };
 
 }
