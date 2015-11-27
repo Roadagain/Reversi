@@ -1,6 +1,8 @@
 #ifndef INCLUDE_ROADAGAIN_PRINT_BOARD
 #define INCLUDE_ROADAGAIN_PRINT_BOARD
 
+#include <string>
+
 namespace roadagain
 {
 
@@ -10,6 +12,8 @@ enum BoardState
     BLACK,
     WHITE
 };
+
+BoardState value(std::string& s);
 
 class Board
 {
