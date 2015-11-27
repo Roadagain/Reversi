@@ -1,16 +1,14 @@
-#include <ctime>
-#include <cstdlib>
 #include <utility>
 
 #include "board.hpp"
 #include "enemy.hpp"
+#include "random.hpp"
 
 namespace roadagain
 {
 
 Enemy::Enemy()
 {
-    std::srand(std::time(NULL));
 }
 
 Enemy::~Enemy()
@@ -19,7 +17,7 @@ Enemy::~Enemy()
 
 std::pair<int, int> Enemy::select(Board* board)
 {
-    int n = std::rand() % Board::ROW * Board::COL;
+    int n = random();
     int y = 0;
     int x = 0;
 
