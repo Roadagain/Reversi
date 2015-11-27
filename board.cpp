@@ -39,7 +39,7 @@ Board::~Board()
     delete[] matrix_;
 }
 
-void Board::print(int y, int x)
+void Board::print(int y, int x) const
 {
     Colors::change_color(Colors::BOARD);
     for (int i = 0; i < ROW * 2 + 1; i++){
@@ -116,7 +116,7 @@ void Board::reverse(int y, int x, BoardState stone, int dy, int dx)
     }
 }
 
-BoardState Board::winner()
+BoardState Board::winner() const
 {
     if (black_ > white_){
         return (BLACK);
@@ -129,17 +129,17 @@ BoardState Board::winner()
     }
 }
 
-bool Board::in_board(int y, int x)
+bool Board::in_board(int y, int x) const
 {
     return (0 <= y && y < ROW && 0 <= x && x < COL);
 }
 
-bool Board::empty(int y, int x)
+bool Board::empty(int y, int x) const
 {
     return (matrix_[y][x] == EMPTY);
 }
 
-bool Board::can_put(BoardState stone)
+bool Board::can_put(BoardState stone) const
 {
     for (int i = 0; i < ROW; i++){
         for (int j = 0; j < COL; j++){
@@ -151,7 +151,7 @@ bool Board::can_put(BoardState stone)
     return (false);
 }
 
-bool Board::can_put(int y, int x, BoardState stone)
+bool Board::can_put(int y, int x, BoardState stone) const
 {
     if (matrix_[y][x] != EMPTY){
         return (false);
@@ -170,7 +170,7 @@ bool Board::can_put(int y, int x, BoardState stone)
     return (false);
 }
 
-bool Board::can_put(int y, int x, BoardState stone, int dy, int dx)
+bool Board::can_put(int y, int x, BoardState stone, int dy, int dx) const
 {
     bool can_reverse = false;
     y += dy;

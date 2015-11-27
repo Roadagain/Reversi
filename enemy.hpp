@@ -12,7 +12,7 @@ public:
     Enemy();
     ~Enemy();
 
-    std::pair<int, int> select(Board* board);
+    std::pair<int, int> select(Board* board) const;
 };
 
 }

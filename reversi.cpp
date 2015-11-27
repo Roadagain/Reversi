@@ -20,7 +20,7 @@ Reversi::~Reversi()
     delete board_;
 }
 
-void Reversi::start()
+void Reversi::start() const
 {
     board_->print();
 }
@@ -54,7 +54,7 @@ void Reversi::play()
     end();
 }
 
-void Reversi::end()
+void Reversi::end() const
 {
     ::move(Board::END_Y + 2, Board::START_X);
     switch (board_->winner()){
@@ -70,7 +70,7 @@ void Reversi::end()
     }
 }
 
-std::pair<int, int> Reversi::move()
+std::pair<int, int> Reversi::move() const
 {
     int y = 0;
     int x = 0;

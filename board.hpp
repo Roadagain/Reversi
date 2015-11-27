@@ -17,17 +17,17 @@ public:
     Board();
     ~Board();
 
-    void print(int y = 0, int x = 0);
+    void print(int y = 0, int x = 0) const;
 
     void put(int y, int x, BoardState stone);
     void reverse(int y, int x, BoardState stone);
 
-    BoardState winner();
+    BoardState winner() const;
 
-    bool in_board(int y, int x);
-    bool empty(int y, int x);
-    bool can_put(BoardState stone);
-    bool can_put(int y, int x, BoardState stone);
+    bool in_board(int y, int x) const;
+    bool empty(int y, int x) const;
+    bool can_put(BoardState stone) const;
+    bool can_put(int y, int x, BoardState stone) const;
 
     static const int ROW;
     static const int COL;
@@ -44,7 +44,7 @@ public:
 
 private:
     void reverse(int y, int x, BoardState stone, int dy, int dx);
-    bool can_put(int y, int x, BoardState stone, int dy, int dx);
+    bool can_put(int y, int x, BoardState stone, int dy, int dx) const;
 
     BoardState** matrix_;
     int black_;

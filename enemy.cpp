@@ -15,7 +15,7 @@ Enemy::~Enemy()
 {
 }
 
-std::pair<int, int> Enemy::select(Board* board)
+std::pair<int, int> Enemy::select(Board* board) const
 {
     int n = random();
     int y = 0;
