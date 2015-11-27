@@ -10,13 +10,15 @@
 namespace roadagain
 {
 
-BoardState to_state(std::string& s)
+BoardState to_state(const char* s)
 {
-    std::transform(s.begin(), s.end(), s.begin(), toupper);
-    if (s == "BLACK"){
+    std::string str(s);
+
+    std::transform(str.begin(), str.end(), str.begin(), toupper);
+    if (str == "BLACK"){
         return (BLACK);
     }
-    else if (s == "WHITE"){
+    else if (str == "WHITE"){
         return (WHITE);
     }
     else {

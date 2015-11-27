@@ -13,7 +13,7 @@ enum BoardState
     WHITE
 };
 
-BoardState value(std::string& s);
+BoardState to_state(const char* s);
 
 class Board
 {
