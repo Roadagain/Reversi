@@ -9,7 +9,7 @@
 namespace roadagain
 {
 
-Reversi::Reversi() : now_(BLACK), next_(WHITE)
+Reversi::Reversi(BoardState player) : now_(BLACK), next_(WHITE), player_(player)
 {
     board_ = new Board();
     enemy_ = new Enemy();
@@ -38,7 +38,7 @@ void Reversi::play()
             }
         }
         std::pair<int, int> point;
-        if (now_ == BLACK){
+        if (now_ == player_){
             point = move();
         }
         else {
