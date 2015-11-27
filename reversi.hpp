@@ -15,12 +15,12 @@ public:
     Reversi();
     ~Reversi();
 
-    void start();
+    void start() const;
     void play();
-    void end();
+    void end() const;
 
 private:
-    std::pair<int, int> move();
+    std::pair<int, int> move() const;
     void change();
 
     Board *board_;
