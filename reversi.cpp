@@ -2,6 +2,7 @@
 #include <utility>
 
 #include "board.hpp"
+#include "enemy.hpp"
 #include "print.hpp"
 #include "reversi.hpp"
 
@@ -11,6 +12,7 @@ namespace roadagain
 Reversi::Reversi() : now_(BLACK), next_(WHITE)
 {
     board_ = new Board();
+    enemy_ = new Enemy();
 }
 
 Reversi::~Reversi()
@@ -35,7 +37,14 @@ void Reversi::play()
                 break;
             }
         }
-        std::pair<int, int> point = move();
+        std::pair<int, int> point;
+        if (now_ == BLACK){
+            point = move();
+        }
+        else {
+            point = enemy_->select(board_);
+            getch();
+        }
         if (point.first == -1 && point.second == -1){
             break;
         }

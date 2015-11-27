@@ -4,6 +4,7 @@
 #include <utility>
 
 #include "board.hpp"
+#include "enemy.hpp"
 
 namespace roadagain
 {
@@ -23,6 +24,7 @@ private:
     void change();
 
     Board *board_;
+    Enemy *enemy_;
     BoardState now_;
     BoardState next_;
 };
