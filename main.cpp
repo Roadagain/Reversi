@@ -5,7 +5,7 @@
 #include "reversi.hpp"
 using namespace roadagain;
 
-int main()
+int main(int argc, char** argv)
 {
     initscr();
     cbreak();
