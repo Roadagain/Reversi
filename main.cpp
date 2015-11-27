@@ -13,10 +13,17 @@ int main(int argc, char** argv)
     curs_set(0);
     Colors::init();
 
-    Reversi reversi;
-    reversi.play();
+    Reversi *reversi;
+    if (argc > 1){
+        reversi = new Reversi(to_state(argv[1]));
+    }
+    else {
+        reversi = new Reversi(BLACK);
+    }
+    reversi->play();
     getch();
 
+    delete reversi;
     endwin();
     return (0);
 }
