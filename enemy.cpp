@@ -7,7 +7,7 @@
 namespace roadagain
 {
 
-Enemy::Enemy()
+Enemy::Enemy(BoardState stone) : stone_(stone)
 {
 }
 
@@ -27,7 +27,7 @@ std::pair<int, int> Enemy::select(const Board* board) const
             y = 0;
             x = (x + 1) % Board::COL;
         }
-        while (!board->can_put(y, x, WHITE)){
+        while (!board->can_put(y, x, stone_)){
             y++;
             if (y >= Board::ROW){
                 y = 0;
