@@ -16,12 +16,6 @@ int main(int argc, char** argv)
     Reversi *reversi;
     if (argc > 1){
         BoardState player = to_state(argv[1]);
-        if (player == EMPTY){
-            endwin();
-            printf("Argument error: %s is not available\n", argv[1]);
-            printf("Argument must be BLACK or WHITE\n");
-            return (-1);
-        }
         reversi = new Reversi(player);
     }
     else {

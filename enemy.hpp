@@ -9,13 +9,10 @@ namespace roadagain
 class Enemy
 {
 public:
-    Enemy(BoardState stone);
+    Enemy();
     ~Enemy();
 
-    std::pair<int, int> select(const Board* board) const;
-
-private:
-    BoardState stone_;
+    std::pair<int, int> select(const Board* board, BoardState stone) const;
 };
 
 }

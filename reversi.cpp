@@ -12,7 +12,7 @@ namespace roadagain
 Reversi::Reversi(BoardState player) : player_(player), now_(BLACK), next_(WHITE)
 {
     board_ = new Board();
-    enemy_ = new Enemy(player == BLACK ? WHITE : BLACK);
+    enemy_ = new Enemy();
 }
 
 Reversi::~Reversi()
@@ -42,7 +42,7 @@ void Reversi::play()
             point = move();
         }
         else {
-            point = enemy_->select(board_);
+            point = enemy_->select(board_, now_);
             getch();
         }
         if (point.first == -1 && point.second == -1){
