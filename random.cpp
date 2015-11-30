@@ -8,16 +8,18 @@ namespace roadagain
 
 unsigned int random()
 {
-    static unsigned int MOD = Board::ROW * Board::COL;
-    static unsigned int A = 18;
-    static unsigned int B = 4;
+    static unsigned long long x = 123456789ULL;
+    static unsigned long long y = 362436069ULL;
+    static unsigned long long z = time(NULL) % 521288629ULL;
+    static unsigned long long w = 88675123ULL;
 
-    unsigned int x = std::time(NULL);
-    for (int i = 0; i < 72; i++){
-        x = (A * x + B) % MOD;
-    }
+    unsigned long long t = (x ^ (x << 11));
+    x = y;
+    y = z;
+    z = w;
+    w = w ^ (w >> 19) ^ (t ^ (t >> 8));
 
-    return (x);
+    return (w % 64);
 }
 
 }
