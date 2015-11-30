@@ -12,7 +12,7 @@ namespace roadagain
 class Reversi
 {
 public:
-    Reversi();
+    Reversi(BoardState player);
     ~Reversi();
 
     void start() const;
@@ -25,6 +25,7 @@ private:
 
     Board *board_;
     Enemy *enemy_;
+    BoardState player_;
     BoardState now_;
     BoardState next_;
 };

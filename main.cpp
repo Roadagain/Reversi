@@ -5,7 +5,7 @@
 #include "reversi.hpp"
 using namespace roadagain;
 
-int main()
+int main(int argc, char** argv)
 {
     initscr();
     cbreak();
@@ -13,10 +13,18 @@ int main()
     curs_set(0);
     Colors::init();
 
-    Reversi reversi;
-    reversi.play();
+    Reversi *reversi;
+    if (argc > 1){
+        BoardState player = to_state(argv[1]);
+        reversi = new Reversi(player);
+    }
+    else {
+        reversi = new Reversi(BLACK);
+    }
+    reversi->play();
     getch();
 
+    delete reversi;
     endwin();
     return (0);
 }

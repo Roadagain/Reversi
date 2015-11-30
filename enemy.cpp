@@ -15,7 +15,7 @@ Enemy::~Enemy()
 {
 }
 
-std::pair<int, int> Enemy::select(const Board* board) const
+std::pair<int, int> Enemy::select(const Board* board, BoardState stone) const
 {
     int n = random();
     int y = 0;
@@ -27,7 +27,7 @@ std::pair<int, int> Enemy::select(const Board* board) const
             y = 0;
             x = (x + 1) % Board::COL;
         }
-        while (!board->can_put(y, x, WHITE)){
+        while (!board->can_put(y, x, stone)){
             y++;
             if (y >= Board::ROW){
                 y = 0;

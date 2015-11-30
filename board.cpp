@@ -1,4 +1,7 @@
 #include <ncurses.h>
+#include <cctype>
+#include <algorithm>
+#include <string>
 
 #include "board.hpp"
 #include "color.hpp"
@@ -6,6 +9,22 @@
 
 namespace roadagain
 {
+
+BoardState to_state(const char* s)
+{
+    std::string str(s);
+
+    std::transform(str.begin(), str.end(), str.begin(), toupper);
+    if (str == "BLACK"){
+        return (BLACK);
+    }
+    else if (str == "WHITE"){
+        return (WHITE);
+    }
+    else {
+        return (EMPTY);
+    }
+}
 
 const int Board::ROW = 8;
 const int Board::COL = 8;
