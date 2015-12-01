@@ -15,6 +15,13 @@ public:
     bool automatic() const;
     BoardState player() const;
 
+    static const char* BLACK_STR;
+    static const char* WHITE_STR;
+    static const char* AUTOMATIC_STR;
+    static const char* USE_COLOR_STR;
+    static const char* TRUE_STR;
+    static const char* FALSE_STR;
+
 private:
     Config();
     Config(const Config& config);
