@@ -4,8 +4,7 @@
 namespace roadagain
 {
 
-Config::Config(bool use_color, bool automatic, BoardState player)
-    : use_color_(use_color), automatic_(automatic), player_(player)
+Config::Config() : use_color_(true), automatic_(false), player_(BLACK)
 {
 }
 
