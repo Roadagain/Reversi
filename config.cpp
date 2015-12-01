@@ -13,7 +13,8 @@ Config::Config() : use_color_(true), automatic_(false), player_(BLACK)
 
 Config& Config::instance()
 {
-    return (Config::instance_);
+    static Config instance_;
+    return (instance_);
 }
 
 bool Config::init(int argc, char** argv)
