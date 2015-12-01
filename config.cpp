@@ -75,7 +75,12 @@ bool Config::automatic() const
 
 BoardState Config::player() const
 {
-    return (player_);
+    if (automatic_){
+        return (EMPTY);
+    }
+    else {
+        return (player_);
+    }
 }
 
 const std::string Config::BLACK_STR("black");
