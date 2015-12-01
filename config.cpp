@@ -66,17 +66,17 @@ bool Config::init(int argc, char** argv)
     return (true);
 }
 
-bool Config::use_color()
+bool Config::use_color() const
 {
     return (use_color_);
 }
 
-bool Config::automatic()
+bool Config::automatic() const
 {
     return (automatic_);
 }
 
-BoardState player()
+BoardState Config::player() const
 {
     return (player_);
 }
