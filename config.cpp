@@ -14,7 +14,7 @@ Config::Config(const Config& config)
 
 Config& Config::instance()
 {
-    return (Config.instance);
+    return (Config::instance_);
 }
 
 Config::Config& operator=(const Config& config)

@@ -13,7 +13,7 @@ private:
     Config();
     Config(const Config& config);
     Config& operator=(const Config& config);
-    static Config instance;
+    static Config instance_;
 
     bool use_color_;
     bool automatic_;
