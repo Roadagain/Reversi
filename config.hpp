@@ -13,7 +13,7 @@ public:
 
     bool use_color() const;
     bool automatic() const;
-    bool player() const;
+    BoardState player() const;
 
 private:
     Config();
