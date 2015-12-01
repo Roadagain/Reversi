@@ -28,10 +28,10 @@ bool Config::init(int argc, char** argv)
             player_ = WHITE;
         }
         else if (argument.substr(0, 11) == "--automatic"){
-            if (argument == "--automatic" || argument.substr(12) == "=true"){
+            if (argument == "--automatic" || argument.substr(11) == "=true"){
                 automatic_ = true;
             }
-            else if (argument.substr(12) == "=false"){
+            else if (argument.substr(11) == "=false"){
                 automatic_ = false;
             }
             else {
@@ -41,10 +41,10 @@ bool Config::init(int argc, char** argv)
             }
         }
         else if (argument.substr(0, 11) == "--use-color"){
-            if (argument == "--use-color" || argument.substr(12) == "=true"){
+            if (argument == "--use-color" || argument.substr(11) == "=true"){
                 use_color_ = true;
             }
-            else if (argument.substr(12) == "=false"){
+            else if (argument.substr(11) == "=false"){
                 use_color_ = false;
             }
             else {
