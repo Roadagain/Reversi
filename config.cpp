@@ -22,5 +22,3 @@ Config& Config::operator=(const Config& config)
 }
 
 }
-
-#endif
