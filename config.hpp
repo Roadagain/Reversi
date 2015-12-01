@@ -20,8 +20,6 @@ private:
     Config(const Config& config);
     Config& operator=(const Config& config);
 
-    static Config instance_;
-
     bool use_color_;
     bool automatic_;
     BoardState player_;
