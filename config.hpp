@@ -15,9 +15,9 @@ private:
     Config& operator=(const Config& config);
     static Config instance;
 
-    bool use_color;
-    bool automatic;
-    BoardState player;
+    bool use_color_;
+    bool automatic_;
+    BoardState player_;
 };
 
 }
