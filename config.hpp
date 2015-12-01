@@ -7,7 +7,7 @@ namespace roadagain
 class Config
 {
 public:
-    static Config& instance() const;
+    static Config& instance();
 
 private:
     Config();

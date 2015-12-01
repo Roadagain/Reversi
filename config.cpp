@@ -12,7 +12,7 @@ Config::Config(const Config& config)
 {
 }
 
-Config& Config::instance() const
+Config& Config::instance()
 {
     return (Config.instance);
 }
