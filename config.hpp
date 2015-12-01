@@ -9,10 +9,17 @@ class Config
 public:
     static Config& instance();
 
+    bool init(int argc, char** argv);
+
+    bool use_color() const;
+    bool automatic() const;
+    bool player() const;
+
 private:
     Config();
     Config(const Config& config);
     Config& operator=(const Config& config);
+
     static Config instance_;
 
     bool use_color_;
