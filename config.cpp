@@ -81,6 +81,8 @@ BoardState player()
     return (player_);
 }
 
+static Config::instance_;
+
 Config& Config::operator=(const Config& config)
 {
 }
