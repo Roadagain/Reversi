@@ -1,6 +1,8 @@
 #ifndef INCLUDE_ROADAGAIN_CONFIG
 #define INCLUDE_ROADAGAIN_CONFIG
 
+#include <string>
+
 namespace roadagain
 {
 
@@ -15,12 +17,12 @@ public:
     bool automatic() const;
     BoardState player() const;
 
-    static const char* BLACK_STR;
-    static const char* WHITE_STR;
-    static const char* AUTOMATIC_STR;
-    static const char* USE_COLOR_STR;
-    static const char* TRUE_STR;
-    static const char* FALSE_STR;
+    static const std::string BLACK_STR;
+    static const std::string WHITE_STR;
+    static const std::string AUTOMATIC_STR;
+    static const std::string USE_COLOR_STR;
+    static const std::string TRUE_STR;
+    static const std::string FALSE_STR;
 
 private:
     Config();

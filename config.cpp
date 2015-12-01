@@ -28,7 +28,7 @@ bool Config::init(int argc, char** argv)
         else if (argument == WHITE_STR){
             player_ = WHITE;
         }
-        else if (argument.substr(0, 11) == AUTOMATIC_STR){
+        else if (argument.find(AUTOMATIC_STR) == 0){
             if (argument == AUTOMATIC_STR || argument.substr(11) == TRUE_STR){
                 automatic_ = true;
             }
@@ -41,7 +41,7 @@ bool Config::init(int argc, char** argv)
                 return (false);
             }
         }
-        else if (argument.substr(0, 11) == USE_COLOR_STR){
+        else if (argument.find(USE_COLOR_STR) == 0){
             if (argument == USE_COLOR_STR || argument.substr(11) == TRUE_STR){
                 use_color_ = true;
             }
@@ -78,11 +78,11 @@ BoardState Config::player() const
     return (player_);
 }
 
-const char* Config::BLACK_STR = "black";
-const char* Config::WHITE_STR = "white";
-const char* Config::AUTOMATIC_STR = "--automatic";
-const char* Config::USE_COLOR_STR = "--use-color";
-const char* Config::TRUE_STR = "=true";
-const char* Config::FALSE_STR = "=false";
+const std::string Config::BLACK_STR("black");
+const std::string Config::WHITE_STR("white");
+const std::string Config::AUTOMATIC_STR("--automatic");
+const std::string Config::USE_COLOR_STR("--use-color");
+const std::string Config::TRUE_STR("=true");
+const std::string Config::FALSE_STR("=false");
 
 }
