@@ -20,16 +20,15 @@ public:
     static const std::string BLACK_STR;
     static const std::string WHITE_STR;
     static const std::string AUTOMATIC_STR;
-    static const std::string USE_COLOR_STR;
-    static const std::string TRUE_STR;
-    static const std::string FALSE_STR;
+    static const std::string COLOR_STR;
+    static const std::string NO_COLOR_STR;
 
 private:
     Config();
     Config(const Config& config);
     Config& operator=(const Config& config);
 
-    bool use_color_;
+    bool color_;
     bool automatic_;
     BoardState player_;
 };

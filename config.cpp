@@ -29,30 +29,13 @@ bool Config::init(int argc, char** argv)
             player_ = WHITE;
         }
         else if (argument.find(AUTOMATIC_STR) == 0){
-            if (argument == AUTOMATIC_STR || argument.substr(11) == TRUE_STR){
-                automatic_ = true;
-            }
-            else if (argument.substr(11) == FALSE_STR){
-                automatic_ = false;
-            }
-            else {
-                std::printf("invalid argument: %s\n", argv[i]);
-                std::printf("automatic option must be 'true' or 'false'");
-                return (false);
-            }
+            automatic_ = true;
         }
-        else if (argument.find(USE_COLOR_STR) == 0){
-            if (argument == USE_COLOR_STR || argument.substr(11) == TRUE_STR){
-                use_color_ = true;
-            }
-            else if (argument.substr(11) == FALSE_STR){
-                use_color_ = false;
-            }
-            else {
-                std::printf("invalid argument: %s\n", argv[i]);
-                std::printf("using color option must be 'true' or 'false'");
-                return (false);
-            }
+        else if (argument.find(COLOR_STR) == 0){
+            color_ = true;
+        }
+        else if (argument.find(NO_COLOR_STR) == 0){
+            color_ = false;
         }
         else {
             std::printf("invalid argument: %s\n", argv[i]);
@@ -86,8 +69,7 @@ BoardState Config::player() const
 const std::string Config::BLACK_STR("black");
 const std::string Config::WHITE_STR("white");
 const std::string Config::AUTOMATIC_STR("--automatic");
-const std::string Config::USE_COLOR_STR("--use-color");
-const std::string Config::TRUE_STR("=true");
-const std::string Config::FALSE_STR("=false");
+const std::string Config::COLOR_STR("--color");
+const std::string Config::NO_COLOR_STR("--nocolor");
 
 }
