@@ -28,13 +28,13 @@ bool Config::init(int argc, char** argv)
         else if (argument == WHITE_STR){
             player_ = WHITE;
         }
-        else if (argument.find(AUTOMATIC_STR) == 0){
+        else if (argument == AUTOMATIC_STR){
             automatic_ = true;
         }
-        else if (argument.find(COLOR_STR) == 0){
+        else if (argument == COLOR_STR){
             color_ = true;
         }
-        else if (argument.find(NO_COLOR_STR) == 0){
+        else if (argument == NO_COLOR_STR){
             color_ = false;
         }
         else {
