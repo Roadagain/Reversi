@@ -37,6 +37,10 @@ bool Config::init(int argc, char** argv)
         else if (argument == NO_COLOR_STR){
             color_ = false;
         }
+        else if (argument == HELP_STR){
+            help();
+            return (false);
+        }
         else {
             std::printf("invalid argument: %s\n", argv[i]);
             return (false);
@@ -44,6 +48,19 @@ bool Config::init(int argc, char** argv)
     }
 
     return (true);
+}
+
+void Config::help()
+{
+    std::puts("Usage: reversi [options] [color]");
+    std::puts("Reversi game for one person's play.");
+    std::puts("Options:");
+    std::puts("  --automatic Play automatically.");
+    std::puts("  --color     Use colors when printing something.");
+    std::puts("  --help      Print this help and exit successfully.");
+    std::puts("  --nocolor   Don't use colors when printing something.");
+    std::puts("");
+    std::puts("color must be 'black' or 'white'.");
 }
 
 bool Config::color() const

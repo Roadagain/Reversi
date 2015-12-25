@@ -13,6 +13,8 @@ public:
 
     bool init(int argc, char** argv);
 
+    void help();
+
     bool color() const;
     bool automatic() const;
     BoardState player() const;
@@ -22,6 +24,7 @@ public:
     static const std::string AUTOMATIC_STR;
     static const std::string COLOR_STR;
     static const std::string NO_COLOR_STR;
+    static const std::string HELP_STR;
 
 private:
     Config();
