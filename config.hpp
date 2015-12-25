@@ -13,7 +13,7 @@ public:
 
     bool init(int argc, char** argv);
 
-    bool use_color() const;
+    bool color() const;
     bool automatic() const;
     BoardState player() const;
 

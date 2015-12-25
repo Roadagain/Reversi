@@ -7,7 +7,7 @@
 namespace roadagain
 {
 
-Config::Config() : use_color_(true), automatic_(false), player_(BLACK)
+Config::Config() : color_(true), automatic_(false), player_(BLACK)
 {
 }
 
@@ -46,9 +46,9 @@ bool Config::init(int argc, char** argv)
     return (true);
 }
 
-bool Config::use_color() const
+bool Config::color() const
 {
-    return (use_color_);
+    return (color_);
 }
 
 bool Config::automatic() const
@@ -71,5 +71,6 @@ const std::string Config::WHITE_STR("white");
 const std::string Config::AUTOMATIC_STR("--automatic");
 const std::string Config::COLOR_STR("--color");
 const std::string Config::NO_COLOR_STR("--nocolor");
+const std::string Config::HELP_STR("--help");
 
 }

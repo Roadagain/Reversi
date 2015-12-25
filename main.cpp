@@ -17,7 +17,7 @@ int main(int argc, char** argv)
     cbreak();
     noecho();
     curs_set(0);
-    if (config.use_color()){
+    if (config.color()){
         Colors::init();
     }
 
