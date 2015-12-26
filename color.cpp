@@ -14,7 +14,7 @@ const Color Colors::WHITE = { WHITE_NUMBER, COLOR_WHITE, COLOR_WHITE };
 
 void Colors::init()
 {
-    if (has_colors() == false){
+    if (!has_colors()){
         return;
     }
 
