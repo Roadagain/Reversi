@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstdlib>
 #include <string>
 
 #include "board.hpp"
@@ -47,7 +48,7 @@ bool Config::init(int argc, char** argv)
         }
         else if (argument == HELP_STR){
             help();
-            return (false);
+            std::exit(0);
         }
         else {
             std::printf("invalid argument: %s\n", argv[i]);
