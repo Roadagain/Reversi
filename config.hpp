@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "board.hpp"
+
 namespace roadagain
 {
 
@@ -23,7 +25,9 @@ public:
     static const std::string WHITE_STR;
     static const std::string AUTOMATIC_STR;
     static const std::string COLOR_STR;
-    static const std::string NO_COLOR_STR;
+    static const std::string ALWAYS_STR;
+    static const std::string AUTO_STR;
+    static const std::string NEVER_STR;
     static const std::string HELP_STR;
 
 private:
