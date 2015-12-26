@@ -60,7 +60,8 @@ void Config::help()
     std::puts("  --help      Print this help and exit successfully.");
     std::puts("  --nocolor   Don't use colors when printing something.");
     std::puts("");
-    std::puts("color must be 'black' or 'white'.");
+    std::puts("Color must be 'black' or 'white'.");
+    std::puts("Default color is black.");
 }
 
 bool Config::color() const
