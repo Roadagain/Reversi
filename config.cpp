@@ -1,6 +1,9 @@
 #include <cstdio>
 #include <cstdlib>
 #include <string>
+#include <vector>
+
+#include "Scorpio/parse-option.hpp"
 
 #include "board.hpp"
 #include "config.hpp"
@@ -20,38 +23,47 @@ Config& Config::instance()
 
 bool Config::init(int argc, char** argv)
 {
-    for (int i = 1; i < argc; i++){
-        std::string argument(argv[i]);
+    scorpio::OptionParser parser(argc, argv);
 
-        if (argument == BLACK_STR){
-            player_ = BLACK;
+    parser.add_option(AUTOMATIC_STR);
+    parser.add_option(COLOR_STR, true);
+    parser.add_option(HELP_STR);
+    parser.add_option(BLACK_STR);
+    parser.add_option(WHITE_STR);
+
+    std::vector<scorpio::Option> options = parser.parse();
+    int size = options.size();
+    for (int i = 0; i < size; i++){
+        if (!options[i].available){
+            continue;
         }
-        else if (argument == WHITE_STR){
-            player_ = WHITE;
+        if (options[i].name == HELP_STR){
+            help();
+            return (false);
         }
-        else if (argument == AUTOMATIC_STR){
+        else if (options[i].name == AUTOMATIC_STR){
             automatic_ = true;
         }
-        else if (argument.find(COLOR_STR) == 0){
-            std::string when = argument.substr(COLOR_STR.length());
-            if (when == "" || when == ALWAYS_STR || when == AUTO_STR){
+        else if (options[i].name == COLOR_STR){
+            if (options[i].value == ALWAYS_STR || options[i].value == AUTO_STR){
                 color_ = true;
             }
-            else if (when == NEVER_STR){
+            else if (options[i].value == NEVER_STR){
                 color_ = false;
             }
             else {
-                std::printf("invalid argument: %s\n", argv[i]);
-                std::printf("color argument must be 'always', 'auto', or 'never'.\n");
+                std::puts("color option can be only 1 of 3 values: always, auto, never");
                 return (false);
             }
         }
-        else if (argument == HELP_STR){
-            help();
-            std::exit(0);
+        else if (options[i].name == BLACK_STR){
+            player_ = BLACK;
+        }
+        else if (options[i].name == WHITE_STR){
+            player_ = WHITE;
         }
         else {
-            std::printf("invalid argument: %s\n", argv[i]);
+            std::printf("Unknown option: %s", options[i].name.c_str());
             return (false);
         }
     }
