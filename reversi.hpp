@@ -12,7 +12,7 @@ namespace roadagain
 class Reversi
 {
 public:
-    Reversi(BoardState player);
+    Reversi(BoardState player, Level level);
     ~Reversi();
 
     void start() const;
