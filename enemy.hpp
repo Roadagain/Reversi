@@ -8,6 +8,12 @@
 namespace roadagain
 {
 
+enum Level
+{
+    EASY,
+    HARD
+};
+
 class Enemy
 {
 public:
@@ -15,6 +21,8 @@ public:
     ~Enemy();
 
     std::pair<int, int> select(const Board* board, BoardState stone) const;
+private:
+    Level level_;
 };
 
 }
