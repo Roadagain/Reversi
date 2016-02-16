@@ -21,7 +21,7 @@ std::pair<int, int> Enemy::select(const Board* board, BoardState stone) const
 {
     switch (level_){
         case EASY:
-            return random_select(board, stone);
+            return randomized_select(board, stone);
         case HARD:
             return maximized_select(board, stone);
     }
