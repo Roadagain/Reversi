@@ -1,6 +1,9 @@
 #include <cstdio>
 #include <cstdlib>
 #include <string>
+#include <vector>
+
+#include "Scorpio/parse-option.hpp"
 
 #include "board.hpp"
 #include "config.hpp"
@@ -8,7 +11,7 @@
 namespace roadagain
 {
 
-Config::Config() : color_(true), automatic_(false), player_(BLACK)
+Config::Config() : color_(true), automatic_(false), player_(BLACK), level_(EASY)
 {
 }
 
@@ -20,38 +23,59 @@ Config& Config::instance()
 
 bool Config::init(int argc, char** argv)
 {
-    for (int i = 1; i < argc; i++){
-        std::string argument(argv[i]);
+    scorpio::OptionParser parser(argc, argv);
 
-        if (argument == BLACK_STR){
-            player_ = BLACK;
+    parser.add_option(AUTOMATIC_STR);
+    parser.add_option(COLOR_STR, true);
+    parser.add_option(LEVEL_STR, true);
+    parser.add_option(HELP_STR);
+    parser.add_option(BLACK_STR);
+    parser.add_option(WHITE_STR);
+
+    std::vector<scorpio::Option> options = parser.parse();
+    int size = options.size();
+    for (int i = 0; i < size; i++){
+        if (!options[i].available){
+            continue;
         }
-        else if (argument == WHITE_STR){
-            player_ = WHITE;
+        if (options[i].name == HELP_STR){
+            help();
         }
-        else if (argument == AUTOMATIC_STR){
+        else if (options[i].name == AUTOMATIC_STR){
             automatic_ = true;
         }
-        else if (argument.find(COLOR_STR) == 0){
-            std::string when = argument.substr(COLOR_STR.length());
-            if (when == "" || when == ALWAYS_STR || when == AUTO_STR){
+        else if (options[i].name == COLOR_STR){
+            if (options[i].value == ALWAYS_STR || options[i].value == AUTO_STR){
                 color_ = true;
             }
-            else if (when == NEVER_STR){
+            else if (options[i].value == NEVER_STR){
                 color_ = false;
             }
             else {
-                std::printf("invalid argument: %s\n", argv[i]);
-                std::printf("color argument must be 'always', 'auto', or 'never'.\n");
+                std::puts("color option can be only 1 of 3 values: always, auto, never");
                 return (false);
             }
         }
-        else if (argument == HELP_STR){
-            help();
-            std::exit(0);
+        else if (options[i].name == LEVEL_STR){
+            if (options[i].value == EASY_STR){
+                level_ = EASY;
+            }
+            else if (options[i].value == HARD_STR){
+                level_ = HARD;
+            }
+            else {
+                std::puts("level option cna be only 1 of 2 values: easy, hard");
+                return (false);
+            }
+        }
+        else if (options[i].name == BLACK_STR){
+            player_ = BLACK;
+        }
+        else if (options[i].name == WHITE_STR){
+            player_ = WHITE;
         }
         else {
-            std::printf("invalid argument: %s\n", argv[i]);
+            std::printf("Unknown option: %s\n", options[i].name.c_str());
             return (false);
         }
     }
@@ -71,6 +95,8 @@ void Config::help()
     std::puts("");
     std::puts("Color must be 'black' or 'white'.");
     std::puts("Default color is black.");
+
+    std::exit(0);
 }
 
 bool Config::color() const
@@ -93,13 +119,21 @@ BoardState Config::player() const
     }
 }
 
+Level Config::level() const
+{
+    return (level_);
+}
+
 const std::string Config::BLACK_STR("black");
 const std::string Config::WHITE_STR("white");
 const std::string Config::AUTOMATIC_STR("--automatic");
 const std::string Config::COLOR_STR("--color");
-const std::string Config::ALWAYS_STR("=always");
-const std::string Config::AUTO_STR("=auto");
-const std::string Config::NEVER_STR("=never");
+const std::string Config::ALWAYS_STR("always");
+const std::string Config::AUTO_STR("auto");
+const std::string Config::NEVER_STR("never");
+const std::string Config::LEVEL_STR("--level");
+const std::string Config::EASY_STR("easy");
+const std::string Config::HARD_STR("hard");
 const std::string Config::HELP_STR("--help");
 
 }
