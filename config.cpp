@@ -39,7 +39,6 @@ bool Config::init(int argc, char** argv)
         }
         if (options[i].name == HELP_STR){
             help();
-            return (false);
         }
         else if (options[i].name == AUTOMATIC_STR){
             automatic_ = true;
@@ -83,6 +82,8 @@ void Config::help()
     std::puts("");
     std::puts("Color must be 'black' or 'white'.");
     std::puts("Default color is black.");
+
+    std::exit(0);
 }
 
 bool Config::color() const
