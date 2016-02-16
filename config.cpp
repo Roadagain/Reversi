@@ -131,7 +131,7 @@ const std::string Config::COLOR_STR("--color");
 const std::string Config::ALWAYS_STR("always");
 const std::string Config::AUTO_STR("auto");
 const std::string Config::NEVER_STR("never");
-const std::string Config::LEVEL_STR("level");
+const std::string Config::LEVEL_STR("--level");
 const std::string Config::EASY_STR("easy");
 const std::string Config::HARD_STR("hard");
 const std::string Config::HELP_STR("--help");
