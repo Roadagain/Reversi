@@ -54,8 +54,8 @@ std::pair<int, int> Enemy::randomized_select(const Board* board, BoardState ston
 
 std::pair<int, int> Enemy::maximized_select(const Board* board, BoardState stone) const
 {
-    int y;
-    int x;
+    int y = 0;
+    int x = 0;
     int maximum = 0;
 
     for (int i = 0; i < Board::ROW; i++){
