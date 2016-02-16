@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     }
 
     Reversi *reversi;
-    reversi = new Reversi(config.player());
+    reversi = new Reversi(config.player(), config.level());
     reversi->play();
     getch();
 
