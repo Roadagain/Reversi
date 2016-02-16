@@ -60,8 +60,8 @@ std::pair<int, int> Enemy::maximized_select(const Board* board, BoardState stone
 
     for (int i = 0; i < Board::ROW; i++){
         for (int j = 0; j < Board::COL; j++){
-            if (board->can_put(y, x, stone)){
-                int tmp = board->reverse_num(y, x, stone);
+            if (board->can_put(i, j, stone)){
+                int tmp = board->reverse_num(i, j, stone);
                 if (maximum < tmp){
                     maximum = tmp;
                     y = i;
