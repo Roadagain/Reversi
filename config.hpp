@@ -4,6 +4,7 @@
 #include <string>
 
 #include "board.hpp"
+#include "enemy.hpp"
 
 namespace roadagain
 {
@@ -28,6 +29,9 @@ public:
     static const std::string ALWAYS_STR;
     static const std::string AUTO_STR;
     static const std::string NEVER_STR;
+    static const std::string LEVEL_STR;
+    static const std::string EASY_STR;
+    static const std::string HARD_STR;
     static const std::string HELP_STR;
 
 private:
@@ -38,6 +42,7 @@ private:
     bool color_;
     bool automatic_;
     BoardState player_;
+    Level level_;
 };
 
 }

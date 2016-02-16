@@ -11,7 +11,7 @@
 namespace roadagain
 {
 
-Config::Config() : color_(true), automatic_(false), player_(BLACK)
+Config::Config() : color_(true), automatic_(false), player_(BLACK), level_(EASY)
 {
 }
 
@@ -27,6 +27,7 @@ bool Config::init(int argc, char** argv)
 
     parser.add_option(AUTOMATIC_STR);
     parser.add_option(COLOR_STR, true);
+    parser.add_option(LEVEL_STR, true);
     parser.add_option(HELP_STR);
     parser.add_option(BLACK_STR);
     parser.add_option(WHITE_STR);
@@ -52,6 +53,18 @@ bool Config::init(int argc, char** argv)
             }
             else {
                 std::puts("color option can be only 1 of 3 values: always, auto, never");
+                return (false);
+            }
+        }
+        else if (options[i].name == LEVEL_STR){
+            if (options[i].value == EASY_STR){
+                level_ = EASY;
+            }
+            else if (options[i].value == HARD_STR){
+                level_ = HARD;
+            }
+            else {
+                std::puts("level option cna be only 1 of 2 values: easy, hard");
                 return (false);
             }
         }
@@ -113,6 +126,9 @@ const std::string Config::COLOR_STR("--color");
 const std::string Config::ALWAYS_STR("always");
 const std::string Config::AUTO_STR("auto");
 const std::string Config::NEVER_STR("never");
+const std::string Config::LEVEL_STR("level");
+const std::string Config::EASY_STR("easy");
+const std::string Config::HARD_STR("hard");
 const std::string Config::HELP_STR("--help");
 
 }
