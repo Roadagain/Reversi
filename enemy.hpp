@@ -22,6 +22,7 @@ public:
 
     std::pair<int, int> select(const Board* board, BoardState stone) const;
 private:
+    std::pair<int, int> random_select(const Board* board, BoardState stone) const;
     Level level_;
 };
 

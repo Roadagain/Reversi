@@ -17,6 +17,14 @@ Enemy::~Enemy()
 
 std::pair<int, int> Enemy::select(const Board* board, BoardState stone) const
 {
+    switch (level_){
+        case EASY:
+            return random_select(board, stone);
+    }
+}
+
+std::pair<int, int> Enemy::random_select(const Board* board, BoardState stone) const
+{
     int n = random();
     int y = 0;
     int x = 0;
