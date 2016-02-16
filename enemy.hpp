@@ -17,7 +17,7 @@ enum Level
 class Enemy
 {
 public:
-    Enemy();
+    Enemy(Level level);
     ~Enemy();
 
     std::pair<int, int> select(const Board* board, BoardState stone) const;

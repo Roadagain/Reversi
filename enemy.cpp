@@ -7,7 +7,7 @@
 namespace roadagain
 {
 
-Enemy::Enemy()
+Enemy::Enemy(Level level) : level_(level)
 {
 }
 
