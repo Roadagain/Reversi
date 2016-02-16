@@ -4,7 +4,9 @@ Version 2.0 is latest
 
 ## Implemented function
 + Selecting color by a program argument
-+ Randomized Enemy
++ Enemy
+    + Randomized (EASY)
+    + Maximized (HARD)
 + Automatical mode
 + Selecting output colorization
 + Printing help message
