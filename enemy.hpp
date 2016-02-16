@@ -23,6 +23,7 @@ public:
     std::pair<int, int> select(const Board* board, BoardState stone) const;
 private:
     std::pair<int, int> randomized_select(const Board* board, BoardState stone) const;
+    std::pair<int, int> maximized_select(const Board* board, BoardState stone) const;
     Level level_;
 };
 

@@ -1,5 +1,7 @@
 #include <utility>
 
+#include "Scorpio/min-max.hpp"
+
 #include "board.hpp"
 #include "enemy.hpp"
 #include "random.hpp"
@@ -20,6 +22,8 @@ std::pair<int, int> Enemy::select(const Board* board, BoardState stone) const
     switch (level_){
         case EASY:
             return random_select(board, stone);
+        case HARD:
+            return maximized_select(board, stone);
     }
 }
 
@@ -44,6 +48,32 @@ std::pair<int, int> Enemy::randomized_select(const Board* board, BoardState ston
         }
         n--;
     } while (n > 0);
+
+    return (std::pair<int, int>(y, x));
+}
+
+std::pair<int, int> Enemy::maximized_select(const Board* board, BoardState stone) const
+{
+    int y;
+    int x;
+    int maximum = 0;
+
+    for (int i = 0; i < Board::ROW; i++){
+        for (int j = 0; j < Board::COL; j++){
+            if (board->can_put(y, x, stone)){
+                int tmp = board->reverse_num(y, x, stone);
+                if (maximum < tmp){
+                    maximum = tmp;
+                    y = i;
+                    x = j;
+                }
+                else if (maximum == tmp && random() % 2 == 0){
+                    y = i;
+                    x = j;
+                }
+            }
+        }
+    }
 
     return (std::pair<int, int>(y, x));
 }
