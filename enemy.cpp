@@ -23,7 +23,7 @@ std::pair<int, int> Enemy::select(const Board* board, BoardState stone) const
     }
 }
 
-std::pair<int, int> Enemy::random_select(const Board* board, BoardState stone) const
+std::pair<int, int> Enemy::randomized_select(const Board* board, BoardState stone) const
 {
     int n = random();
     int y = 0;
