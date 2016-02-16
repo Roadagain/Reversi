@@ -109,9 +109,9 @@ const std::string Config::BLACK_STR("black");
 const std::string Config::WHITE_STR("white");
 const std::string Config::AUTOMATIC_STR("--automatic");
 const std::string Config::COLOR_STR("--color");
-const std::string Config::ALWAYS_STR("=always");
-const std::string Config::AUTO_STR("=auto");
-const std::string Config::NEVER_STR("=never");
+const std::string Config::ALWAYS_STR("always");
+const std::string Config::AUTO_STR("auto");
+const std::string Config::NEVER_STR("never");
 const std::string Config::HELP_STR("--help");
 
 }
