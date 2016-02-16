@@ -21,9 +21,9 @@ std::pair<int, int> Enemy::select(const Board* board, BoardState stone) const
 {
     switch (level_){
         case EASY:
-            return randomized_select(board, stone);
+            return (randomized_select(board, stone));
         default:
-            return maximized_select(board, stone);
+            return (maximized_select(board, stone));
     }
 }
 
