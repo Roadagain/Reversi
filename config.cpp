@@ -119,6 +119,11 @@ BoardState Config::player() const
     }
 }
 
+Level Config::level() const
+{
+    return (level_);
+}
+
 const std::string Config::BLACK_STR("black");
 const std::string Config::WHITE_STR("white");
 const std::string Config::AUTOMATIC_STR("--automatic");

@@ -21,6 +21,7 @@ public:
     bool color() const;
     bool automatic() const;
     BoardState player() const;
+    Level level() const;
 
     static const std::string BLACK_STR;
     static const std::string WHITE_STR;
