@@ -63,7 +63,7 @@ bool Config::init(int argc, char** argv)
             player_ = WHITE;
         }
         else {
-            std::printf("Unknown option: %s", options[i].name.c_str());
+            std::printf("Unknown option: %s\n", options[i].name.c_str());
             return (false);
         }
     }
