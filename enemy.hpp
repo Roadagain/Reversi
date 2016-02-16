@@ -3,6 +3,8 @@
 
 #include <utility>
 
+#include "board.hpp"
+
 namespace roadagain
 {
 
