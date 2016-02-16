@@ -9,10 +9,10 @@
 namespace roadagain
 {
 
-Reversi::Reversi(BoardState player) : player_(player), now_(BLACK), next_(WHITE)
+Reversi::Reversi(BoardState player, Level level) : player_(player), now_(BLACK), next_(WHITE)
 {
     board_ = new Board();
-    enemy_ = new Enemy();
+    enemy_ = new Enemy(level);
 }
 
 Reversi::~Reversi()
