@@ -68,6 +68,8 @@ void Reversi::end() const
         printw(" Draw ");
         break;
     }
+    ::move(Board::END_Y + 2, Board::END_X - 6);
+    printw(" %02d %02d ", board_->black(), board_->white());
 }
 
 std::pair<int, int> Reversi::move() const
