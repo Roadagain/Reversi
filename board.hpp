@@ -28,6 +28,9 @@ public:
 
     int reverse_num(int y, int x, BoardState stone) const;
 
+    int black() const;
+    int white() const;
+
     BoardState winner() const;
 
     bool in_board(int y, int x) const;
