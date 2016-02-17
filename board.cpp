@@ -169,6 +169,16 @@ int Board::reverse_num(int y, int x, BoardState stone, int dy, int dx) const
     return (cnt);
 }
 
+int Board::black() const
+{
+    return (black_);
+}
+
+int Board::white() const
+{
+    return (white_);
+}
+
 BoardState Board::winner() const
 {
     if (black_ > white_){
