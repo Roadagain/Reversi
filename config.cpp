@@ -101,6 +101,8 @@ void Config::help()
     std::puts("  --automatic    Play automatically.");
     std::puts("  --color[=WHEN] Colorize the output; ");
     std::puts("                 WHEN can be 'always' (default if omitted), 'auto', or 'never'.");
+    std::puts("  --level=LEVEL  Choose enemy's level;");
+    std::puts("                 LEVEL can be 'easy', 'hard'.");
     std::puts("  --help         Print this help and exit successfully.");
     std::puts("");
     std::puts("Color must be 'black' or 'white'.");
