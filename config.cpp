@@ -65,7 +65,7 @@ bool Config::init(int argc, char** argv)
                 level_ = HARD;
             }
             else {
-                std::puts("level option cna be only 1 of 2 values: easy, hard");
+                std::puts("level option can be only 1 of 2 values: easy, hard");
                 return (false);
             }
         }
