@@ -28,6 +28,7 @@ bool Config::init(int argc, char** argv)
     parser.add_option(AUTOMATIC_STR);
     parser.add_option(COLOR_STR, true);
     parser.add_option(LEVEL_STR, true);
+    parser.add_option(LOG_STR, true);
     parser.add_option(HELP_STR);
     parser.add_option(BLACK_STR);
     parser.add_option(WHITE_STR);
@@ -66,6 +67,15 @@ bool Config::init(int argc, char** argv)
             else {
                 std::puts("level option cna be only 1 of 2 values: easy, hard");
                 return (false);
+            }
+        }
+        else if (options[i].name == LOG_STR){
+            if (options[i].value.empty()){
+                std::puts("log option needs filename");
+                return (false);
+            }
+            else {
+                log_file_ = options[i].value;
             }
         }
         else if (options[i].name == BLACK_STR){
@@ -134,6 +144,7 @@ const std::string Config::NEVER_STR("never");
 const std::string Config::LEVEL_STR("--level");
 const std::string Config::EASY_STR("easy");
 const std::string Config::HARD_STR("hard");
+const std::string Config::LOG_STR("--log");
 const std::string Config::HELP_STR("--help");
 
 }
