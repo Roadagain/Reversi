@@ -1,8 +1,10 @@
 #include <ncurses.h>
 #include <utility>
+#include <vector>
 
 #include "board.hpp"
 #include "enemy.hpp"
+#include "log.hpp"
 #include "print.hpp"
 #include "reversi.hpp"
 
@@ -13,6 +15,8 @@ Reversi::Reversi(BoardState player, Level level) : player_(player), now_(BLACK),
 {
     board_ = new Board();
     enemy_ = new Enemy(level);
+    logs_ = new std::vector<Log>();
+    logs_->reserve(Board::MAX_PUT);
 }
 
 Reversi::~Reversi()
