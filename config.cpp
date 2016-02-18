@@ -137,6 +137,11 @@ Level Config::level() const
     return (level_);
 }
 
+std::string Config::log_file() const
+{
+    return (log_file_);
+}
+
 const std::string Config::BLACK_STR("black");
 const std::string Config::WHITE_STR("white");
 const std::string Config::AUTOMATIC_STR("--automatic");

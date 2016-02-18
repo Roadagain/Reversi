@@ -22,6 +22,7 @@ public:
     bool automatic() const;
     BoardState player() const;
     Level level() const;
+    std::string log_file() const;
 
     static const std::string BLACK_STR;
     static const std::string WHITE_STR;
