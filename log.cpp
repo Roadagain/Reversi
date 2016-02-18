@@ -34,13 +34,13 @@ void log_records(std::vector<Log>& logs, BoardState winner)
         log_file << '\n';
     }
     if (winner == BLACK){
-        log_file << "Winner is Blackn";
+        log_file << "Winner is Black";
     }
     else if (winner == WHITE){
-        log_file << "Winner is Whiten";
+        log_file << "Winner is White";
     }
     else {
-        log_file << "Drawn";
+        log_file << "Draw";
     }
     log_file << '\n';
 
