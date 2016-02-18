@@ -17,7 +17,7 @@ struct Log
     Log(int y, int x, BoardState stone);
 };
 
-void log_records(std::vector<Log> logs, BoardState winner);
+void log_records(std::vector<Log>& logs, BoardState winner);
 
 }
 
