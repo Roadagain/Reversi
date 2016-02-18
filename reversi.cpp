@@ -74,7 +74,7 @@ void Reversi::end() const
         printw(" Draw ");
         break;
     }
-    log_records(logs_, winner);
+    log_records(*logs_, winner);
 }
 
 std::pair<int, int> Reversi::move() const
