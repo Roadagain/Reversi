@@ -28,6 +28,7 @@ bool Config::init(int argc, char** argv)
     parser.add_option(AUTOMATIC_STR);
     parser.add_option(COLOR_STR, true);
     parser.add_option(LEVEL_STR, true);
+    parser.add_option(LOG_STR, true);
     parser.add_option(HELP_STR);
     parser.add_option(BLACK_STR);
     parser.add_option(WHITE_STR);
@@ -68,6 +69,15 @@ bool Config::init(int argc, char** argv)
                 return (false);
             }
         }
+        else if (options[i].name == LOG_STR){
+            if (options[i].value.empty()){
+                std::puts("log option needs filename");
+                return (false);
+            }
+            else {
+                log_file_name_ = options[i].value;
+            }
+        }
         else if (options[i].name == BLACK_STR){
             player_ = BLACK;
         }
@@ -89,8 +99,11 @@ void Config::help()
     std::puts("Reversi game for one person's play.");
     std::puts("Options:");
     std::puts("  --automatic    Play automatically.");
-    std::puts("  --color[=WHEN] Colorize the output; ");
+    std::puts("  --color[=WHEN] Colorize the output;");
     std::puts("                 WHEN can be 'always' (default if omitted), 'auto', or 'never'.");
+    std::puts("  --level=LEVEL  Choose enemy's level;");
+    std::puts("                 LEVEL can be 'easy' or 'hard'.");
+    std::puts("  --log=FILENAME Log the game records to FILENAME.");
     std::puts("  --help         Print this help and exit successfully.");
     std::puts("");
     std::puts("Color must be 'black' or 'white'.");
@@ -124,6 +137,11 @@ Level Config::level() const
     return (level_);
 }
 
+std::string Config::log_file_name() const
+{
+    return (log_file_name_);
+}
+
 const std::string Config::BLACK_STR("black");
 const std::string Config::WHITE_STR("white");
 const std::string Config::AUTOMATIC_STR("--automatic");
@@ -134,6 +152,7 @@ const std::string Config::NEVER_STR("never");
 const std::string Config::LEVEL_STR("--level");
 const std::string Config::EASY_STR("easy");
 const std::string Config::HARD_STR("hard");
+const std::string Config::LOG_STR("--log");
 const std::string Config::HELP_STR("--help");
 
 }
