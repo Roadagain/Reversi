@@ -23,7 +23,7 @@ void log_records(std::vector<Log>& logs, BoardState winner)
         else {
             log_file << 'W';
         }
-        log_file << ' ' << ('a' + logs[i].x);
+        log_file << ' ' << (char)('a' + logs[i].x);
         log_file << ' ' << logs[i].y;
         log_file << '\n';
     }
