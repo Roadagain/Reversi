@@ -22,6 +22,7 @@ public:
     bool automatic() const;
     BoardState player() const;
     Level level() const;
+    std::string log_file_name() const;
 
     static const std::string BLACK_STR;
     static const std::string WHITE_STR;
@@ -33,6 +34,7 @@ public:
     static const std::string LEVEL_STR;
     static const std::string EASY_STR;
     static const std::string HARD_STR;
+    static const std::string LOG_STR;
     static const std::string HELP_STR;
 
 private:
@@ -44,6 +46,7 @@ private:
     bool automatic_;
     BoardState player_;
     Level level_;
+    std::string log_file_name_;
 };
 
 }

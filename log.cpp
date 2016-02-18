@@ -16,12 +16,12 @@ void log_records(std::vector<Log>& logs, BoardState winner)
 {
     Config& config = Config::instance();
 
-    if (config.log_file().empty()){
+    if (config.log_file_name().empty()){
         return;
     }
 
     int size = logs.size();
-    std::ofstream log_file(config.log_file().c_str());
+    std::ofstream log_file(config.log_file_name().c_str());
     for (int i = 0; i < size; i++){
         if (logs[i].stone == BLACK){
             log_file << 'B';
