@@ -53,6 +53,7 @@ void Reversi::play()
             break;
         }
         board_->put(point.first, point.second, now_);
+        logs_->push_back(Log(point.first, point.second, now_));
         change();
     }
     end();
@@ -61,7 +62,8 @@ void Reversi::play()
 void Reversi::end() const
 {
     ::move(Board::END_Y + 2, Board::START_X);
-    switch (board_->winner()){
+    BoardState winner = board_->winner();
+    switch (winner){
       case BLACK:
         printw(" Winner is Black ");
         break;
@@ -72,6 +74,7 @@ void Reversi::end() const
         printw(" Draw ");
         break;
     }
+    log_records(logs_, winner);
 }
 
 std::pair<int, int> Reversi::move() const
