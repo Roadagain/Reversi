@@ -1,10 +1,8 @@
 #include <ncurses.h>
 #include <utility>
-#include <vector>
 
 #include "board.hpp"
 #include "enemy.hpp"
-#include "log.hpp"
 #include "print.hpp"
 #include "reversi.hpp"
 
@@ -15,8 +13,6 @@ Reversi::Reversi(BoardState player, Level level) : player_(player), now_(BLACK),
 {
     board_ = new Board();
     enemy_ = new Enemy(level);
-    logs_ = new std::vector<Log>();
-    logs_->reserve(Board::MAX_PUT);
 }
 
 Reversi::~Reversi()
@@ -53,7 +49,6 @@ void Reversi::play()
             break;
         }
         board_->put(point.first, point.second, now_);
-        logs_->push_back(Log(point.first, point.second, now_));
         change();
     }
     end();
@@ -62,8 +57,7 @@ void Reversi::play()
 void Reversi::end() const
 {
     ::move(Board::END_Y + 2, Board::START_X);
-    BoardState winner = board_->winner();
-    switch (winner){
+    switch (board_->winner()){
       case BLACK:
         printw(" Winner is Black ");
         break;
@@ -74,7 +68,6 @@ void Reversi::end() const
         printw(" Draw ");
         break;
     }
-    log_records(*logs_, winner);
 }
 
 std::pair<int, int> Reversi::move() const
