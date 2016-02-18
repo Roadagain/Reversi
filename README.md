@@ -10,4 +10,5 @@ Version 2.1 is latest
 + Automatical mode
 + Selecting output colorization
 + Printing help message
++ Printing result after game
 + Log the game records
