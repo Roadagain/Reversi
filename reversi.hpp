@@ -2,9 +2,11 @@
 #define INCLUDE_ROADAGAIN_GAME_HPP
 
 #include <utility>
+#include <vector>
 
 #include "board.hpp"
 #include "enemy.hpp"
+#include "log.hpp"
 
 namespace roadagain
 {
@@ -28,6 +30,7 @@ private:
     BoardState player_;
     BoardState now_;
     BoardState next_;
+    std::vector<Log> *logs_;
 };
 
 }

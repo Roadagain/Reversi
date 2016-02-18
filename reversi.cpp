@@ -3,6 +3,7 @@
 
 #include "board.hpp"
 #include "enemy.hpp"
+#include "log.hpp"
 #include "print.hpp"
 #include "reversi.hpp"
 
@@ -13,6 +14,8 @@ Reversi::Reversi(BoardState player, Level level) : player_(player), now_(BLACK),
 {
     board_ = new Board();
     enemy_ = new Enemy(level);
+    logs_ = new std::vector<Log>();
+    logs_->reserve(Board::MAX_PUT);
 }
 
 Reversi::~Reversi()
@@ -50,14 +53,16 @@ void Reversi::play()
         }
         board_->put(point.first, point.second, now_);
         change();
+        logs_->push_back(Log(point.first, point.second, now_));
     }
     end();
 }
 
 void Reversi::end() const
 {
+    BoardState winner = board_->winner();
     ::move(Board::END_Y + 2, Board::START_X);
-    switch (board_->winner()){
+    switch (winner){
       case BLACK:
         printw(" Winner is Black ");
         break;
