@@ -12,7 +12,7 @@ Log::Log(int y, int x, BoardState stone) : y(y), x(x), stone(stone)
 {
 }
 
-void log_record(std::vector<Log> logs, BoardState winner)
+void log_records(std::vector<Log> logs, BoardState winner)
 {
     int size = logs.size();
     std::ofstream log_file(Config::instance().log_file().c_str());
