@@ -13,6 +13,8 @@ struct Log
     int y;
     int x;
     BoardState stone;
+
+    Log(int y, int x, BoardState stone);
 };
 
 void log_records(std::vector<Log> logs);

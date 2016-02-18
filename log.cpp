@@ -8,6 +8,10 @@
 namespace roadagain
 {
 
+Log::Log(int y, int x, BoardState stone) : y(y), x(x), stone(stone)
+{
+}
+
 void log_record(std::vector<Log> logs, BoardState winner)
 {
     int size = logs.size();
