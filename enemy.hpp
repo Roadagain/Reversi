@@ -1,8 +1,6 @@
 #ifndef INCLUDE_ROADAGAIN_ENEMY
 #define INCLUDE_ROADAGAIN_ENEMY
 
-#include <utility>
-
 #include "board.hpp"
 
 namespace roadagain
@@ -20,10 +18,10 @@ public:
     Enemy(Level level);
     ~Enemy();
 
-    std::pair<int, int> select(const Board* board, BoardState stone) const;
+    Point select(const Board* board, BoardState stone) const;
 private:
-    std::pair<int, int> randomized_select(const Board* board, BoardState stone) const;
-    std::pair<int, int> maximized_select(const Board* board, BoardState stone) const;
+    Point randomized_select(const Board* board, BoardState stone) const;
+    Point maximized_select(const Board* board, BoardState stone) const;
     Level level_;
 };
 
