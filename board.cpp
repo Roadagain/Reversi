@@ -139,7 +139,7 @@ void Board::reverse(Point p, BoardState stone, int dy, int dx)
     }
 }
 
-int Board::reverse_num(int y, int x, BoardState stone) const
+int Board::reverse_num(const Point& p, BoardState stone) const
 {
     int cnt = 0;
 
@@ -148,25 +148,25 @@ int Board::reverse_num(int y, int x, BoardState stone) const
             if (DXY[i] == 0 && DXY[j] == 0){
                 continue;
             }
-            cnt += reverse_num(y, x, stone, DXY[i], DXY[j]);
+            cnt += reverse_num(p, stone, DXY[i], DXY[j]);
         }
     }
 
     return (cnt);
 }
 
-int Board::reverse_num(int y, int x, BoardState stone, int dy, int dx) const
+int Board::reverse_num(Point p, BoardState stone, int dy, int dx) const
 {
     int cnt = 0;
 
-    y += dy;
-    x += dx;
-    while (in_board(y, x) && matrix_[y][x] != EMPTY && matrix_[y][x] != stone){
+    p.y += dy;
+    p.x += dx;
+    while (in_board(p.y, p.x) && matrix_[p.y][p.x] != EMPTY && matrix_[p.y][p.x] != stone){
         cnt++;
-        y += dy;
-        x += dx;
+        p.y += dy;
+        p.x += dx;
     }
-    if (!in_board(y, x) || matrix_[y][x] == EMPTY){
+    if (!in_board(p.y, p.x) || matrix_[p.y][p.x] == EMPTY){
         return (0);
     }
 
