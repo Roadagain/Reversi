@@ -32,7 +32,6 @@ void Reversi::play()
 {
     start();
 
-    Point point;
     for (int i = 0; i < Board::MAX_PUT; i++){
         if (!board_->can_put(now_)){
             change();
