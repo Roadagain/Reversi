@@ -26,7 +26,7 @@ BoardState to_state(const char* s)
     }
 }
 
-Point point(int y, int x) : y(y), x(x)
+Point::Point(int y, int x) : y(y), x(x)
 {
 }
 
