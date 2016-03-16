@@ -96,37 +96,37 @@ void Board::put(const Point& p, BoardState stone)
     reverse(y, x, stone);
 }
 
-void Board::reverse(int y, int x, BoardState stone)
+void Board::reverse(const Point& p, BoardState stone)
 {
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
             if (DXY[i] == 0 && DXY[j] == 0){
                 continue;
             }
-            reverse(y, x, stone, DXY[i], DXY[j]);
+            reverse(p, stone, DXY[i], DXY[j]);
         }
     }
 }
 
-void Board::reverse(int y, int x, BoardState stone, int dy, int dx)
+void Board::reverse(Point p, BoardState stone, int dy, int dx)
 {
     int cnt = 0;
 
-    y += dy;
-    x += dx;
-    while (in_board(y, x) && matrix_[y][x] != EMPTY && matrix_[y][x] != stone){
+    p.y += dy;
+    p.x += dx;
+    while (in_board(p) && matrix_[p.y][p.x] != EMPTY && matrix_[p.y][p.x] != stone){
         cnt++;
-        y += dy;
-        x += dx;
+        p.y += dy;
+        p.x += dx;
     }
     if (!in_board(y, x) || matrix_[y][x] == EMPTY){
         return;
     }
 
     while (cnt-- > 0){
-        y -= dy;
-        x -= dx;
-        matrix_[y][x] = stone;
+        p.y -= dy;
+        p.x -= dx;
+        matrix_[p.y][p.x] = stone;
         if (stone == BLACK){
             black_++;
             white_--;
