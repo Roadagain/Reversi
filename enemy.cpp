@@ -28,32 +28,30 @@ Point Enemy::select(const Board* board, BoardState stone) const
 Point Enemy::randomized_select(const Board* board, BoardState stone) const
 {
     int n = random();
-    int y = 0;
-    int x = 0;
+    Point p;
 
     do {
-        y++;
-        if (y >= Board::ROW){
-            y = 0;
-            x = (x + 1) % Board::COL;
+        p.y++;
+        if (p.y >= Board::ROW){
+            p.y = 0;
+            p.x = (p.x + 1) % Board::COL;
         }
-        while (!board->can_put(Point(y, x), stone)){
-            y++;
-            if (y >= Board::ROW){
-                y = 0;
-                x = (x + 1) % Board::COL;
+        while (!board->can_put(p, stone)){
+            p.y++;
+            if (p.y >= Board::ROW){
+                p.y = 0;
+                p.x = (p.x + 1) % Board::COL;
             }
         }
         n--;
     } while (n > 0);
 
-    return (Point(y, x));
+    return (p);
 }
 
 Point Enemy::maximized_select(const Board* board, BoardState stone) const
 {
-    int y = 0;
-    int x = 0;
+    Point p;
     int maximum = 0;
 
     for (int i = 0; i < Board::ROW; i++){
@@ -62,18 +60,18 @@ Point Enemy::maximized_select(const Board* board, BoardState stone) const
                 int tmp = board->reverse_num(Point(i, j), stone);
                 if (maximum < tmp){
                     maximum = tmp;
-                    y = i;
-                    x = j;
+                    p.y = i;
+                    p.x = j;
                 }
                 else if (maximum == tmp && random() % 2 == 0){
-                    y = i;
-                    x = j;
+                    p.y = i;
+                    p.x = j;
                 }
             }
         }
     }
 
-    return (Point(y, x));
+    return (p);
 }
 
 }
