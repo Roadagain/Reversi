@@ -41,7 +41,7 @@ public:
 
     BoardState winner() const;
 
-    bool in_board(int y, int x) const;
+    bool in_board(const Point& p) const;
     bool empty(int y, int x) const;
     bool can_put(BoardState stone) const;
     bool can_put(int y, int x, BoardState stone) const;
