@@ -20,7 +20,7 @@ struct Point
     int y;
     int x;
 
-    Point(int y, int x);
+    Point(int y = 0, int x = 0);
 };
 
 class Board
