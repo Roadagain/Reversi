@@ -53,7 +53,7 @@ void Reversi::play()
         }
         board_->put(p, now_);
         change();
-        logs_->push_back(Log(p.y, p.x, now_));
+        logs_->push_back(Log(p, now_));
     }
     end();
 }
