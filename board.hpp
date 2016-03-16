@@ -31,7 +31,7 @@ public:
 
     void print(const Point& p = Point(0, 0)) const;
 
-    void put(int y, int x, BoardState stone);
+    void put(const Point& p, BoardState stone);
     void reverse(int y, int x, BoardState stone);
 
     int reverse_num(int y, int x, BoardState stone) const;

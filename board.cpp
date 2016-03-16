@@ -83,9 +83,9 @@ void Board::print(const Point& p) const
     }
 }
 
-void Board::put(int y, int x, BoardState stone)
+void Board::put(const Point& p, BoardState stone)
 {
-    matrix_[y][x] = stone;
+    matrix_[p.y][p.x] = stone;
     if (stone == BLACK){
         black_++;
     }
