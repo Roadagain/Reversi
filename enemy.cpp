@@ -39,7 +39,7 @@ std::pair<int, int> Enemy::randomized_select(const Board* board, BoardState ston
             y = 0;
             x = (x + 1) % Board::COL;
         }
-        while (!board->can_put(y, x, stone)){
+        while (!board->can_put(Point(y, x), stone)){
             y++;
             if (y >= Board::ROW){
                 y = 0;
@@ -60,7 +60,7 @@ std::pair<int, int> Enemy::maximized_select(const Board* board, BoardState stone
 
     for (int i = 0; i < Board::ROW; i++){
         for (int j = 0; j < Board::COL; j++){
-            if (board->can_put(i, j, stone)){
+            if (board->can_put(Point(i, j), stone)){
                 int tmp = board->reverse_num(Point(i, j), stone);
                 if (maximum < tmp){
                     maximum = tmp;

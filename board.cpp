@@ -210,7 +210,7 @@ bool Board::can_put(BoardState stone) const
 {
     for (int i = 0; i < ROW; i++){
         for (int j = 0; j < COL; j++){
-            if (can_put(i, j, stone)){
+            if (can_put(Point(i, j), stone)){
                 return (true);
             }
         }
@@ -218,9 +218,9 @@ bool Board::can_put(BoardState stone) const
     return (false);
 }
 
-bool Board::can_put(int y, int x, BoardState stone) const
+bool Board::can_put(const Point& p, BoardState stone) const
 {
-    if (matrix_[y][x] != EMPTY){
+    if (matrix_[p.y][p.x] != EMPTY){
         return (false);
     }
     for (int i = 0; i < 3; i++){
@@ -228,7 +228,7 @@ bool Board::can_put(int y, int x, BoardState stone) const
             if (DXY[i] == 0 && DXY[j] == 0){
                 continue;
             }
-            if (can_put(y, x, stone, DXY[i], DXY[j])){
+            if (can_put(p, stone, DXY[i], DXY[j])){
                 return (true);
             }
         }
@@ -237,18 +237,18 @@ bool Board::can_put(int y, int x, BoardState stone) const
     return (false);
 }
 
-bool Board::can_put(int y, int x, BoardState stone, int dy, int dx) const
+bool Board::can_put(Point p, BoardState stone, int dy, int dx) const
 {
     bool can_reverse = false;
-    y += dy;
-    x += dx;
-    while (in_board(Point(y, x)) && matrix_[y][x] != EMPTY && matrix_[y][x] != stone){
+    p.y += dy;
+    p.x += dx;
+    while (in_board(p) && matrix_[p.y][p.x] != EMPTY && matrix_[p.y][p.x] != stone){
         can_reverse = true;
-        y += dy;
-        x += dx;
+        p.y += dy;
+        p.x += dx;
     }
 
-    return (in_board(Point(y, x)) && can_reverse && matrix_[y][x] == stone);
+    return (in_board(p) && can_reverse && matrix_[p.y][p.x] == stone);
 }
 
 }

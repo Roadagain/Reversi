@@ -44,7 +44,7 @@ public:
     bool in_board(const Point& p) const;
     bool empty(const Point& p) const;
     bool can_put(BoardState stone) const;
-    bool can_put(int y, int x, BoardState stone) const;
+    bool can_put(const Point& p, BoardState stone) const;
 
     static const int ROW;
     static const int COL;
@@ -62,7 +62,7 @@ public:
 private:
     void reverse(Point p, BoardState stone, int dy, int dx);
     int reverse_num(Point p, BoardState stone, int dy, int dx) const;
-    bool can_put(int y, int x, BoardState stone, int dy, int dx) const;
+    bool can_put(Point p, BoardState stone, int dy, int dx) const;
 
     BoardState** matrix_;
     int black_;

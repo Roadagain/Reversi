@@ -92,7 +92,7 @@ std::pair<int, int> Reversi::move() const
     }
 
     c = getch();
-    while (c != '\n' || !board_->can_put(y, x, now_)){
+    while (c != '\n' || !board_->can_put(Point(y, x), now_)){
         if (board_->empty(Point(y, x))){
             clear_stone(y, x);
         }
