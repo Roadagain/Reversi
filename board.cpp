@@ -26,6 +26,10 @@ BoardState to_state(const char* s)
     }
 }
 
+Point point(int y, int x) : y(y), x(x)
+{
+}
+
 const int Board::ROW = 8;
 const int Board::COL = 8;
 

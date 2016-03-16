@@ -15,6 +15,14 @@ enum BoardState
 
 BoardState to_state(const char* s);
 
+struct Point
+{
+    int y;
+    int x;
+
+    Point(int y, int x);
+};
+
 class Board
 {
 public:
