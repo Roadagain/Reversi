@@ -85,19 +85,19 @@ std::pair<int, int> Reversi::move() const
     char c;
 
     if (board_->empty(Point(y, x))){
-        print_stone(y, x, now_);
+        print_stone(Point(y, x), now_);
     }
     else {
-        print_coordinate(y, x);
+        print_coordinate(Point(y, x));
     }
 
     c = getch();
     while (c != '\n' || !board_->can_put(Point(y, x), now_)){
         if (board_->empty(Point(y, x))){
-            clear_stone(y, x);
+            clear_stone(Point(y, x));
         }
         else {
-            clear_coordinate(y, x);
+            clear_coordinate(Point(y, x));
         }
         switch (c){
           case 'h':
@@ -116,14 +116,14 @@ std::pair<int, int> Reversi::move() const
             return (std::pair<int, int>(-1, -1));
         }
         if (board_->empty(Point(y, x))){
-            print_stone(y, x, now_);
+            print_stone(Point(y, x), now_);
         }
         else {
-            print_coordinate(y, x);
+            print_coordinate(Point(y, x));
         }
         c = getch();
     }
-    clear_stone(y, x);
+    clear_stone(Point(y, x));
 
     return (std::pair<int, int>(y, x));
 }

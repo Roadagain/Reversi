@@ -76,7 +76,7 @@ void Board::print(const Point& p) const
                     addch('|');
                 }
                 else {
-                    print_stone(i / 2, j / 3, matrix_[i / 2][j / 3], false);
+                    print_stone(Point(i / 2, j / 3), matrix_[i / 2][j / 3], false);
                 }
             }
         }
@@ -92,7 +92,7 @@ void Board::put(const Point& p, BoardState stone)
     else {
         white_++;
     }
-    print_stone(p.y, p.x, stone, false);
+    print_stone(p, stone, false);
     reverse(p, stone);
 }
 
@@ -135,7 +135,7 @@ void Board::reverse(Point p, BoardState stone, int dy, int dx)
             white_++;
             black_--;
         }
-        print_stone(p.y, p.x, stone, false);
+        print_stone(p, stone, false);
     }
 }
 
