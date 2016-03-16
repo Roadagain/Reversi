@@ -51,7 +51,7 @@ void Reversi::play()
         if (point.first == -1 && point.second == -1){
             break;
         }
-        board_->put(point.first, point.second, now_);
+        board_->put(Point(point.first, point.second), now_);
         change();
         logs_->push_back(Log(point.first, point.second, now_));
     }

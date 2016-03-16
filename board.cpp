@@ -92,8 +92,8 @@ void Board::put(const Point& p, BoardState stone)
     else {
         white_++;
     }
-    print_stone(y, x, stone, false);
-    reverse(y, x, stone);
+    print_stone(p.y, p.x, stone, false);
+    reverse(p, stone);
 }
 
 void Board::reverse(const Point& p, BoardState stone)
@@ -114,12 +114,12 @@ void Board::reverse(Point p, BoardState stone, int dy, int dx)
 
     p.y += dy;
     p.x += dx;
-    while (in_board(p) && matrix_[p.y][p.x] != EMPTY && matrix_[p.y][p.x] != stone){
+    while (in_board(p.y, p.x) && matrix_[p.y][p.x] != EMPTY && matrix_[p.y][p.x] != stone){
         cnt++;
         p.y += dy;
         p.x += dx;
     }
-    if (!in_board(y, x) || matrix_[y][x] == EMPTY){
+    if (!in_board(p.y, p.x) || matrix_[p.y][p.x] == EMPTY){
         return;
     }
 
@@ -135,7 +135,7 @@ void Board::reverse(Point p, BoardState stone, int dy, int dx)
             white_++;
             black_--;
         }
-        print_stone(y, x, stone, false);
+        print_stone(p.y, p.x, stone, false);
     }
 }
 
