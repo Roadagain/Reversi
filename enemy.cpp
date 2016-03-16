@@ -1,5 +1,3 @@
-#include <utility>
-
 #include "Scorpio/min-max.hpp"
 
 #include "board.hpp"
@@ -17,7 +15,7 @@ Enemy::~Enemy()
 {
 }
 
-std::pair<int, int> Enemy::select(const Board* board, BoardState stone) const
+Point Enemy::select(const Board* board, BoardState stone) const
 {
     switch (level_){
         case EASY:
@@ -27,55 +25,53 @@ std::pair<int, int> Enemy::select(const Board* board, BoardState stone) const
     }
 }
 
-std::pair<int, int> Enemy::randomized_select(const Board* board, BoardState stone) const
+Point Enemy::randomized_select(const Board* board, BoardState stone) const
 {
     int n = random();
-    int y = 0;
-    int x = 0;
+    Point p;
 
     do {
-        y++;
-        if (y >= Board::ROW){
-            y = 0;
-            x = (x + 1) % Board::COL;
+        p.y++;
+        if (p.y >= Board::ROW){
+            p.y = 0;
+            p.x = (p.x + 1) % Board::COL;
         }
-        while (!board->can_put(y, x, stone)){
-            y++;
-            if (y >= Board::ROW){
-                y = 0;
-                x = (x + 1) % Board::COL;
+        while (!board->can_put(p, stone)){
+            p.y++;
+            if (p.y >= Board::ROW){
+                p.y = 0;
+                p.x = (p.x + 1) % Board::COL;
             }
         }
         n--;
     } while (n > 0);
 
-    return (std::pair<int, int>(y, x));
+    return (p);
 }
 
-std::pair<int, int> Enemy::maximized_select(const Board* board, BoardState stone) const
+Point Enemy::maximized_select(const Board* board, BoardState stone) const
 {
-    int y = 0;
-    int x = 0;
+    Point p;
     int maximum = 0;
 
     for (int i = 0; i < Board::ROW; i++){
         for (int j = 0; j < Board::COL; j++){
-            if (board->can_put(i, j, stone)){
-                int tmp = board->reverse_num(i, j, stone);
+            if (board->can_put(Point(i, j), stone)){
+                int tmp = board->reverse_num(Point(i, j), stone);
                 if (maximum < tmp){
                     maximum = tmp;
-                    y = i;
-                    x = j;
+                    p.y = i;
+                    p.x = j;
                 }
                 else if (maximum == tmp && random() % 2 == 0){
-                    y = i;
-                    x = j;
+                    p.y = i;
+                    p.x = j;
                 }
             }
         }
     }
 
-    return (std::pair<int, int>(y, x));
+    return (p);
 }
 
 }

@@ -15,28 +15,36 @@ enum BoardState
 
 BoardState to_state(const char* s);
 
+struct Point
+{
+    int y;
+    int x;
+
+    Point(int y = 0, int x = 0);
+};
+
 class Board
 {
 public:
     Board();
     ~Board();
 
-    void print(int y = 0, int x = 0) const;
+    void print(const Point& p = Point(0, 0)) const;
 
-    void put(int y, int x, BoardState stone);
-    void reverse(int y, int x, BoardState stone);
+    void put(const Point& p, BoardState stone);
+    void reverse(const Point& p, BoardState stone);
 
-    int reverse_num(int y, int x, BoardState stone) const;
+    int reverse_num(const Point& p, BoardState stone) const;
 
     int black() const;
     int white() const;
 
     BoardState winner() const;
 
-    bool in_board(int y, int x) const;
-    bool empty(int y, int x) const;
+    bool in_board(const Point& p) const;
+    bool empty(const Point& p) const;
     bool can_put(BoardState stone) const;
-    bool can_put(int y, int x, BoardState stone) const;
+    bool can_put(const Point& p, BoardState stone) const;
 
     static const int ROW;
     static const int COL;
@@ -52,9 +60,9 @@ public:
     static const int DXY[];
 
 private:
-    void reverse(int y, int x, BoardState stone, int dy, int dx);
-    int reverse_num(int y, int x, BoardState stone, int dy, int dx) const;
-    bool can_put(int y, int x, BoardState stone, int dy, int dx) const;
+    void reverse(Point p, BoardState stone, int dy, int dx);
+    int reverse_num(Point p, BoardState stone, int dy, int dx) const;
+    bool can_put(Point p, BoardState stone, int dy, int dx) const;
 
     BoardState** matrix_;
     int black_;

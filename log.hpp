@@ -10,11 +10,10 @@ namespace roadagain
 
 struct Log
 {
-    int y;
-    int x;
+    Point p;
     BoardState stone;
 
-    Log(int y, int x, BoardState stone);
+    Log(const Point& p, BoardState stone);
 };
 
 void log_records(std::vector<Log>& logs, BoardState winner);
