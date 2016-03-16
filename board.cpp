@@ -62,12 +62,12 @@ Board::~Board()
     delete[] matrix_;
 }
 
-void Board::print(int y, int x) const
+void Board::print(const Point& p) const
 {
     Colors::change_color(Colors::BOARD);
     for (int i = 0; i < ROW * 2 + 1; i++){
         for (int j = 0; j < COL * 3 + 1; j++){
-            move(START_Y + y + i, START_X + x + j);
+            move(START_Y + p.y + i, START_X + p.x + j);
             if (i % 2 == 0){
                 addch(j % 3 == 0 ? '+' : '-');
             }

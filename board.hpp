@@ -29,7 +29,7 @@ public:
     Board();
     ~Board();
 
-    void print(int y = 0, int x = 0) const;
+    void print(const Point& p = Point(0, 0)) const;
 
     void put(int y, int x, BoardState stone);
     void reverse(int y, int x, BoardState stone);
