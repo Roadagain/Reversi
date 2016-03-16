@@ -84,7 +84,7 @@ std::pair<int, int> Reversi::move() const
     int x = 0;
     char c;
 
-    if (board_->empty(y, x)){
+    if (board_->empty(Point(y, x))){
         print_stone(y, x, now_);
     }
     else {
@@ -93,7 +93,7 @@ std::pair<int, int> Reversi::move() const
 
     c = getch();
     while (c != '\n' || !board_->can_put(y, x, now_)){
-        if (board_->empty(y, x)){
+        if (board_->empty(Point(y, x))){
             clear_stone(y, x);
         }
         else {
@@ -115,7 +115,7 @@ std::pair<int, int> Reversi::move() const
           case ' ':
             return (std::pair<int, int>(-1, -1));
         }
-        if (board_->empty(y, x)){
+        if (board_->empty(Point(y, x))){
             print_stone(y, x, now_);
         }
         else {

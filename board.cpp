@@ -201,9 +201,9 @@ bool Board::in_board(const Point& p) const
     return (0 <= p.y && p.y < ROW && 0 <= p.x && p.x < COL);
 }
 
-bool Board::empty(int y, int x) const
+bool Board::empty(const Point& p) const
 {
-    return (matrix_[y][x] == EMPTY);
+    return (matrix_[p.y][p.x] == EMPTY);
 }
 
 bool Board::can_put(BoardState stone) const
