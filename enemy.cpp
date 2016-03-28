@@ -112,7 +112,7 @@ Point Enemy::evaluated_select(const Board* board, BoardState stone) const
 
 int Enemy::reverse_score(const Board* board, const Point& p, BoardState stone) const
 {
-    int score = score[p.y][p.x];
+    int score = score_[p.y][p.x];
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
             if (Board::DXY[i] == 0 && Board::DXY[j] == 0){
@@ -130,7 +130,7 @@ int Enemy::reverse_score(const Board* board, const Point& p, BoardState stone, i
     int score = 0;
     int num = board->reverse_num(p, stone, dy, dx);
     for (int i = 1; i < num; i++){
-        score += score[p.y + dy * i][p.x + dx * i];
+        score += score_[p.y + dy * i][p.x + dx * i];
     }
 
     return (score);
