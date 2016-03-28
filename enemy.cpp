@@ -106,6 +106,8 @@ Point Enemy::evaluated_select(const Board* board, BoardState stone) const
             }
         }
     }
+
+    return (p);
 }
 
 Point Enemy::reverse_score(const Board* board, const Point& p, BoardState stone) const
