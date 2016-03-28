@@ -93,7 +93,7 @@ Point Enemy::evaluated_select(const Board* board, BoardState stone) const
     for (int i = 0; i < Board::ROW; i++){
         for (int j = 0; j < Board::COL; j++){
             if (board->can_put(Point(i, j), stone)){
-                int tmp = reverse_score(Point(i, j), stone);
+                int tmp = reverse_score(board, Point(i, j), stone);
                 if (maximum < tmp){
                     maximum = tmp;
                     p.y = i;
