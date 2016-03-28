@@ -25,6 +25,17 @@ Point Enemy::select(const Board* board, BoardState stone) const
     }
 }
 
+const int Enemy::score[8][8] = {
+    {  30, -10,  10,  10,  10,  10, -10,  30 },
+    { -10, -10,  10,  -5,  -5,  10, -10, -10 },
+    {  15,  10,   8,   5,   5,   8,  10,  15 },
+    {  10,  -5,   5,   0,   0,   5,  -5,  10 },
+    {  10,  -5,   5,   0,   0,   5,  -5,  10 },
+    {  15,  10,   8,   5,   5,   8,  10,  15 },
+    { -10, -10,  10,  -5,  -5,  10, -10, -10 },
+    {  30, -10,  15,  10,  10,  15, -10,  30 },
+};
+
 Point Enemy::randomized_select(const Board* board, BoardState stone) const
 {
     int n = random();

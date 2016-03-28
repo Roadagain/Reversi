@@ -24,6 +24,7 @@ private:
     Point randomized_select(const Board* board, BoardState stone) const;
     Point maximized_select(const Board* board, BoardState stone) const;
     Level level_;
+    static const int score[8][8];
 };
 
 }
