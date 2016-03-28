@@ -85,4 +85,27 @@ Point Enemy::maximized_select(const Board* board, BoardState stone) const
     return (p);
 }
 
+Point Enemy::evaluated_select(const Board* board, BoardState stone) const
+{
+    Point p;
+    int maximum = -500;
+
+    for (int i = 0; i < Board::ROW; i++){
+        for (int j = 0; j < Board::COL; j++){
+            if (board->can_put(Point(i, j), stone)){
+                int tmp = reverse_score(Point(i, j), stone);
+                if (maximum < tmp){
+                    maximum = tmp;
+                    p.y = i;
+                    p.x = j;
+                }
+                else if (maximum == tmp && random() % 2 == 0){
+                    p.y = i;
+                    p.x = j;
+                }
+            }
+        }
+    }
+}
+
 }
