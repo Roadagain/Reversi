@@ -25,7 +25,7 @@ Point Enemy::select(const Board* board, BoardState stone) const
     }
 }
 
-const int Enemy::score[8][8] = {
+const int Enemy::score_[8][8] = {
     {  30, -10,  10,  10,  10,  10, -10,  30 },
     { -10, -10,  10,  -5,  -5,  10, -10, -10 },
     {  15,  10,   8,   5,   5,   8,  10,  15 },
