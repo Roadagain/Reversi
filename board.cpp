@@ -26,6 +26,18 @@ BoardState to_state(const char* s)
     }
 }
 
+BoardState reversed(BoardState stone)
+{
+    switch (stone){
+        case BLACK:
+            return (WHITE);
+        case WHITE:
+            return (BLACK);
+        default:
+            return (EMPTY);
+    }
+}
+
 Point::Point(int y, int x) : y(y), x(x)
 {
 }

@@ -15,6 +15,8 @@ enum BoardState
 
 BoardState to_state(const char* s);
 
+BoardState reversed(BoardState stone);
+
 struct Point
 {
     int y;
