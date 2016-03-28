@@ -118,7 +118,7 @@ int Enemy::reverse_score(const Board* board, const Point& p, BoardState stone) c
             if (Board::DXY[i] == 0 && Board::DXY[j] == 0){
                 continue;
             }
-            score += reverse_score(board, p, stone, DXY[i], DXY[j]);
+            score += reverse_score(board, p, stone, Board::DXY[i], Board::DXY[j]);
         }
     }
 
