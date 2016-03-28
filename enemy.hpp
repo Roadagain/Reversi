@@ -9,6 +9,7 @@ namespace roadagain
 enum Level
 {
     EASY,
+    MEDIUM,
     HARD
 };
 
