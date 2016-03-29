@@ -32,7 +32,6 @@ void Reversi::play()
 {
     start();
 
-    std::pair<int, int> point;
     for (int i = 0; i < Board::MAX_PUT; i++){
         if (!board_->can_put(now_)){
             change();
@@ -40,20 +39,20 @@ void Reversi::play()
                 break;
             }
         }
-        std::pair<int, int> point;
+        Point p;
         if (now_ == player_){
-            point = move();
+            p = move();
         }
         else {
-            point = enemy_->select(board_, now_);
+            p = enemy_->select(board_, now_);
             getch();
         }
-        if (point.first == -1 && point.second == -1){
+        if (p.y == -1 && p.x == -1){
             break;
         }
-        board_->put(point.first, point.second, now_);
+        board_->put(p, now_);
         change();
-        logs_->push_back(Log(point.first, point.second, now_));
+        logs_->push_back(Log(p, now_));
     }
     end();
 }
@@ -78,54 +77,53 @@ void Reversi::end() const
     log_records(*logs_, winner);
 }
 
-std::pair<int, int> Reversi::move() const
+Point Reversi::move() const
 {
-    int y = 0;
-    int x = 0;
+    Point p;
     char c;
 
-    if (board_->empty(y, x)){
-        print_stone(y, x, now_);
+    if (board_->empty(p)){
+        print_stone(p, now_);
     }
     else {
-        print_coordinate(y, x);
+        print_coordinate(p);
     }
 
     c = getch();
-    while (c != '\n' || !board_->can_put(y, x, now_)){
-        if (board_->empty(y, x)){
-            clear_stone(y, x);
+    while (c != '\n' || !board_->can_put(p, now_)){
+        if (board_->empty(p)){
+            clear_stone(p);
         }
         else {
-            clear_coordinate(y, x);
+            clear_coordinate(p);
         }
         switch (c){
           case 'h':
-            x = (x + Board::COL - 1) % Board::COL;
+            p.x = (p.x + Board::COL - 1) % Board::COL;
             break;
           case 'j':
-            y = (y + 1) % Board::ROW;
+            p.y = (p.y + 1) % Board::ROW;
             break;
           case 'k':
-            y = (y + Board::ROW - 1) % Board::ROW;
+            p.y = (p.y + Board::ROW - 1) % Board::ROW;
             break;
           case 'l':
-            x = (x + 1) % Board::COL;
+            p.x = (p.x + 1) % Board::COL;
             break;
           case ' ':
-            return (std::pair<int, int>(-1, -1));
+            return (Point(-1, -1));
         }
-        if (board_->empty(y, x)){
-            print_stone(y, x, now_);
+        if (board_->empty(p)){
+            print_stone(p, now_);
         }
         else {
-            print_coordinate(y, x);
+            print_coordinate(p);
         }
         c = getch();
     }
-    clear_stone(y, x);
+    clear_stone(p);
 
-    return (std::pair<int, int>(y, x));
+    return (p);
 }
 
 void Reversi::change()

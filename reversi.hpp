@@ -1,7 +1,6 @@
 #ifndef INCLUDE_ROADAGAIN_GAME_HPP
 #define INCLUDE_ROADAGAIN_GAME_HPP
 
-#include <utility>
 #include <vector>
 
 #include "board.hpp"
@@ -22,7 +21,7 @@ public:
     void end() const;
 
 private:
-    std::pair<int, int> move() const;
+    Point move() const;
     void change();
 
     Board *board_;

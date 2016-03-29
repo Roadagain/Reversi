@@ -61,6 +61,9 @@ bool Config::init(int argc, char** argv)
             if (options[i].value == EASY_STR){
                 level_ = EASY;
             }
+            else if (options[i].value == MEDIUM_STR){
+                level_ = MEDIUM;
+            }
             else if (options[i].value == HARD_STR){
                 level_ = HARD;
             }
@@ -102,7 +105,7 @@ void Config::help()
     std::puts("  --color[=WHEN] Colorize the output;");
     std::puts("                 WHEN can be 'always' (default if omitted), 'auto', or 'never'.");
     std::puts("  --level=LEVEL  Choose enemy's level;");
-    std::puts("                 LEVEL can be 'easy' or 'hard'.");
+    std::puts("                 LEVEL can be 'easy', 'medium' or 'hard'.");
     std::puts("  --log=FILENAME Log the game records to FILENAME.");
     std::puts("  --help         Print this help and exit successfully.");
     std::puts("");
@@ -151,6 +154,7 @@ const std::string Config::AUTO_STR("auto");
 const std::string Config::NEVER_STR("never");
 const std::string Config::LEVEL_STR("--level");
 const std::string Config::EASY_STR("easy");
+const std::string Config::MEDIUM_STR("medium");
 const std::string Config::HARD_STR("hard");
 const std::string Config::LOG_STR("--log");
 const std::string Config::HELP_STR("--help");

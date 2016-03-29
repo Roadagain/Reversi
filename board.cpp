@@ -26,16 +26,22 @@ BoardState to_state(const char* s)
     }
 }
 
-const int Board::ROW = 8;
-const int Board::COL = 8;
+BoardState reversed(BoardState stone)
+{
+    switch (stone){
+        case BLACK:
+            return (WHITE);
+        case WHITE:
+            return (BLACK);
+        default:
+            return (EMPTY);
+    }
+}
 
-const int Board::DEFAULT_STONE = 4;
-const int Board::MAX_PUT = ROW * COL - DEFAULT_STONE;
+Point::Point(int y, int x) : y(y), x(x)
+{
+}
 
-const int Board::START_Y = 1;
-const int Board::START_X = 1;
-const int Board::END_Y = START_Y + ROW * 2;
-const int Board::END_X = START_Y + COL * 3;
 const int Board::DXY[] = { -1, 0, 1 };
 
 Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
@@ -50,6 +56,15 @@ Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
     matrix_[ROW / 2][COL / 2 - 1] = BLACK;
 }
 
+Board::Board(const Board& board) : black_(board.black()), white_(board.white())
+{
+    matrix_ = new BoardState*[ROW]();
+    for (int i = 0; i < ROW; i++){
+        matrix_[i] = new BoardState[COL]();
+    }
+    board.copy_matrix(matrix_);
+}
+
 Board::~Board()
 {
     for (int i = 0; i < ROW; i++){
@@ -58,12 +73,12 @@ Board::~Board()
     delete[] matrix_;
 }
 
-void Board::print(int y, int x) const
+void Board::print(const Point& p) const
 {
     Colors::change_color(Colors::BOARD);
     for (int i = 0; i < ROW * 2 + 1; i++){
         for (int j = 0; j < COL * 3 + 1; j++){
-            move(START_Y + y + i, START_X + x + j);
+            move(START_Y + p.y + i, START_X + p.x + j);
             if (i % 2 == 0){
                 addch(j % 3 == 0 ? '+' : '-');
             }
@@ -72,57 +87,59 @@ void Board::print(int y, int x) const
                     addch('|');
                 }
                 else {
-                    print_stone(i / 2, j / 3, matrix_[i / 2][j / 3], false);
+                    print_stone(Point(i / 2, j / 3), matrix_[i / 2][j / 3], false);
                 }
             }
         }
     }
 }
 
-void Board::put(int y, int x, BoardState stone)
+void Board::put(const Point& p, BoardState stone, bool print_flag)
 {
-    matrix_[y][x] = stone;
+    matrix_[p.y][p.x] = stone;
     if (stone == BLACK){
         black_++;
     }
     else {
         white_++;
     }
-    print_stone(y, x, stone, false);
-    reverse(y, x, stone);
+    if (print_flag){
+        print_stone(p, stone, false);
+    }
+    reverse(p, stone, print_flag);
 }
 
-void Board::reverse(int y, int x, BoardState stone)
+void Board::reverse(const Point& p, BoardState stone, bool print_flag)
 {
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
             if (DXY[i] == 0 && DXY[j] == 0){
                 continue;
             }
-            reverse(y, x, stone, DXY[i], DXY[j]);
+            reverse(p, stone, DXY[i], DXY[j], print_flag);
         }
     }
 }
 
-void Board::reverse(int y, int x, BoardState stone, int dy, int dx)
+void Board::reverse(Point p, BoardState stone, int dy, int dx, bool print_flag)
 {
     int cnt = 0;
 
-    y += dy;
-    x += dx;
-    while (in_board(y, x) && matrix_[y][x] != EMPTY && matrix_[y][x] != stone){
+    p.y += dy;
+    p.x += dx;
+    while (in_board(p) && matrix_[p.y][p.x] != EMPTY && matrix_[p.y][p.x] != stone){
         cnt++;
-        y += dy;
-        x += dx;
+        p.y += dy;
+        p.x += dx;
     }
-    if (!in_board(y, x) || matrix_[y][x] == EMPTY){
+    if (!in_board(p) || matrix_[p.y][p.x] == EMPTY){
         return;
     }
 
     while (cnt-- > 0){
-        y -= dy;
-        x -= dx;
-        matrix_[y][x] = stone;
+        p.y -= dy;
+        p.x -= dx;
+        matrix_[p.y][p.x] = stone;
         if (stone == BLACK){
             black_++;
             white_--;
@@ -131,11 +148,13 @@ void Board::reverse(int y, int x, BoardState stone, int dy, int dx)
             white_++;
             black_--;
         }
-        print_stone(y, x, stone, false);
+        if (print_flag){
+            print_stone(p, stone, false);
+        }
     }
 }
 
-int Board::reverse_num(int y, int x, BoardState stone) const
+int Board::reverse_num(const Point& p, BoardState stone) const
 {
     int cnt = 0;
 
@@ -144,26 +163,43 @@ int Board::reverse_num(int y, int x, BoardState stone) const
             if (DXY[i] == 0 && DXY[j] == 0){
                 continue;
             }
-            cnt += reverse_num(y, x, stone, DXY[i], DXY[j]);
+            cnt += reverse_num(p, stone, DXY[i], DXY[j]);
         }
     }
 
     return (cnt);
 }
 
-int Board::reverse_num(int y, int x, BoardState stone, int dy, int dx) const
+int Board::reverse_num(Point p, BoardState stone, int dy, int dx) const
 {
     int cnt = 0;
 
-    y += dy;
-    x += dx;
-    while (in_board(y, x) && matrix_[y][x] != EMPTY && matrix_[y][x] != stone){
+    p.y += dy;
+    p.x += dx;
+    while (in_board(p) && matrix_[p.y][p.x] != EMPTY && matrix_[p.y][p.x] != stone){
         cnt++;
-        y += dy;
-        x += dx;
+        p.y += dy;
+        p.x += dx;
     }
-    if (!in_board(y, x) || matrix_[y][x] == EMPTY){
+    if (!in_board(p) || matrix_[p.y][p.x] == EMPTY){
         return (0);
+    }
+
+    return (cnt);
+}
+
+int Board::count_neighbor(const Point& p, BoardState stone)
+{
+    int cnt = 0;
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            if ((DXY[i] == 0 && DXY[j] == 0) || !in_board(Point(p.y + DXY[i], p.x + DXY[j]))){
+                continue;
+            }
+            if (matrix_[p.y + DXY[i]][p.x + DXY[j]] == stone){
+                cnt++;
+            }
+        }
     }
 
     return (cnt);
@@ -179,6 +215,15 @@ int Board::white() const
     return (white_);
 }
 
+void Board::copy_matrix(BoardState** matrix) const
+{
+    for (int i = 0; i < COL; i++){
+        for (int j = 0; j < ROW; j++){
+            matrix[i][j] = matrix_[i][j];
+        }
+    }
+}
+
 BoardState Board::winner() const
 {
     if (black_ > white_){
@@ -192,21 +237,21 @@ BoardState Board::winner() const
     }
 }
 
-bool Board::in_board(int y, int x) const
+bool Board::in_board(const Point& p) const
 {
-    return (0 <= y && y < ROW && 0 <= x && x < COL);
+    return (0 <= p.y && p.y < ROW && 0 <= p.x && p.x < COL);
 }
 
-bool Board::empty(int y, int x) const
+bool Board::empty(const Point& p) const
 {
-    return (matrix_[y][x] == EMPTY);
+    return (matrix_[p.y][p.x] == EMPTY);
 }
 
 bool Board::can_put(BoardState stone) const
 {
     for (int i = 0; i < ROW; i++){
         for (int j = 0; j < COL; j++){
-            if (can_put(i, j, stone)){
+            if (can_put(Point(i, j), stone)){
                 return (true);
             }
         }
@@ -214,9 +259,9 @@ bool Board::can_put(BoardState stone) const
     return (false);
 }
 
-bool Board::can_put(int y, int x, BoardState stone) const
+bool Board::can_put(const Point& p, BoardState stone) const
 {
-    if (matrix_[y][x] != EMPTY){
+    if (matrix_[p.y][p.x] != EMPTY){
         return (false);
     }
     for (int i = 0; i < 3; i++){
@@ -224,7 +269,7 @@ bool Board::can_put(int y, int x, BoardState stone) const
             if (DXY[i] == 0 && DXY[j] == 0){
                 continue;
             }
-            if (can_put(y, x, stone, DXY[i], DXY[j])){
+            if (can_put(p, stone, DXY[i], DXY[j])){
                 return (true);
             }
         }
@@ -233,18 +278,18 @@ bool Board::can_put(int y, int x, BoardState stone) const
     return (false);
 }
 
-bool Board::can_put(int y, int x, BoardState stone, int dy, int dx) const
+bool Board::can_put(Point p, BoardState stone, int dy, int dx) const
 {
     bool can_reverse = false;
-    y += dy;
-    x += dx;
-    while (in_board(y, x) && matrix_[y][x] != EMPTY && matrix_[y][x] != stone){
+    p.y += dy;
+    p.x += dx;
+    while (in_board(p) && matrix_[p.y][p.x] != EMPTY && matrix_[p.y][p.x] != stone){
         can_reverse = true;
-        y += dy;
-        x += dx;
+        p.y += dy;
+        p.x += dx;
     }
 
-    return (in_board(y, x) && can_reverse && matrix_[y][x] == stone);
+    return (in_board(p) && can_reverse && matrix_[p.y][p.x] == stone);
 }
 
 }

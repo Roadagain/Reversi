@@ -8,7 +8,7 @@
 namespace roadagain
 {
 
-Log::Log(int y, int x, BoardState stone) : y(y), x(x), stone(stone)
+Log::Log(const Point& p, BoardState stone) : p(p), stone(stone)
 {
 }
 
@@ -29,8 +29,8 @@ void log_records(std::vector<Log>& logs, BoardState winner)
         else {
             log_file << 'W';
         }
-        log_file << ' ' << static_cast<char>('a' + logs[i].x);
-        log_file << ' ' << logs[i].y;
+        log_file << ' ' << static_cast<char>('a' + logs[i].p.x);
+        log_file << ' ' << logs[i].p.y;
         log_file << '\n';
     }
     if (winner == BLACK){
