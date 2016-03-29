@@ -21,6 +21,7 @@ public:
 
     Point select(const Board* board, BoardState stone) const;
 
+    static const int MIN_EVALUTE_VALUE = int(-1e5);
     static const int MAX_DEPTH = 3;
     static const int SCORE_TABLE[Board::ROW][Board::COL];
 private:

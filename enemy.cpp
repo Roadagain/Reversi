@@ -94,7 +94,7 @@ Point Enemy::evaluated_select(const Board* board, BoardState stone, int depth) c
     }
 
     Point p;
-    int maximum = -500;
+    int maximum = MIN_EVALUTE_VALUE;
 
     for (int i = 0; i < Board::ROW; i++){
         for (int j = 0; j < Board::COL; j++){
