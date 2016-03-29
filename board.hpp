@@ -33,8 +33,8 @@ public:
 
     void print(const Point& p = Point(0, 0)) const;
 
-    void put(const Point& p, BoardState stone);
-    void reverse(const Point& p, BoardState stone);
+    void put(const Point& p, BoardState stone, bool print_flag = true);
+    void reverse(const Point& p, BoardState stone, bool print_flag);
 
     int reverse_num(const Point& p, BoardState stone) const;
     int reverse_num(Point p, BoardState stone, int dy, int dx) const;
@@ -63,7 +63,7 @@ public:
     static const int DXY[];
 
 private:
-    void reverse(Point p, BoardState stone, int dy, int dx);
+    void reverse(Point p, BoardState stone, int dy, int dx, bool print_flag);
     bool can_put(Point p, BoardState stone, int dy, int dx) const;
 
     BoardState** matrix_;
