@@ -1,6 +1,6 @@
-# Reversi v2.2
+# Reversi v3.0
 A reversi game for one person's use
-Version 2.3 is latest
+Version 3.0 is latest
 
 ## Implemented function
 + Selecting color by a program argument
