@@ -127,9 +127,27 @@ int Enemy::reverse_score(Board* board, const Point& p, BoardState stone, int dep
             }
             score += reverse_score(board, p, stone, Board::DXY[i], Board::DXY[j]);
             board->put(p, stone, false);
-            Point player_point = evaluated_select(board, reversed(stone), depth + 1);
-            if (player_point.y != -1 && player_point.x != -1){
-                score -= reverse_score(board, player_point, reversed(stone), depth + 1);
+            bool player_put = false;
+            for (int i = 0; i < Board::ROW; i++){
+                for (int j = 0; j < Board::COL; j++){
+                    if (board->can_put(Point(i, j), reversed(stone))){
+                        score--;
+                        player_put = true;
+                    }
+                }
+            }
+            if (!player_put){
+                score += 30;
+                Point player_point = evaluated_select(board, stone, depth + 1);
+                if (player_point.y != -1 && player_point.x != -1){
+                    score += reverse_score(board, player_point, stone, depth + 1);
+                }
+            }
+            else {
+                Point player_point = evaluated_select(board, reversed(stone), depth + 1);
+                if (player_point.y != -1 && player_point.x != -1){
+                    score -= reverse_score(board, player_point, reversed(stone), depth + 1);
+                }
             }
         }
     }
