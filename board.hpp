@@ -39,6 +39,7 @@ public:
 
     int reverse_num(const Point& p, BoardState stone) const;
     int reverse_num(Point p, BoardState stone, int dy, int dx) const;
+    int count_neighbor(const Point& p, BoardState stone);
 
     int black() const;
     int white() const;
