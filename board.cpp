@@ -56,6 +56,15 @@ Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
     matrix_[ROW / 2][COL / 2 - 1] = BLACK;
 }
 
+Board::Board(const Board& board) : black_(board.black()), white_(board.white())
+{
+    matrix_ = new BoardState*[ROW]();
+    for (int i = 0; i < ROW; i++){
+        matrix_[i] = new BoardState[COL]();
+    }
+    board.copy_matrix(matrix_);
+}
+
 Board::~Board()
 {
     for (int i = 0; i < ROW; i++){

@@ -29,6 +29,7 @@ class Board
 {
 public:
     Board();
+    Board(const Board& board);
     ~Board();
 
     void print(const Point& p = Point(0, 0)) const;
