@@ -26,20 +26,22 @@ BoardState to_state(const char* s)
     }
 }
 
+BoardState reversed(BoardState stone)
+{
+    switch (stone){
+        case BLACK:
+            return (WHITE);
+        case WHITE:
+            return (BLACK);
+        default:
+            return (EMPTY);
+    }
+}
+
 Point::Point(int y, int x) : y(y), x(x)
 {
 }
 
-const int Board::ROW = 8;
-const int Board::COL = 8;
-
-const int Board::DEFAULT_STONE = 4;
-const int Board::MAX_PUT = ROW * COL - DEFAULT_STONE;
-
-const int Board::START_Y = 1;
-const int Board::START_X = 1;
-const int Board::END_Y = START_Y + ROW * 2;
-const int Board::END_X = START_Y + COL * 3;
 const int Board::DXY[] = { -1, 0, 1 };
 
 Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
@@ -52,6 +54,15 @@ Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
     matrix_[ROW / 2][COL / 2] = WHITE;
     matrix_[ROW / 2 - 1][COL / 2] = BLACK;
     matrix_[ROW / 2][COL / 2 - 1] = BLACK;
+}
+
+Board::Board(const Board& board) : black_(board.black()), white_(board.white())
+{
+    matrix_ = new BoardState*[ROW]();
+    for (int i = 0; i < ROW; i++){
+        matrix_[i] = new BoardState[COL]();
+    }
+    board.copy_matrix(matrix_);
 }
 
 Board::~Board()
@@ -83,7 +94,7 @@ void Board::print(const Point& p) const
     }
 }
 
-void Board::put(const Point& p, BoardState stone)
+void Board::put(const Point& p, BoardState stone, bool print_flag)
 {
     matrix_[p.y][p.x] = stone;
     if (stone == BLACK){
@@ -92,23 +103,25 @@ void Board::put(const Point& p, BoardState stone)
     else {
         white_++;
     }
-    print_stone(p, stone, false);
-    reverse(p, stone);
+    if (print_flag){
+        print_stone(p, stone, false);
+    }
+    reverse(p, stone, print_flag);
 }
 
-void Board::reverse(const Point& p, BoardState stone)
+void Board::reverse(const Point& p, BoardState stone, bool print_flag)
 {
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
             if (DXY[i] == 0 && DXY[j] == 0){
                 continue;
             }
-            reverse(p, stone, DXY[i], DXY[j]);
+            reverse(p, stone, DXY[i], DXY[j], print_flag);
         }
     }
 }
 
-void Board::reverse(Point p, BoardState stone, int dy, int dx)
+void Board::reverse(Point p, BoardState stone, int dy, int dx, bool print_flag)
 {
     int cnt = 0;
 
@@ -135,7 +148,9 @@ void Board::reverse(Point p, BoardState stone, int dy, int dx)
             white_++;
             black_--;
         }
-        print_stone(p, stone, false);
+        if (print_flag){
+            print_stone(p, stone, false);
+        }
     }
 }
 
@@ -173,6 +188,23 @@ int Board::reverse_num(Point p, BoardState stone, int dy, int dx) const
     return (cnt);
 }
 
+int Board::count_neighbor(const Point& p, BoardState stone)
+{
+    int cnt = 0;
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            if ((DXY[i] == 0 && DXY[j] == 0) || !in_board(Point(p.y + DXY[i], p.x + DXY[j]))){
+                continue;
+            }
+            if (matrix_[p.y + DXY[i]][p.x + DXY[j]] == stone){
+                cnt++;
+            }
+        }
+    }
+
+    return (cnt);
+}
+
 int Board::black() const
 {
     return (black_);
@@ -181,6 +213,15 @@ int Board::black() const
 int Board::white() const
 {
     return (white_);
+}
+
+void Board::copy_matrix(BoardState** matrix) const
+{
+    for (int i = 0; i < COL; i++){
+        for (int j = 0; j < ROW; j++){
+            matrix[i][j] = matrix_[i][j];
+        }
+    }
 }
 
 BoardState Board::winner() const

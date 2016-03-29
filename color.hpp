@@ -26,9 +26,9 @@ public:
 
 private:
     static void register_color(const Color& color);
-    static const int BOARD_NUMBER;
-    static const int BLACK_NUMBER;
-    static const int WHITE_NUMBER;
+    static const int BOARD_NUMBER = 1;
+    static const int BLACK_NUMBER = 2;
+    static const int WHITE_NUMBER = 3;
 };
 
 }

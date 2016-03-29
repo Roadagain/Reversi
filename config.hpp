@@ -33,6 +33,7 @@ public:
     static const std::string NEVER_STR;
     static const std::string LEVEL_STR;
     static const std::string EASY_STR;
+    static const std::string MEDIUM_STR;
     static const std::string HARD_STR;
     static const std::string LOG_STR;
     static const std::string HELP_STR;
