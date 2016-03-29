@@ -87,16 +87,20 @@ Point Enemy::maximized_select(const Board* board, BoardState stone) const
     return (p);
 }
 
-Point Enemy::evaluated_select(const Board* board, BoardState stone) const
+Point Enemy::evaluated_select(const Board* board, BoardState stone, int depth) const
 {
+    if (depth >= MAX_DEPTH){
+        return Point(-1, -1);
+    }
+
     Point p;
     int maximum = -500;
 
     for (int i = 0; i < Board::ROW; i++){
         for (int j = 0; j < Board::COL; j++){
             if (board->can_put(Point(i, j), stone)){
-                Board t_board = *board;
-                int tmp = reverse_score(&t_board, Point(i, j), stone);
+                Board t_board(*board);
+                int tmp = reverse_score(&t_board, Point(i, j), stone, depth);
                 if (maximum < tmp){
                     maximum = tmp;
                     p.y = i;
@@ -122,9 +126,9 @@ int Enemy::reverse_score(Board* board, const Point& p, BoardState stone, int dep
                 continue;
             }
             score += reverse_score(board, p, stone, Board::DXY[i], Board::DXY[j]);
-            if (depth <= MAX_DEPTH){
-                board->put(p, stone, false);
-                Point player_point = evaluated_select(board, reversed(stone));
+            board->put(p, stone, false);
+            Point player_point = evaluated_select(board, reversed(stone), depth + 1);
+            if (player_point.y != -1 && player_point.x != -1){
                 score += reverse_score(board, player_point, reversed(stone), depth + 1);
             }
         }
