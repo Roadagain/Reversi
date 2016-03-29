@@ -29,7 +29,7 @@ Point Enemy::select(const Board* board, BoardState stone) const
 
 const int Enemy::MAX_DEPTH = 2;
 
-const int Enemy::score_[8][8] = {
+const int Enemy::SCORE_TABLE[8][8] = {
     {  30, -10,  10,  10,  10,  10, -10,  30 },
     { -10, -10,  10,  -5,  -5,  10, -10, -10 },
     {  15,  10,   8,   5,   5,   8,  10,  15 },
@@ -117,7 +117,7 @@ Point Enemy::evaluated_select(const Board* board, BoardState stone) const
 
 int Enemy::reverse_score(Board* board, const Point& p, BoardState stone, int depth) const
 {
-    int score = score_[p.y][p.x];
+    int score = SCORE_TABLE[p.y][p.x];
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
             if (Board::DXY[i] == 0 && Board::DXY[j] == 0){
@@ -140,7 +140,7 @@ int Enemy::reverse_score(const Board* board, const Point& p, BoardState stone, i
     int score = 0;
     int num = board->reverse_num(p, stone, dy, dx);
     for (int i = 1; i < num; i++){
-        score += score_[p.y + dy * i][p.x + dx * i];
+        score += SCORE_TABLE[p.y + dy * i][p.x + dx * i];
     }
 
     return (score);
