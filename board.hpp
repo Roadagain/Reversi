@@ -66,7 +66,7 @@ private:
     void reverse(Point p, BoardState stone, int dy, int dx, bool print_flag);
     bool can_put(Point p, BoardState stone, int dy, int dx) const;
 
-    BoardState** matrix_;
+    BoardState matrix_[ROW][COL];
     int black_;
     int white_;
 };
