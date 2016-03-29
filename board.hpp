@@ -41,6 +41,7 @@ public:
 
     int black() const;
     int white() const;
+    void copy_matrix(BoardState** matrix) const;
 
     BoardState winner() const;
 

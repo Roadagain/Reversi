@@ -186,6 +186,15 @@ int Board::white() const
     return (white_);
 }
 
+void Board::copy_matrix(BoardState** matrix) const
+{
+    for (int i = 0; i < COL; i++){
+        for (int j = 0; j < ROW; j++){
+            matrix[i][j] = matrix_[i][j];
+        }
+    }
+}
+
 BoardState Board::winner() const
 {
     if (black_ > white_){
