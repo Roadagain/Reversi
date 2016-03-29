@@ -125,6 +125,7 @@ int Enemy::reverse_score(Board* board, const Point& p, BoardState stone, int dep
             if (Board::DXY[i] == 0 && Board::DXY[j] == 0){
                 continue;
             }
+            score += board->count_neighbor(p, reversed(stone));
             score += reverse_score(board, p, stone, Board::DXY[i], Board::DXY[j]);
             board->put(p, stone, false);
             bool player_put = false;
