@@ -22,6 +22,7 @@ public:
     Point select(const Board* board, BoardState stone) const;
 
     static const int MAX_DEPTH;
+    static const int score_[8][8];
 private:
     Point randomized_select(const Board* board, BoardState stone) const;
     Point maximized_select(const Board* board, BoardState stone) const;
@@ -29,7 +30,6 @@ private:
     int reverse_score(Board* board, const Point& p, BoardState stone, int depth = 1) const;
     int reverse_score(const Board* board, const Point& p, BoardState stone, int dy, int dx) const;
     Level level_;
-    static const int score_[8][8];
 };
 
 }
