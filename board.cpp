@@ -193,7 +193,7 @@ int Board::count_neighbor(const Point& p, BoardState stone)
     int cnt = 0;
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
-            if (DXY[i] == 0 && DXY[j] == 0){
+            if ((DXY[i] == 0 && DXY[j] == 0) || !in_board(Point(p.y + DXY[i], p.x + DXY[j]))){
                 continue;
             }
             if (matrix_[p.y + DXY[i]][p.x + DXY[j]] == stone){
