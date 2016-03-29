@@ -46,10 +46,9 @@ const int Board::DXY[] = { -1, 0, 1 };
 
 Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
 {
-    for (int i = 0; i < COL; i++){
-        for (int j = 0; j < ROW; j++){
-            matrix_[i][j] = EMPTY;
-        }
+    matrix_ = new BoardState*[ROW]();
+    for (int i = 0; i < ROW; i++){
+        matrix_[i] = new BoardState[COL]();
     }
     matrix_[ROW / 2 - 1][COL / 2 - 1] = WHITE;
     matrix_[ROW / 2][COL / 2] = WHITE;
@@ -59,6 +58,10 @@ Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
 
 Board::~Board()
 {
+    for (int i = 0; i < ROW; i++){
+        delete[] matrix_[i];
+    }
+    delete[] matrix_;
 }
 
 void Board::print(const Point& p) const
