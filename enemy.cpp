@@ -27,9 +27,7 @@ Point Enemy::select(const Board* board, BoardState stone) const
     }
 }
 
-const int Enemy::MAX_DEPTH = 2;
-
-const int Enemy::SCORE_TABLE[8][8] = {
+const int Enemy::SCORE_TABLE[Board::ROW][Board::COL] = {
     {  30, -10,  10,  10,  10,  10, -10,  30 },
     { -10, -10,  10,  -5,  -5,  10, -10, -10 },
     {  15,  10,   8,   5,   5,   8,  10,  15 },

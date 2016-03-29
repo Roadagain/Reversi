@@ -42,16 +42,6 @@ Point::Point(int y, int x) : y(y), x(x)
 {
 }
 
-const int Board::ROW = 8;
-const int Board::COL = 8;
-
-const int Board::DEFAULT_STONE = 4;
-const int Board::MAX_PUT = ROW * COL - DEFAULT_STONE;
-
-const int Board::START_Y = 1;
-const int Board::START_X = 1;
-const int Board::END_Y = START_Y + ROW * 2;
-const int Board::END_X = START_Y + COL * 3;
 const int Board::DXY[] = { -1, 0, 1 };
 
 Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)

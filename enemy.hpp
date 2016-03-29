@@ -21,8 +21,8 @@ public:
 
     Point select(const Board* board, BoardState stone) const;
 
-    static const int MAX_DEPTH;
-    static const int SCORE_TABLE[8][8];
+    static const int MAX_DEPTH = 2;
+    static const int SCORE_TABLE[Board::ROW][Board::COL];
 private:
     Point randomized_select(const Board* board, BoardState stone) const;
     Point maximized_select(const Board* board, BoardState stone) const;
