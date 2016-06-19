@@ -126,19 +126,19 @@ std::string Config::log_file_name() const
 
 const std::string Config::BLACK_STR("black");
 const std::string Config::WHITE_STR("white");
-const std::string Config::AUTOMATIC_STR("--automatic");
+const std::string Config::AUTOMATIC_STR("automatic");
 const std::string Config::AUTOMATIC_DESCRIPTION("Play automatically.");
-const std::string Config::COLOR_STR("--color");
+const std::string Config::COLOR_STR("color");
 const std::string Config::COLOR_DESCRIPTION("Colorize the output.");
 const std::string Config::ALWAYS_STR("always");
 const std::string Config::AUTO_STR("auto");
 const std::string Config::NEVER_STR("never");
-const std::string Config::LEVEL_STR("--level");
+const std::string Config::LEVEL_STR("level");
 const std::string Config::LEVEL_DESCRIPTION("Choose enemy's level.");
 const std::string Config::EASY_STR("easy");
 const std::string Config::MEDIUM_STR("medium");
 const std::string Config::HARD_STR("hard");
-const std::string Config::LOG_STR("--log");
+const std::string Config::LOG_STR("log");
 const std::string Config::LOG_DESCRIPTION("Log the game records to FILENAME.");
 
 }
