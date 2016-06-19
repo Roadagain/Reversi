@@ -25,15 +25,19 @@ public:
     static const std::string BLACK_STR;
     static const std::string WHITE_STR;
     static const std::string AUTOMATIC_STR;
+    static const std::string AUTOMATIC_DESCRIPTION;
     static const std::string COLOR_STR;
+    static const std::string COLOR_DESCRIPTION;
     static const std::string ALWAYS_STR;
     static const std::string AUTO_STR;
     static const std::string NEVER_STR;
     static const std::string LEVEL_STR;
+    static const std::string LEVEL_DESCRIPTION;
     static const std::string EASY_STR;
     static const std::string MEDIUM_STR;
     static const std::string HARD_STR;
     static const std::string LOG_STR;
+    static const std::string LOG_DESCRIPTION;
 
 private:
     Config();
