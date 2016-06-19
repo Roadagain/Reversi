@@ -3,8 +3,6 @@
 #include <string>
 #include <vector>
 
-#include "Scorpio/parse-option.hpp"
-
 #include "board.hpp"
 #include "config.hpp"
 
@@ -96,25 +94,6 @@ bool Config::init(int argc, char** argv)
     return (true);
 }
 
-void Config::help()
-{
-    std::puts("Usage: reversi [options] [color]");
-    std::puts("Reversi game for one person's play.");
-    std::puts("Options:");
-    std::puts("  --automatic    Play automatically.");
-    std::puts("  --color[=WHEN] Colorize the output;");
-    std::puts("                 WHEN can be 'always' (default if omitted), 'auto', or 'never'.");
-    std::puts("  --level=LEVEL  Choose enemy's level;");
-    std::puts("                 LEVEL can be 'easy', 'medium' or 'hard'.");
-    std::puts("  --log=FILENAME Log the game records to FILENAME.");
-    std::puts("  --help         Print this help and exit successfully.");
-    std::puts("");
-    std::puts("Color must be 'black' or 'white'.");
-    std::puts("Default color is black.");
-
-    std::exit(0);
-}
-
 bool Config::color() const
 {
     return (color_);
@@ -157,6 +136,5 @@ const std::string Config::EASY_STR("easy");
 const std::string Config::MEDIUM_STR("medium");
 const std::string Config::HARD_STR("hard");
 const std::string Config::LOG_STR("--log");
-const std::string Config::HELP_STR("--help");
 
 }
