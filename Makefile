@@ -4,6 +4,7 @@ CXX = g++
 CXXFLAGS = -c -O3 -Wall -Wextra
 SRC = $(wildcard *.cpp)
 OBJ = $(patsubst %.cpp, %.o, $(SRC))
+LIBFLAGS = -lncurses -largp
 EXE = reversi
 
 .SUFFIXES: .cpp .o .h .d
@@ -12,7 +13,7 @@ EXE = reversi
 all: $(EXE)
 
 $(EXE): $(OBJ)
-	$(CXX) -o $(EXE) $(OBJ) -lncurses -largp
+	$(CXX) -o $(EXE) $(OBJ) $(LIBFLAGS)
 
 .PHONY: clean
 clean:
