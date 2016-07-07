@@ -82,9 +82,9 @@ const char Config::LEVEL_CHAR = 'l';
 const std::string Config::EASY_STR("easy");
 const std::string Config::MEDIUM_STR("medium");
 const std::string Config::HARD_STR("hard");
-const std::string Config::LOG_STR("log");
+const std::string Config::LOG_STR("Log");
 const std::string Config::LOG_DESCRIPTION("Log the game records to FILENAME.");
-const char Config::LOG_CHAR = 'l';
+const char Config::LOG_CHAR = 'L';
 const std::string Config::ARGS_DOC("[ARG1]");
 
 error_t parse_opt(int key, char* arg, struct argp_state* state)
