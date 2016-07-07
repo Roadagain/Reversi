@@ -21,75 +21,16 @@ Config& Config::instance()
 
 bool Config::init(int argc, char** argv)
 {
-    scorpio::OptionParser parser(argc, argv);
-
-    parser.add_option(AUTOMATIC_STR);
-    parser.add_option(COLOR_STR, true);
-    parser.add_option(LEVEL_STR, true);
-    parser.add_option(LOG_STR, true);
-    parser.add_option(HELP_STR);
-    parser.add_option(BLACK_STR);
-    parser.add_option(WHITE_STR);
-
-    std::vector<scorpio::Option> options = parser.parse();
-    int size = options.size();
-    for (int i = 0; i < size; i++){
-        if (!options[i].available){
-            continue;
-        }
-        if (options[i].name == HELP_STR){
-            help();
-        }
-        else if (options[i].name == AUTOMATIC_STR){
-            automatic_ = true;
-        }
-        else if (options[i].name == COLOR_STR){
-            if (options[i].value == ALWAYS_STR || options[i].value == AUTO_STR){
-                color_ = true;
-            }
-            else if (options[i].value == NEVER_STR){
-                color_ = false;
-            }
-            else {
-                std::puts("color option can be only 1 of 3 values: always, auto, never");
-                return (false);
-            }
-        }
-        else if (options[i].name == LEVEL_STR){
-            if (options[i].value == EASY_STR){
-                level_ = EASY;
-            }
-            else if (options[i].value == MEDIUM_STR){
-                level_ = MEDIUM;
-            }
-            else if (options[i].value == HARD_STR){
-                level_ = HARD;
-            }
-            else {
-                std::puts("level option cna be only 1 of 2 values: easy, hard");
-                return (false);
-            }
-        }
-        else if (options[i].name == LOG_STR){
-            if (options[i].value.empty()){
-                std::puts("log option needs filename");
-                return (false);
-            }
-            else {
-                log_file_name_ = options[i].value;
-            }
-        }
-        else if (options[i].name == BLACK_STR){
-            player_ = BLACK;
-        }
-        else if (options[i].name == WHITE_STR){
-            player_ = WHITE;
-        }
-        else {
-            std::printf("Unknown option: %s\n", options[i].name.c_str());
-            return (false);
-        }
-    }
+    argp_option options[] = {
+        { AUTOMATIC_STR.c_str(), AUTOMATIC_STR[0], nullptr, 0, AUTOMATIC_DESCRIPTION.c_str() },
+        { COLOR_STR.c_str(), COLOR_STR[0], "WHEN", 0, COLOR_DESCRIPTION.c_str() },
+        { LEVEL_STR.c_str(), LEVEL_STR[0], "LEVEL", 0, LEVEL_DESCRIPTION.c_str() },
+        { LOG_STR.c_str(), LOG_STR[0], "FILE", 0, LOG_DESCRIPTION.c_str() },
+        { nullptr }
+    };
+    argp args = { options, parse_opt, ARGS_DOC.c_str(), nullptr };
+    arguments a = { false, false, EASY, BLACK, "" };
+    argp_parse(&args, argc, argv, 0, nullptr, &a);
 
     return (true);
 }
@@ -128,17 +69,66 @@ const std::string Config::BLACK_STR("black");
 const std::string Config::WHITE_STR("white");
 const std::string Config::AUTOMATIC_STR("automatic");
 const std::string Config::AUTOMATIC_DESCRIPTION("Play automatically.");
+const char Config::AUTOMATIC_CHAR = 'a';
 const std::string Config::COLOR_STR("color");
 const std::string Config::COLOR_DESCRIPTION("Colorize the output.");
+const char Config::COLOR_CHAR = 'c';
 const std::string Config::ALWAYS_STR("always");
 const std::string Config::AUTO_STR("auto");
 const std::string Config::NEVER_STR("never");
 const std::string Config::LEVEL_STR("level");
 const std::string Config::LEVEL_DESCRIPTION("Choose enemy's level.");
+const char Config::LEVEL_CHAR = 'l';
 const std::string Config::EASY_STR("easy");
 const std::string Config::MEDIUM_STR("medium");
 const std::string Config::HARD_STR("hard");
 const std::string Config::LOG_STR("log");
 const std::string Config::LOG_DESCRIPTION("Log the game records to FILENAME.");
+const char Config::LOG_CHAR = 'l';
+const std::string Config::ARGS_DOC("[ARG1]");
+
+error_t parse_opt(int key, char* arg, struct argp_state* state)
+{
+    arguments* a = static_cast<arguments*>(state->input);
+    switch (key){
+        case Config::AUTOMATIC_CHAR:
+            a->automatic = true;
+            break;
+        case Config::COLOR_CHAR:
+            if (arg == Config::NEVER_STR){
+                a->color = false;
+            }
+            else {
+                a->color = true;
+            }
+            break;
+        case Config::LEVEL_CHAR:
+            if (arg == Config::EASY_STR){
+                a->level = EASY;
+            }
+            else if (arg == Config::MEDIUM_STR){
+                a->level = MEDIUM;
+            }
+            else {
+                a->level = HARD;
+            }
+            break;
+        case Config::LOG_CHAR:
+            a->log_file_name = arg;
+            break;
+        case ARGP_KEY_ARG:
+            if (arg == Config::WHITE_STR){
+                a->player = WHITE;
+            }
+            else {
+                a->player = BLACK;
+            }
+            break;
+        default:
+            return ARGP_ERR_UNKNOWN;
+    }
+
+    return 0;
+}
 
 }
