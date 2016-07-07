@@ -22,13 +22,13 @@ Config& Config::instance()
 bool Config::init(int argc, char** argv)
 {
     argp_option options[] = {
-        { AUTOMATIC_STR.c_str(), AUTOMATIC_STR[0], nullptr, 0, AUTOMATIC_DESCRIPTION.c_str() },
-        { COLOR_STR.c_str(), COLOR_STR[0], "WHEN", 0, COLOR_DESCRIPTION.c_str() },
-        { LEVEL_STR.c_str(), LEVEL_STR[0], "LEVEL", 0, LEVEL_DESCRIPTION.c_str() },
-        { LOG_STR.c_str(), LOG_STR[0], "FILE", 0, LOG_DESCRIPTION.c_str() },
-        { nullptr }
+        { AUTOMATIC_STR.c_str(), AUTOMATIC_STR[0], nullptr, 0, AUTOMATIC_DESCRIPTION.c_str(), 0 },
+        { COLOR_STR.c_str(), COLOR_STR[0], "WHEN", 0, COLOR_DESCRIPTION.c_str(), 0 },
+        { LEVEL_STR.c_str(), LEVEL_STR[0], "LEVEL", 0, LEVEL_DESCRIPTION.c_str(), 0 },
+        { LOG_STR.c_str(), LOG_STR[0], "FILE", 0, LOG_DESCRIPTION.c_str(), 0 },
+        { nullptr , '\0', nullptr, 0, nullptr, 0 }
     };
-    argp args = { options, parse_opt, ARGS_DOC.c_str(), nullptr };
+    argp args = { options, parse_opt, ARGS_DOC.c_str(), nullptr, nullptr, nullptr, nullptr };
     arguments a = { false, true, EASY, BLACK, "" };
     argp_parse(&args, argc, argv, 0, nullptr, &a);
 
