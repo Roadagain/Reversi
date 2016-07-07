@@ -12,7 +12,7 @@ EXE = reversi
 all: $(EXE)
 
 $(EXE): $(OBJ)
-	$(CXX) -o $(EXE) $(OBJ) -lncurses
+	$(CXX) -o $(EXE) $(OBJ) -lncurses -largp
 
 .PHONY: clean
 clean:
