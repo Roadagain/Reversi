@@ -29,7 +29,7 @@ bool Config::init(int argc, char** argv)
         { nullptr }
     };
     argp args = { options, parse_opt, ARGS_DOC.c_str(), nullptr };
-    arguments a = { false, false, EASY, BLACK, "" };
+    arguments a = { false, true, EASY, BLACK, "" };
     argp_parse(&args, argc, argv, 0, nullptr, &a);
 
     automatic_ = a.automatic;
