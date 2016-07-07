@@ -32,6 +32,12 @@ bool Config::init(int argc, char** argv)
     arguments a = { false, false, EASY, BLACK, "" };
     argp_parse(&args, argc, argv, 0, nullptr, &a);
 
+    automatic_ = a.automatic;
+    color_ = a.color;
+    level_ = a.level;
+    player_ = a.player;
+    log_file_name_ = a.log_file_name;
+
     return (true);
 }
 
