@@ -1,5 +1,3 @@
-#include "Scorpio/min-max.hpp"
-
 #include "board.hpp"
 #include "enemy.hpp"
 #include "random.hpp"
