@@ -165,4 +165,4 @@ int Enemy::reverse_score(const Board* board, const Point& p, BoardState stone, i
     return (score);
 }
 
-}
+} // namespace roadagain

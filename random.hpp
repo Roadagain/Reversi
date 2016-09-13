@@ -6,6 +6,6 @@ namespace roadagain
 
 unsigned int random();
 
-}
+} // namespace roadagain
 
 #endif

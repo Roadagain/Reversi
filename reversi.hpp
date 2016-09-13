@@ -32,6 +32,6 @@ private:
     std::vector<Log> *logs_;
 };
 
-}
+} // namespace roadagain
 
 #endif

@@ -32,4 +32,4 @@ void Colors::change_color(const Color& color)
     attrset(COLOR_PAIR(color.number));
 }
 
-}
+} // namespace roadagain

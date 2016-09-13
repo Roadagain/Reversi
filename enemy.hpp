@@ -33,6 +33,6 @@ private:
     Level level_;
 };
 
-}
+} // namespace roadagain
 
 #endif

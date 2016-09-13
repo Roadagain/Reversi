@@ -18,6 +18,6 @@ struct Log
 
 void log_records(std::vector<Log>& logs, BoardState winner);
 
-}
+} // namespace roadagain
 
 #endif

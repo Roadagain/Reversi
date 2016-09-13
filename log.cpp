@@ -47,4 +47,4 @@ void log_records(std::vector<Log>& logs, BoardState winner)
     log_file.close();
 }
 
-}
+} // namespace roadagain

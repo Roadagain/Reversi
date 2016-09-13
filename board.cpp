@@ -292,4 +292,4 @@ bool Board::can_put(Point p, BoardState stone, int dy, int dx) const
     return (in_board(p) && can_reverse && matrix_[p.y][p.x] == stone);
 }
 
-}
+} // namespace roadagain

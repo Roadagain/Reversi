@@ -11,6 +11,6 @@ void clear_stone(const Point& p);
 void print_coordinate(const Point& p);
 void clear_coordinate(const Point& p);
 
-}
+} // namespace roadagain
 
 #endif

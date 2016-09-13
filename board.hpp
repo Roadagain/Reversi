@@ -74,6 +74,6 @@ private:
     int white_;
 };
 
-}
+} // namespace roadagain
 
 #endif

@@ -31,6 +31,6 @@ private:
     static const int WHITE_NUMBER = 3;
 };
 
-}
+} // namespace roadagain
 
 #endif
