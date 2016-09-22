@@ -28,7 +28,7 @@ void print_stone(const Point& p, BoardState state, bool coordinate)
         stone = '\0';
         break;
     }
-    mvaddch(p.y * 2 + 1 + Board::START_Y, p.x * 3 + 1 + Board::START_X, stone);
+    mvaddch(p.y * 2 + 1 + Board::START.y, p.x * 3 + 1 + Board::START.x, stone);
     addch(stone);
     Colors::change_color(Colors::BOARD);
     if (coordinate){
@@ -46,19 +46,19 @@ void clear_stone(const Point& p)
 
 void print_coordinate(const Point& p)
 {
-    mvaddch(p.y * 2 + 1 + Board::START_Y, 0, '1' + p.y);
-    mvaddch(p.y * 2 + 1 + Board::START_X, Board::END_X + 1, '1' + p.y);
-    mvaddch(0, p.x * 3 + 1 + Board::START_X, 'a' + p.x);
-    mvaddch(Board::END_Y + 1, p.x * 3 + 2 + Board::START_X, 'a' + p.x);
+    mvaddch(p.y * 2 + 1 + Board::START.y, 0, '1' + p.y);
+    mvaddch(p.y * 2 + 1 + Board::START.x, Board::END.x + 1, '1' + p.y);
+    mvaddch(0, p.x * 3 + 1 + Board::START.x, 'a' + p.x);
+    mvaddch(Board::END.y + 1, p.x * 3 + 2 + Board::START.x, 'a' + p.x);
 }
 
 void clear_coordinate(const Point& p)
 {
     attrset(0);
-    mvaddch(p.y * 2 + 1 + Board::START_Y, 0, ' ');
-    mvaddch(p.y * 2 + 1 + Board::START_Y, Board::END_X + 1, ' ');
-    mvaddch(0, p.x * 3 + 1 + Board::START_X, ' ');
-    mvaddch(Board::END_Y + 1, p.x * 3 + 2 + Board::START_X, ' ');
+    mvaddch(p.y * 2 + 1 + Board::START.y, 0, ' ');
+    mvaddch(p.y * 2 + 1 + Board::START.y, Board::END.x + 1, ' ');
+    mvaddch(0, p.x * 3 + 1 + Board::START.x, ' ');
+    mvaddch(Board::END.y + 1, p.x * 3 + 2 + Board::START.x, ' ');
     Colors::change_color(Colors::BOARD);
 }
 

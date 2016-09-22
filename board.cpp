@@ -10,6 +10,9 @@
 namespace roadagain
 {
 
+const Point Board::START(1, 1);
+const Point Board::END(START.y + ROW * 2, START.x + COL * 3);
+
 BoardState to_state(const char* s)
 {
     std::string str(s);
@@ -78,7 +81,7 @@ void Board::print(const Point& p) const
     Colors::change_color(Colors::BOARD);
     for (int i = 0; i < ROW * 2 + 1; i++){
         for (int j = 0; j < COL * 3 + 1; j++){
-            move(START_Y + p.y + i, START_X + p.x + j);
+            move(START.y + p.y + i, START.x + p.x + j);
             if (i % 2 == 0){
                 addch(j % 3 == 0 ? '+' : '-');
             }

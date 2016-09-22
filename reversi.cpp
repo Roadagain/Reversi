@@ -60,7 +60,7 @@ void Reversi::play()
 void Reversi::end() const
 {
     BoardState winner = board_->winner();
-    ::move(Board::END_Y + 2, Board::START_X);
+    ::move(Board::END.y + 2, Board::START.x);
     switch (winner){
       case BLACK:
         printw(" Winner is Black ");
@@ -72,7 +72,7 @@ void Reversi::end() const
         printw(" Draw ");
         break;
     }
-    ::move(Board::END_Y + 2, Board::END_X - 6);
+    ::move(Board::END.y + 2, Board::END.x - 6);
     printw(" %02d %02d ", board_->black(), board_->white());
     log_records(*logs_, winner);
 }
