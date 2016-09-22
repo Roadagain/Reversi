@@ -1,18 +1,11 @@
 #ifndef INCLUDE_ROADAGAIN_BOARD
 #define INCLUDE_ROADAGAIN_BOARD
 
+#include "point.hpp"
 #include "state.hpp"
 
 namespace roadagain
 {
-
-struct Point
-{
-    int y;
-    int x;
-
-    Point(int y, int x);
-};
 
 class Board
 {
