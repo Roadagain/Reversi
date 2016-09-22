@@ -2,16 +2,10 @@
 #define INCLUDE_ROADAGAIN_ENEMY
 
 #include "board.hpp"
+#include "level.hpp"
 
 namespace roadagain
 {
-
-enum Level
-{
-    EASY,
-    MEDIUM,
-    HARD
-};
 
 class Enemy
 {

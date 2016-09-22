@@ -1,5 +1,6 @@
 #include "board.hpp"
 #include "enemy.hpp"
+#include "level.hpp"
 #include "random.hpp"
 
 namespace roadagain
