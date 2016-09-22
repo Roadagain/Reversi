@@ -1,28 +1,17 @@
 #ifndef INCLUDE_ROADAGAIN_BOARD
 #define INCLUDE_ROADAGAIN_BOARD
 
-#include <string>
+#include "state.hpp"
 
 namespace roadagain
 {
-
-enum BoardState
-{
-    EMPTY,
-    BLACK,
-    WHITE
-};
-
-BoardState to_state(const char* s);
-
-BoardState reversed(BoardState stone);
 
 struct Point
 {
     int y;
     int x;
 
-    Point(int y = 0, int x = 0);
+    Point(int y, int x);
 };
 
 class Board

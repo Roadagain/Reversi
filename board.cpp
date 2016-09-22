@@ -1,45 +1,15 @@
 #include <ncurses.h>
-#include <cctype>
-#include <algorithm>
-#include <string>
 
 #include "board.hpp"
 #include "color.hpp"
 #include "print.hpp"
+#include "state.hpp"
 
 namespace roadagain
 {
 
 const Point Board::START(1, 1);
 const Point Board::END(START.y + ROW * 2, START.x + COL * 3);
-
-BoardState to_state(const char* s)
-{
-    std::string str(s);
-
-    std::transform(str.begin(), str.end(), str.begin(), toupper);
-    if (str == "BLACK"){
-        return (BLACK);
-    }
-    else if (str == "WHITE"){
-        return (WHITE);
-    }
-    else {
-        return (EMPTY);
-    }
-}
-
-BoardState reversed(BoardState stone)
-{
-    switch (stone){
-        case BLACK:
-            return (WHITE);
-        case WHITE:
-            return (BLACK);
-        default:
-            return (EMPTY);
-    }
-}
 
 Point::Point(int y, int x) : y(y), x(x)
 {
