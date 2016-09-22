@@ -135,7 +135,7 @@ void Board::reverse(Point p, BoardState stone, int dy, int dx, bool print_flag)
         p.y += dy;
         p.x += dx;
     }
-    if (!in_board(p) || matrix_[p.y][p.x] == EMPTY){
+    if (not in_board(p) || matrix_[p.y][p.x] == EMPTY){
         return;
     }
 
@@ -184,7 +184,7 @@ int Board::reverse_num(Point p, BoardState stone, int dy, int dx) const
         p.y += dy;
         p.x += dx;
     }
-    if (!in_board(p) || matrix_[p.y][p.x] == EMPTY){
+    if (not in_board(p) || matrix_[p.y][p.x] == EMPTY){
         return (0);
     }
 
@@ -196,7 +196,7 @@ int Board::count_neighbor(const Point& p, BoardState stone)
     int cnt = 0;
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
-            if ((DXY[i] == 0 && DXY[j] == 0) || !in_board(Point(p.y + DXY[i], p.x + DXY[j]))){
+            if ((DXY[i] == 0 && DXY[j] == 0) || not in_board(Point(p.y + DXY[i], p.x + DXY[j]))){
                 continue;
             }
             if (matrix_[p.y + DXY[i]][p.x + DXY[j]] == stone){

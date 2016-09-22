@@ -33,9 +33,9 @@ void Reversi::play()
     start();
 
     for (int i = 0; i < Board::MAX_PUT; i++){
-        if (!board_->can_put(now_)){
+        if (not board_->can_put(now_)){
             change();
-            if (!board_->can_put(now_)){
+            if (not board_->can_put(now_)){
                 break;
             }
         }
@@ -90,7 +90,7 @@ Point Reversi::move() const
     }
 
     c = getch();
-    while (c != '\n' || !board_->can_put(p, now_)){
+    while (c != '\n' || not board_->can_put(p, now_)){
         if (board_->empty(p)){
             clear_stone(p);
         }

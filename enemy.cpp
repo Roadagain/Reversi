@@ -47,7 +47,7 @@ Point Enemy::randomized_select(const Board* board, BoardState stone) const
             p.y = 0;
             p.x = (p.x + 1) % Board::COL;
         }
-        while (!board->can_put(p, stone)){
+        while (not board->can_put(p, stone)){
             p.y++;
             if (p.y >= Board::ROW){
                 p.y = 0;
@@ -135,7 +135,7 @@ int Enemy::reverse_score(Board* board, const Point& p, BoardState stone, int dep
                     }
                 }
             }
-            if (!player_put){
+            if (not player_put){
                 score += 30;
                 Point player_point = evaluated_select(board, stone, depth + 1);
                 if (player_point.y != -1 && player_point.x != -1){

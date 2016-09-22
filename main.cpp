@@ -9,7 +9,7 @@ using namespace roadagain;
 int main(int argc, char** argv)
 {
     Config& config = Config::instance();
-    if (!config.init(argc, argv)){
+    if (not config.init(argc, argv)){
         return (-1);
     }
 
