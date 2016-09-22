@@ -1,6 +1,7 @@
 #include <ncurses.h>
 
 #include "color.hpp"
+#include "colors.hpp"
 
 namespace roadagain
 {
