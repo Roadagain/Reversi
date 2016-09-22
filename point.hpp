@@ -9,6 +9,7 @@ struct Point
     int y;
     int x;
 
+    Point();
     Point(int y, int x);
 };
 
