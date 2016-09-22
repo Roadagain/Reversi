@@ -2,6 +2,7 @@
 
 #include "board.hpp"
 #include "color.hpp"
+#include "colormanager.hpp"
 #include "print.hpp"
 #include "reversi.hpp"
 
@@ -13,15 +14,15 @@ void print_stone(const Point& p, BoardState state, bool coordinate)
     char stone;
     switch (state){
       case EMPTY:
-        Colors::change_color(Colors::BOARD);
+        ColorManager::instance().change_color(ColorManager::BOARD);
         stone = ' ';
         break;
       case BLACK:
-        Colors::change_color(Colors::BLACK);
+        ColorManager::instance().change_color(ColorManager::BLACK);
         stone = 'o';
         break;
       case WHITE:
-        Colors::change_color(Colors::WHITE);
+        ColorManager::instance().change_color(ColorManager::WHITE);
         stone = 'x';
         break;
       default:
@@ -30,7 +31,7 @@ void print_stone(const Point& p, BoardState state, bool coordinate)
     }
     mvaddch(p.y * 2 + 1 + Board::START.y, p.x * 3 + 1 + Board::START.x, stone);
     addch(stone);
-    Colors::change_color(Colors::BOARD);
+    ColorManager::instance().change_color(ColorManager::BOARD);
     if (coordinate){
         print_coordinate(p);
     }
@@ -59,7 +60,7 @@ void clear_coordinate(const Point& p)
     mvaddch(p.y * 2 + 1 + Board::START.y, Board::END.x + 1, ' ');
     mvaddch(0, p.x * 3 + 1 + Board::START.x, ' ');
     mvaddch(Board::END.y + 1, p.x * 3 + 2 + Board::START.x, ' ');
-    Colors::change_color(Colors::BOARD);
+    ColorManager::instance().change_color(ColorManager::BOARD);
 }
 
 }

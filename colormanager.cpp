@@ -10,6 +10,12 @@ const Color ColorManager::BOARD = { BOARD_NUMBER, COLOR_BLACK, COLOR_GREEN };
 const Color ColorManager::BLACK = { BLACK_NUMBER, COLOR_BLACK, COLOR_BLACK };
 const Color ColorManager::WHITE = { WHITE_NUMBER, COLOR_WHITE, COLOR_WHITE };
 
+ColorManager& ColorManager::instance()
+{
+    static ColorManager instance_;
+    return (instance_);
+}
+
 void ColorManager::init()
 {
     if (not has_colors()){
