@@ -6,7 +6,7 @@
 namespace roadagain
 {
 
-class Colors
+class ColorManager
 {
 public:
     static void init();
