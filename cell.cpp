@@ -7,7 +7,7 @@ Cell::Cell() : color(EMPTY)
 {
 }
 
-Cell::Cell(const Point& point, CellColor color) : point(point), color(color)
+Cell::Cell(const Point& point, CellColor color) : point_(point), color_(color)
 {
 }
 
