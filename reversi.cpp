@@ -129,7 +129,7 @@ Point Reversi::move() const
 void Reversi::change()
 {
     now_ = next_;
-    next_ = next_.reversed();
+    next_.reverse();
 }
 
 } // namespace roadagain
