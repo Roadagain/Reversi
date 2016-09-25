@@ -11,7 +11,7 @@ class Cell
 {
 public:
     Cell();
-    Cell(const Point& p, CellColor color);
+    Cell(const Point& p, const CellColor& color);
 
     void reverse();
 

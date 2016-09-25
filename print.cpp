@@ -9,7 +9,7 @@
 namespace roadagain
 {
 
-void print_stone(const Point& p, CellColor cell, bool coordinate)
+void print_stone(const Point& p, const CellColor& cell, bool coordinate)
 {
     char stone;
     switch (cell){

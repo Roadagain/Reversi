@@ -64,7 +64,7 @@ void Board::print(const Point& p) const
     }
 }
 
-void Board::put(const Point& p, CellColor stone, bool print_flag)
+void Board::put(const Cell& cell, bool print_flag)
 {
     matrix_[p.y][p.x] = stone;
     if (stone == CellColor::BLACK){
@@ -79,7 +79,7 @@ void Board::put(const Point& p, CellColor stone, bool print_flag)
     reverse(p, stone, print_flag);
 }
 
-void Board::reverse(const Point& p, CellColor stone, bool print_flag)
+void Board::reverse(const Point& p, const CellColor& stone, bool print_flag)
 {
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
@@ -91,7 +91,7 @@ void Board::reverse(const Point& p, CellColor stone, bool print_flag)
     }
 }
 
-void Board::reverse(Point p, CellColor stone, int dy, int dx, bool print_flag)
+void Board::reverse(Point p, const CellColor& stone, int dy, int dx, bool print_flag)
 {
     int cnt = 0;
 
@@ -124,7 +124,7 @@ void Board::reverse(Point p, CellColor stone, int dy, int dx, bool print_flag)
     }
 }
 
-int Board::reverse_num(const Point& p, CellColor stone) const
+int Board::reverse_num(const Point& p, const CellColor& stone) const
 {
     int cnt = 0;
 
@@ -140,7 +140,7 @@ int Board::reverse_num(const Point& p, CellColor stone) const
     return (cnt);
 }
 
-int Board::reverse_num(Point p, CellColor stone, int dy, int dx) const
+int Board::reverse_num(Point p, const CellColor& stone, int dy, int dx) const
 {
     int cnt = 0;
 
@@ -158,7 +158,7 @@ int Board::reverse_num(Point p, CellColor stone, int dy, int dx) const
     return (cnt);
 }
 
-int Board::count_neighbor(const Point& p, CellColor stone)
+int Board::count_neighbor(const Point& p, const CellColor& stone)
 {
     int cnt = 0;
     for (int i = 0; i < 3; i++){
@@ -217,7 +217,7 @@ bool Board::empty(const Point& p) const
     return (matrix_[p.y][p.x] == CellColor::EMPTY);
 }
 
-bool Board::can_put(CellColor stone) const
+bool Board::can_put(const CellColor& stone) const
 {
     for (int i = 0; i < ROW; i++){
         for (int j = 0; j < COL; j++){
@@ -229,7 +229,7 @@ bool Board::can_put(CellColor stone) const
     return (false);
 }
 
-bool Board::can_put(const Point& p, CellColor stone) const
+bool Board::can_put(const Point& p, const CellColor& stone) const
 {
     if (matrix_[p.y][p.x] != CellColor::EMPTY){
         return (false);
@@ -248,7 +248,7 @@ bool Board::can_put(const Point& p, CellColor stone) const
     return (false);
 }
 
-bool Board::can_put(Point p, CellColor stone, int dy, int dx) const
+bool Board::can_put(Point p, const CellColor& stone, int dy, int dx) const
 {
     bool can_reverse = false;
     p.y += dy;

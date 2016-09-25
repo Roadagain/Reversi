@@ -4,7 +4,7 @@
 namespace roadagain
 {
 
-struct CellColor
+class CellColor
 {
 public:
     enum ColorEnum : short

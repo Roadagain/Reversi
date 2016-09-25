@@ -13,10 +13,10 @@ struct Log
     Point p;
     CellColor stone;
 
-    Log(const Point& p, CellColor stone);
+    Log(const Point& p, const CellColor& stone);
 };
 
-void log_records(std::vector<Log>& logs, CellColor winner);
+void log_records(std::vector<Log>& logs, const CellColor& winner);
 
 } // namespace roadagain
 

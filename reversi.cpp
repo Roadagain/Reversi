@@ -10,7 +10,7 @@
 namespace roadagain
 {
 
-Reversi::Reversi(CellColor player, Level level) : player_(player), now_(CellColor::BLACK), next_(CellColor::WHITE)
+Reversi::Reversi(const CellColor& player, Level level) : player_(player), now_(CellColor::BLACK), next_(CellColor::WHITE)
 {
     board_ = new Board();
     enemy_ = new Enemy(level);

@@ -13,7 +13,7 @@ namespace roadagain
 class Reversi
 {
 public:
-    Reversi(CellColor player, Level level);
+    Reversi(const CellColor& player, Level level);
     ~Reversi();
 
     void start() const;
