@@ -15,7 +15,7 @@ public:
 private:
     Point point_;
     CellColor color_;
-}
+};
 
 } // namespace roadagain
 
