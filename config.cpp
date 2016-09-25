@@ -51,7 +51,7 @@ bool Config::automatic() const
     return (automatic_);
 }
 
-Cell Config::player() const
+CellColor Config::player() const
 {
     if (automatic_){
         return (EMPTY);

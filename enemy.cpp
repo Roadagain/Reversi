@@ -14,7 +14,7 @@ Enemy::~Enemy()
 {
 }
 
-Point Enemy::select(const Board* board, Cell stone) const
+Point Enemy::select(const Board* board, CellColor stone) const
 {
     switch (level_){
         case EASY:
@@ -37,7 +37,7 @@ const int Enemy::SCORE_TABLE[Board::ROW][Board::COL] = {
     {  30, -10,  15,  10,  10,  15, -10,  30 },
 };
 
-Point Enemy::randomized_select(const Board* board, Cell stone) const
+Point Enemy::randomized_select(const Board* board, CellColor stone) const
 {
     int n = random();
     Point p;
@@ -61,7 +61,7 @@ Point Enemy::randomized_select(const Board* board, Cell stone) const
     return (p);
 }
 
-Point Enemy::maximized_select(const Board* board, Cell stone) const
+Point Enemy::maximized_select(const Board* board, CellColor stone) const
 {
     Point p;
     int maximum = 0;
@@ -86,7 +86,7 @@ Point Enemy::maximized_select(const Board* board, Cell stone) const
     return (p);
 }
 
-Point Enemy::evaluated_select(const Board* board, Cell stone, int depth) const
+Point Enemy::evaluated_select(const Board* board, CellColor stone, int depth) const
 {
     if (depth >= MAX_DEPTH){
         return Point(-1, -1);
@@ -116,7 +116,7 @@ Point Enemy::evaluated_select(const Board* board, Cell stone, int depth) const
     return (p);
 }
 
-int Enemy::reverse_score(Board* board, const Point& p, Cell stone, int depth) const
+int Enemy::reverse_score(Board* board, const Point& p, CellColor stone, int depth) const
 {
     int score = SCORE_TABLE[p.y][p.x];
     for (int i = 0; i < 3; i++){
@@ -155,7 +155,7 @@ int Enemy::reverse_score(Board* board, const Point& p, Cell stone, int depth) co
     return (score);
 }
 
-int Enemy::reverse_score(const Board* board, const Point& p, Cell stone, int dy, int dx) const
+int Enemy::reverse_score(const Board* board, const Point& p, CellColor stone, int dy, int dx) const
 {
     int score = 0;
     int num = board->reverse_num(p, stone, dy, dx);

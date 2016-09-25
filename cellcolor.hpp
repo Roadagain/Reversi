@@ -4,16 +4,16 @@
 namespace roadagain
 {
 
-enum Cell
+enum CellColor
 {
     EMPTY,
     BLACK,
     WHITE
 };
 
-Cell to_cell(const char* s);
+CellColor to_cell_color(const char* s);
 
-Cell reversed(Cell stone);
+CellColor reversed(CellColor color);
 
 } // namespace roadagain
 

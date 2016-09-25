@@ -2,12 +2,12 @@
 #include <cctype>
 #include <string>
 
-#include "cell.hpp"
+#include "cellcolor.hpp"
 
 namespace roadagain
 {
 
-Cell to_state(const char* s)
+CellColor to_state(const char* s)
 {
     std::string str(s);
 
@@ -23,9 +23,9 @@ Cell to_state(const char* s)
     }
 }
 
-Cell reversed(Cell stone)
+CellColor reversed(CellColor color)
 {
-    switch (stone){
+    switch (color){
         case BLACK:
             return (WHITE);
         case WHITE:

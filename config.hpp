@@ -20,7 +20,7 @@ public:
 
     bool color() const;
     bool automatic() const;
-    Cell player() const;
+    CellColor player() const;
     Level level() const;
     std::string log_file_name() const;
 
@@ -53,7 +53,7 @@ private:
 
     bool color_;
     bool automatic_;
-    Cell player_;
+    CellColor player_;
     Level level_;
     std::string log_file_name_;
 };
@@ -63,7 +63,7 @@ struct arguments
     bool automatic;
     bool color;
     Level level;
-    Cell player;
+    CellColor player;
     std::string log_file_name;
 };
 
