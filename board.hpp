@@ -2,7 +2,7 @@
 #define INCLUDE_ROADAGAIN_BOARD
 
 #include "point.hpp"
-#include "state.hpp"
+#include "cell.hpp"
 
 namespace roadagain
 {
@@ -16,23 +16,23 @@ public:
 
     void print(const Point& p = Point(0, 0)) const;
 
-    void put(const Point& p, BoardState stone, bool print_flag = true);
-    void reverse(const Point& p, BoardState stone, bool print_flag);
+    void put(const Point& p, Cell stone, bool print_flag = true);
+    void reverse(const Point& p, Cell stone, bool print_flag);
 
-    int reverse_num(const Point& p, BoardState stone) const;
-    int reverse_num(Point p, BoardState stone, int dy, int dx) const;
-    int count_neighbor(const Point& p, BoardState stone);
+    int reverse_num(const Point& p, Cell stone) const;
+    int reverse_num(Point p, Cell stone, int dy, int dx) const;
+    int count_neighbor(const Point& p, Cell stone);
 
     int black() const;
     int white() const;
-    void copy_matrix(BoardState** matrix) const;
+    void copy_matrix(Cell** matrix) const;
 
-    BoardState winner() const;
+    Cell winner() const;
 
     bool in_board(const Point& p) const;
     bool empty(const Point& p) const;
-    bool can_put(BoardState stone) const;
-    bool can_put(const Point& p, BoardState stone) const;
+    bool can_put(Cell stone) const;
+    bool can_put(const Point& p, Cell stone) const;
 
     static const int ROW = 8;
     static const int COL = 8;
@@ -46,10 +46,10 @@ public:
     static const int DXY[];
 
 private:
-    void reverse(Point p, BoardState stone, int dy, int dx, bool print_flag);
-    bool can_put(Point p, BoardState stone, int dy, int dx) const;
+    void reverse(Point p, Cell stone, int dy, int dx, bool print_flag);
+    bool can_put(Point p, Cell stone, int dy, int dx) const;
 
-    BoardState** matrix_;
+    Cell** matrix_;
     int black_;
     int white_;
 };

@@ -11,12 +11,12 @@ namespace roadagain
 struct Log
 {
     Point p;
-    BoardState stone;
+    Cell stone;
 
-    Log(const Point& p, BoardState stone);
+    Log(const Point& p, Cell stone);
 };
 
-void log_records(std::vector<Log>& logs, BoardState winner);
+void log_records(std::vector<Log>& logs, Cell winner);
 
 } // namespace roadagain
 

@@ -2,12 +2,12 @@
 #include <cctype>
 #include <string>
 
-#include "state.hpp"
+#include "cell.hpp"
 
 namespace roadagain
 {
 
-BoardState to_state(const char* s)
+Cell to_state(const char* s)
 {
     std::string str(s);
 
@@ -23,7 +23,7 @@ BoardState to_state(const char* s)
     }
 }
 
-BoardState reversed(BoardState stone)
+Cell reversed(Cell stone)
 {
     switch (stone){
         case BLACK:

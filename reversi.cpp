@@ -10,7 +10,7 @@
 namespace roadagain
 {
 
-Reversi::Reversi(BoardState player, Level level) : player_(player), now_(BLACK), next_(WHITE)
+Reversi::Reversi(Cell player, Level level) : player_(player), now_(BLACK), next_(WHITE)
 {
     board_ = new Board();
     enemy_ = new Enemy(level);
@@ -59,7 +59,7 @@ void Reversi::play()
 
 void Reversi::end() const
 {
-    BoardState winner = board_->winner();
+    Cell winner = board_->winner();
     ::move(Board::END.y + 2, Board::START.x);
     switch (winner){
       case BLACK:

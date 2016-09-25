@@ -9,10 +9,10 @@
 namespace roadagain
 {
 
-void print_stone(const Point& p, BoardState state, bool coordinate)
+void print_stone(const Point& p, Cell cell, bool coordinate)
 {
     char stone;
-    switch (state){
+    switch (cell){
       case EMPTY:
         ColorManager::instance().change_color(ColorManager::BOARD);
         stone = ' ';

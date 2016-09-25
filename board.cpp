@@ -4,7 +4,7 @@
 #include "color.hpp"
 #include "colormanager.hpp"
 #include "print.hpp"
-#include "state.hpp"
+#include "cell.hpp"
 
 namespace roadagain
 {
@@ -16,9 +16,9 @@ const int Board::DXY[] = { -1, 0, 1 };
 
 Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
 {
-    matrix_ = new BoardState*[ROW]();
+    matrix_ = new Cell*[ROW]();
     for (int i = 0; i < ROW; i++){
-        matrix_[i] = new BoardState[COL]();
+        matrix_[i] = new Cell[COL]();
     }
     matrix_[ROW / 2 - 1][COL / 2 - 1] = WHITE;
     matrix_[ROW / 2][COL / 2] = WHITE;
@@ -28,9 +28,9 @@ Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
 
 Board::Board(const Board& board) : black_(board.black()), white_(board.white())
 {
-    matrix_ = new BoardState*[ROW]();
+    matrix_ = new Cell*[ROW]();
     for (int i = 0; i < ROW; i++){
-        matrix_[i] = new BoardState[COL]();
+        matrix_[i] = new Cell[COL]();
     }
     board.copy_matrix(matrix_);
 }
@@ -64,7 +64,7 @@ void Board::print(const Point& p) const
     }
 }
 
-void Board::put(const Point& p, BoardState stone, bool print_flag)
+void Board::put(const Point& p, Cell stone, bool print_flag)
 {
     matrix_[p.y][p.x] = stone;
     if (stone == BLACK){
@@ -79,7 +79,7 @@ void Board::put(const Point& p, BoardState stone, bool print_flag)
     reverse(p, stone, print_flag);
 }
 
-void Board::reverse(const Point& p, BoardState stone, bool print_flag)
+void Board::reverse(const Point& p, Cell stone, bool print_flag)
 {
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
@@ -91,7 +91,7 @@ void Board::reverse(const Point& p, BoardState stone, bool print_flag)
     }
 }
 
-void Board::reverse(Point p, BoardState stone, int dy, int dx, bool print_flag)
+void Board::reverse(Point p, Cell stone, int dy, int dx, bool print_flag)
 {
     int cnt = 0;
 
@@ -124,7 +124,7 @@ void Board::reverse(Point p, BoardState stone, int dy, int dx, bool print_flag)
     }
 }
 
-int Board::reverse_num(const Point& p, BoardState stone) const
+int Board::reverse_num(const Point& p, Cell stone) const
 {
     int cnt = 0;
 
@@ -140,7 +140,7 @@ int Board::reverse_num(const Point& p, BoardState stone) const
     return (cnt);
 }
 
-int Board::reverse_num(Point p, BoardState stone, int dy, int dx) const
+int Board::reverse_num(Point p, Cell stone, int dy, int dx) const
 {
     int cnt = 0;
 
@@ -158,7 +158,7 @@ int Board::reverse_num(Point p, BoardState stone, int dy, int dx) const
     return (cnt);
 }
 
-int Board::count_neighbor(const Point& p, BoardState stone)
+int Board::count_neighbor(const Point& p, Cell stone)
 {
     int cnt = 0;
     for (int i = 0; i < 3; i++){
@@ -185,7 +185,7 @@ int Board::white() const
     return (white_);
 }
 
-void Board::copy_matrix(BoardState** matrix) const
+void Board::copy_matrix(Cell** matrix) const
 {
     for (int i = 0; i < COL; i++){
         for (int j = 0; j < ROW; j++){
@@ -194,7 +194,7 @@ void Board::copy_matrix(BoardState** matrix) const
     }
 }
 
-BoardState Board::winner() const
+Cell Board::winner() const
 {
     if (black_ > white_){
         return (BLACK);
@@ -217,7 +217,7 @@ bool Board::empty(const Point& p) const
     return (matrix_[p.y][p.x] == EMPTY);
 }
 
-bool Board::can_put(BoardState stone) const
+bool Board::can_put(Cell stone) const
 {
     for (int i = 0; i < ROW; i++){
         for (int j = 0; j < COL; j++){
@@ -229,7 +229,7 @@ bool Board::can_put(BoardState stone) const
     return (false);
 }
 
-bool Board::can_put(const Point& p, BoardState stone) const
+bool Board::can_put(const Point& p, Cell stone) const
 {
     if (matrix_[p.y][p.x] != EMPTY){
         return (false);
@@ -248,7 +248,7 @@ bool Board::can_put(const Point& p, BoardState stone) const
     return (false);
 }
 
-bool Board::can_put(Point p, BoardState stone, int dy, int dx) const
+bool Board::can_put(Point p, Cell stone, int dy, int dx) const
 {
     bool can_reverse = false;
     p.y += dy;

@@ -13,7 +13,7 @@ namespace roadagain
 class Reversi
 {
 public:
-    Reversi(BoardState player, Level level);
+    Reversi(Cell player, Level level);
     ~Reversi();
 
     void start() const;
@@ -26,9 +26,9 @@ private:
 
     Board *board_;
     Enemy *enemy_;
-    BoardState player_;
-    BoardState now_;
-    BoardState next_;
+    Cell player_;
+    Cell now_;
+    Cell next_;
     std::vector<Log> *logs_;
 };
 

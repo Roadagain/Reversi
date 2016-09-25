@@ -8,11 +8,11 @@
 namespace roadagain
 {
 
-Log::Log(const Point& p, BoardState stone) : p(p), stone(stone)
+Log::Log(const Point& p, Cell stone) : p(p), stone(stone)
 {
 }
 
-void log_records(std::vector<Log>& logs, BoardState winner)
+void log_records(std::vector<Log>& logs, Cell winner)
 {
     Config& config = Config::instance();
 

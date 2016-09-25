@@ -51,7 +51,7 @@ bool Config::automatic() const
     return (automatic_);
 }
 
-BoardState Config::player() const
+Cell Config::player() const
 {
     if (automatic_){
         return (EMPTY);
