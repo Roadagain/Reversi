@@ -7,32 +7,45 @@
 namespace roadagain
 {
 
-CellColor to_state(const char* s)
+CellColor::CellColor() : type_(CellColor::EMPTY)
+{
+}
+
+CellColor::CellColor(ColorEnum type) : type_(type)
+{
+}
+
+CellColor::CellColor(const char* s)
 {
     std::string str(s);
 
     std::transform(str.begin(), str.end(), str.begin(), toupper);
     if (str == "BLACK"){
-        return (BLACK);
+        type_ = CellColor::BLACK;
     }
     else if (str == "WHITE"){
-        return (WHITE);
+        type_ = CellColor::WHITE;
     }
     else {
-        return (EMPTY);
+        type_ = CellColor::EMPTY;
     }
 }
 
-CellColor reversed(CellColor color)
+CellColor CellColor::reversed() const
 {
-    switch (color){
-        case BLACK:
-            return (WHITE);
-        case WHITE:
-            return (BLACK);
+    switch (type_){
+        case CellColor::BLACK:
+            return (CellColor(CellColor::WHITE));
+        case CellColor::WHITE:
+            return (CellColor(CellColor::BLACK));
         default:
-            return (EMPTY);
+            return (CellColor());
     }
+}
+
+CellColor::operator short() const
+{
+    return (type_);
 }
 
 } // namespace roadagain

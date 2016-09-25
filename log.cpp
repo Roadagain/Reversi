@@ -23,7 +23,7 @@ void log_records(std::vector<Log>& logs, CellColor winner)
     int size = logs.size();
     std::ofstream log_file(config.log_file_name().c_str());
     for (int i = 0; i < size; i++){
-        if (logs[i].stone == BLACK){
+        if (logs[i].stone == CellColor::BLACK){
             log_file << 'B';
         }
         else {
@@ -33,10 +33,10 @@ void log_records(std::vector<Log>& logs, CellColor winner)
         log_file << ' ' << logs[i].p.y;
         log_file << '\n';
     }
-    if (winner == BLACK){
+    if (winner == CellColor::BLACK){
         log_file << "Winner is Black";
     }
-    else if (winner == WHITE){
+    else if (winner == CellColor::WHITE){
         log_file << "Winner is White";
     }
     else {

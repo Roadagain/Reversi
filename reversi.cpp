@@ -10,7 +10,7 @@
 namespace roadagain
 {
 
-Reversi::Reversi(CellColor player, Level level) : player_(player), now_(BLACK), next_(WHITE)
+Reversi::Reversi(CellColor player, Level level) : player_(player), now_(CellColor::BLACK), next_(CellColor::WHITE)
 {
     board_ = new Board();
     enemy_ = new Enemy(level);
@@ -62,10 +62,10 @@ void Reversi::end() const
     CellColor winner = board_->winner();
     ::move(Board::END.y + 2, Board::START.x);
     switch (winner){
-      case BLACK:
+      case CellColor::BLACK:
         printw(" Winner is Black ");
         break;
-      case WHITE:
+      case CellColor::WHITE:
         printw(" Winner is White ");
         break;
       default:
@@ -129,7 +129,7 @@ Point Reversi::move() const
 void Reversi::change()
 {
     now_ = next_;
-    next_ = (next_ == BLACK ? WHITE : BLACK);
+    next_ = next_.reversed();
 }
 
 } // namespace roadagain

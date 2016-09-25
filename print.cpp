@@ -13,15 +13,15 @@ void print_stone(const Point& p, CellColor cell, bool coordinate)
 {
     char stone;
     switch (cell){
-      case EMPTY:
+      case CellColor::EMPTY:
         ColorManager::instance().change_color(ColorManager::BOARD);
         stone = ' ';
         break;
-      case BLACK:
+      case CellColor::BLACK:
         ColorManager::instance().change_color(ColorManager::BLACK);
         stone = 'o';
         break;
-      case WHITE:
+      case CellColor::WHITE:
         ColorManager::instance().change_color(ColorManager::WHITE);
         stone = 'x';
         break;
@@ -42,7 +42,7 @@ void print_stone(const Point& p, CellColor cell, bool coordinate)
 
 void clear_stone(const Point& p)
 {
-    print_stone(p, EMPTY, false);
+    print_stone(p, CellColor::EMPTY, false);
 }
 
 void print_coordinate(const Point& p)

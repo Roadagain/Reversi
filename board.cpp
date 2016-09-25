@@ -20,10 +20,10 @@ Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
     for (int i = 0; i < ROW; i++){
         matrix_[i] = new CellColor[COL]();
     }
-    matrix_[ROW / 2 - 1][COL / 2 - 1] = WHITE;
-    matrix_[ROW / 2][COL / 2] = WHITE;
-    matrix_[ROW / 2 - 1][COL / 2] = BLACK;
-    matrix_[ROW / 2][COL / 2 - 1] = BLACK;
+    matrix_[ROW / 2 - 1][COL / 2 - 1] = CellColor::WHITE;
+    matrix_[ROW / 2][COL / 2] = CellColor::WHITE;
+    matrix_[ROW / 2 - 1][COL / 2] = CellColor::BLACK;
+    matrix_[ROW / 2][COL / 2 - 1] = CellColor::BLACK;
 }
 
 Board::Board(const Board& board) : black_(board.black()), white_(board.white())
@@ -67,7 +67,7 @@ void Board::print(const Point& p) const
 void Board::put(const Point& p, CellColor stone, bool print_flag)
 {
     matrix_[p.y][p.x] = stone;
-    if (stone == BLACK){
+    if (stone == CellColor::BLACK){
         black_++;
     }
     else {
@@ -97,12 +97,12 @@ void Board::reverse(Point p, CellColor stone, int dy, int dx, bool print_flag)
 
     p.y += dy;
     p.x += dx;
-    while (in_board(p) && matrix_[p.y][p.x] != EMPTY && matrix_[p.y][p.x] != stone){
+    while (in_board(p) && matrix_[p.y][p.x] != CellColor::EMPTY && matrix_[p.y][p.x] != stone){
         cnt++;
         p.y += dy;
         p.x += dx;
     }
-    if (not in_board(p) || matrix_[p.y][p.x] == EMPTY){
+    if (not in_board(p) || matrix_[p.y][p.x] == CellColor::EMPTY){
         return;
     }
 
@@ -110,7 +110,7 @@ void Board::reverse(Point p, CellColor stone, int dy, int dx, bool print_flag)
         p.y -= dy;
         p.x -= dx;
         matrix_[p.y][p.x] = stone;
-        if (stone == BLACK){
+        if (stone == CellColor::BLACK){
             black_++;
             white_--;
         }
@@ -146,12 +146,12 @@ int Board::reverse_num(Point p, CellColor stone, int dy, int dx) const
 
     p.y += dy;
     p.x += dx;
-    while (in_board(p) && matrix_[p.y][p.x] != EMPTY && matrix_[p.y][p.x] != stone){
+    while (in_board(p) && matrix_[p.y][p.x] != CellColor::EMPTY && matrix_[p.y][p.x] != stone){
         cnt++;
         p.y += dy;
         p.x += dx;
     }
-    if (not in_board(p) || matrix_[p.y][p.x] == EMPTY){
+    if (not in_board(p) || matrix_[p.y][p.x] == CellColor::EMPTY){
         return (0);
     }
 
@@ -197,13 +197,13 @@ void Board::copy_matrix(CellColor** matrix) const
 CellColor Board::winner() const
 {
     if (black_ > white_){
-        return (BLACK);
+        return (CellColor::BLACK);
     }
     else if (white_ > black_){
-        return (WHITE);
+        return (CellColor::WHITE);
     }
     else {
-        return (EMPTY);
+        return (CellColor::EMPTY);
     }
 }
 
@@ -214,7 +214,7 @@ bool Board::in_board(const Point& p) const
 
 bool Board::empty(const Point& p) const
 {
-    return (matrix_[p.y][p.x] == EMPTY);
+    return (matrix_[p.y][p.x] == CellColor::EMPTY);
 }
 
 bool Board::can_put(CellColor stone) const
@@ -231,7 +231,7 @@ bool Board::can_put(CellColor stone) const
 
 bool Board::can_put(const Point& p, CellColor stone) const
 {
-    if (matrix_[p.y][p.x] != EMPTY){
+    if (matrix_[p.y][p.x] != CellColor::EMPTY){
         return (false);
     }
     for (int i = 0; i < 3; i++){
@@ -253,7 +253,7 @@ bool Board::can_put(Point p, CellColor stone, int dy, int dx) const
     bool can_reverse = false;
     p.y += dy;
     p.x += dx;
-    while (in_board(p) && matrix_[p.y][p.x] != EMPTY && matrix_[p.y][p.x] != stone){
+    while (in_board(p) && matrix_[p.y][p.x] != CellColor::EMPTY && matrix_[p.y][p.x] != stone){
         can_reverse = true;
         p.y += dy;
         p.x += dx;

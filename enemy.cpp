@@ -124,13 +124,13 @@ int Enemy::reverse_score(Board* board, const Point& p, CellColor stone, int dept
             if (Board::DXY[i] == 0 && Board::DXY[j] == 0){
                 continue;
             }
-            score += board->count_neighbor(p, reversed(stone));
+            score += board->count_neighbor(p, stone.reversed());
             score += reverse_score(board, p, stone, Board::DXY[i], Board::DXY[j]);
             board->put(p, stone, false);
             bool player_put = false;
             for (int i = 0; i < Board::ROW; i++){
                 for (int j = 0; j < Board::COL; j++){
-                    if (board->can_put(Point(i, j), reversed(stone))){
+                    if (board->can_put(Point(i, j), stone.reversed())){
                         score--;
                         player_put = true;
                     }
@@ -144,9 +144,9 @@ int Enemy::reverse_score(Board* board, const Point& p, CellColor stone, int dept
                 }
             }
             else {
-                Point player_point = evaluated_select(board, reversed(stone), depth + 1);
+                Point player_point = evaluated_select(board, stone.reversed(), depth + 1);
                 if (player_point.y != -1 && player_point.x != -1){
-                    score -= reverse_score(board, player_point, reversed(stone), depth + 1);
+                    score -= reverse_score(board, player_point, stone.reversed(), depth + 1);
                 }
             }
         }

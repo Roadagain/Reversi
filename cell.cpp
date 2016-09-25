@@ -3,7 +3,7 @@
 namespace roadagain
 {
 
-Cell::Cell() : color(EMPTY)
+Cell::Cell()
 {
 }
 
@@ -13,7 +13,7 @@ Cell::Cell(const Point& point, CellColor color) : point_(point), color_(color)
 
 void Cell::reverse()
 {
-    color_ = reversed(color_);
+    color_ = color_.reversed();
 }
 
 } // namespace roadagain

@@ -4,16 +4,27 @@
 namespace roadagain
 {
 
-enum CellColor
+struct CellColor
 {
-    EMPTY,
-    BLACK,
-    WHITE
+public:
+    enum ColorEnum : short
+    {
+        EMPTY = 1,
+        BLACK,
+        WHITE
+    };
+
+    CellColor();
+    CellColor(ColorEnum type);
+    CellColor(const char* s);
+
+    CellColor reversed() const;
+
+    operator short() const;
+
+private:
+    ColorEnum type_;
 };
-
-CellColor to_cell_color(const char* s);
-
-CellColor reversed(CellColor color);
 
 } // namespace roadagain
 

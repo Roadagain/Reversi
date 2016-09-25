@@ -1,6 +1,9 @@
 #ifndef INCLUDE_ROADAGAIN_CELL
 #define INCLUDE_ROADAGAIN_CELL
 
+#include "cellcolor.hpp"
+#include "point.hpp"
+
 namespace roadagain
 {
 
