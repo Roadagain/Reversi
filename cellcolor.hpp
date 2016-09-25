@@ -18,6 +18,7 @@ public:
     CellColor(ColorEnum type);
     CellColor(const char* s);
 
+    void reverse();
     CellColor reversed() const;
 
     operator short() const;

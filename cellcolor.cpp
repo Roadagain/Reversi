@@ -31,6 +31,11 @@ CellColor::CellColor(const char* s)
     }
 }
 
+void CellColor::reverse()
+{
+    type_ = reversed();
+}
+
 CellColor CellColor::reversed() const
 {
     switch (type_){
