@@ -63,4 +63,4 @@ void clear_coordinate(const Point& p)
     ColorManager::instance().change_color(ColorManager::BOARD);
 }
 
-}
+} // namespace roadagain

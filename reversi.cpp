@@ -132,4 +132,4 @@ void Reversi::change()
     next_ = (next_ == BLACK ? WHITE : BLACK);
 }
 
-}
+} // namespace roadagain
