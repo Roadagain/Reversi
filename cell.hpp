@@ -10,6 +10,8 @@ public:
     Cell();
     Cell(const Point& p, CellColor color);
 
+    void reverse();
+
 private:
     Point point_;
     CellColor color_;
