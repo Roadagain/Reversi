@@ -18,3 +18,5 @@ private:
 }
 
 } // namespace roadagain
+
+#endif
