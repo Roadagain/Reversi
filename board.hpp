@@ -2,6 +2,7 @@
 #define INCLUDE_ROADAGAIN_BOARD
 
 #include "point.hpp"
+#include "cell.hpp"
 #include "cellcolor.hpp"
 
 namespace roadagain

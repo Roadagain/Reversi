@@ -126,7 +126,7 @@ int Enemy::reverse_score(Board* board, const Point& p, const CellColor& stone, i
             }
             score += board->count_neighbor(p, stone.reversed());
             score += reverse_score(board, p, stone, Board::DXY[i], Board::DXY[j]);
-            board->put(p, stone, false);
+            board->put(Cell(p, stone), false);
             bool player_put = false;
             for (int i = 0; i < Board::ROW; i++){
                 for (int j = 0; j < Board::COL; j++){

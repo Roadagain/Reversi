@@ -50,7 +50,7 @@ void Reversi::play()
         if (p.y == -1 && p.x == -1){
             break;
         }
-        board_->put(p, now_);
+        board_->put(Cell(p, now_));
         change();
         logs_->push_back(Log(p, now_));
     }

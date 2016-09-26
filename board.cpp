@@ -1,6 +1,7 @@
 #include <ncurses.h>
 
 #include "board.hpp"
+#include "cell.hpp"
 #include "color.hpp"
 #include "colormanager.hpp"
 #include "print.hpp"
@@ -66,6 +67,8 @@ void Board::print(const Point& p) const
 
 void Board::put(const Cell& cell, bool print_flag)
 {
+    Point p = cell.point();
+    CellColor stone = cell.color();
     matrix_[p.y][p.x] = stone;
     if (stone == CellColor::BLACK){
         black_++;
