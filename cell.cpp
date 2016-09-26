@@ -16,4 +16,14 @@ void Cell::reverse()
     color_.reverse();
 }
 
+Point Cell::point() const
+{
+    return (point_);
+}
+
+CellColor Cell::color() const
+{
+    return (color_);
+}
+
 } // namespace roadagain

@@ -15,6 +15,9 @@ public:
 
     void reverse();
 
+    Point point() const;
+    CellColor color() const;
+
 private:
     Point point_;
     CellColor color_;
