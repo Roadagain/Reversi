@@ -33,18 +33,27 @@ CellColor::CellColor(const char* s)
 
 void CellColor::reverse()
 {
-    type_ = reversed();
+    switch (type_){
+        case CellColor::BLACK:
+            type_ = CellColor::WHITE;
+            break;
+        case CellColor::WHITE:
+            type_ = CellColor::BLACK;
+            break;
+        default:
+            break;
+    }
 }
 
 CellColor CellColor::reversed() const
 {
     switch (type_){
         case CellColor::BLACK:
-            return (CellColor(CellColor::WHITE));
+            return (CellColor::WHITE);
         case CellColor::WHITE:
-            return (CellColor(CellColor::BLACK));
+            return (CellColor::BLACK);
         default:
-            return (CellColor());
+            return (CellColor::EMPTY);
     }
 }
 
