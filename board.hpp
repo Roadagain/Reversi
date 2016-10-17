@@ -47,12 +47,14 @@ public:
     static const int DXY[];
 
 private:
+    void update_counter();
     void reverse(Point p, const CellColor& stone, int dy, int dx, bool print_flag);
     bool can_put(Point p, const CellColor& stone, int dy, int dx) const;
 
     CellColor** matrix_;
     int black_;
     int white_;
+    bool changed_;
 };
 
 } // namespace roadagain

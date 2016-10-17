@@ -15,7 +15,7 @@ const Point Board::END(START.y + ROW * 2, START.x + COL * 3);
 
 const int Board::DXY[] = { -1, 0, 1 };
 
-Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
+Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2), changed_(false)
 {
     matrix_ = new CellColor*[ROW]();
     for (int i = 0; i < ROW; i++){
@@ -27,7 +27,7 @@ Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
     matrix_[ROW / 2][COL / 2 - 1] = CellColor::BLACK;
 }
 
-Board::Board(const Board& board) : black_(board.black()), white_(board.white())
+Board::Board(const Board& board) : black_(board.black()), white_(board.white()), changed_(false)
 {
     matrix_ = new CellColor*[ROW]();
     for (int i = 0; i < ROW; i++){
@@ -70,12 +70,7 @@ void Board::put(const Cell& cell, bool print_flag)
     Point p = cell.point();
     CellColor stone = cell.color();
     matrix_[p.y][p.x] = stone;
-    if (stone == CellColor::BLACK){
-        black_++;
-    }
-    else {
-        white_++;
-    }
+    changed_ = true;
     if (print_flag){
         print_stone(p, stone, false);
     }
@@ -113,14 +108,7 @@ void Board::reverse(Point p, const CellColor& stone, int dy, int dx, bool print_
         p.y -= dy;
         p.x -= dx;
         matrix_[p.y][p.x].reverse();
-        if (stone == CellColor::BLACK){
-            black_++;
-            white_--;
-        }
-        else {
-            white_++;
-            black_--;
-        }
+        changed_ = true;
         if (print_flag){
             print_stone(p, stone, false);
         }
@@ -180,11 +168,13 @@ int Board::count_neighbor(const Point& p, const CellColor& stone)
 
 int Board::black() const
 {
+    update_counter();
     return (black_);
 }
 
 int Board::white() const
 {
+    update_counter();
     return (white_);
 }
 
@@ -199,6 +189,7 @@ void Board::copy_matrix(CellColor** matrix) const
 
 CellColor Board::winner() const
 {
+    update_counter();
     if (black_ > white_){
         return (CellColor::BLACK);
     }
@@ -218,6 +209,20 @@ bool Board::in_board(const Point& p) const
 bool Board::empty(const Point& p) const
 {
     return (matrix_[p.y][p.x] == CellColor::EMPTY);
+}
+
+void update_counter()
+{
+    if (not changed_){
+        return;
+    }
+
+    black_ = white_ = 0;
+    for (int i = 0; i < Board::ROW; i++){
+        black_ += count(matrix_[i], matrix_[i] + Board::COL, CellColor::BLACK);
+        white_ += count(matrix_[i], matrix_[i] + Board::COL, CellColor::WHITE);
+    }
+    changed_ = false;
 }
 
 bool Board::can_put(const CellColor& stone) const
