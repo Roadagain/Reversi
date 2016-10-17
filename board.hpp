@@ -18,7 +18,6 @@ public:
     void print(const Point& p = Point(0, 0)) const;
 
     void put(const Cell& cell, bool print_flag = true);
-    void reverse(const Point& p, const CellColor& stone, bool print_flag);
 
     int reverse_num(const Point& p, const CellColor& stone) const;
     int reverse_num(Point p, const CellColor& stone, int dy, int dx) const;
@@ -48,6 +47,7 @@ public:
 
 private:
     void update_counter();
+    void reverse(const Point& p, const CellColor& stone, bool print_flag);
     void reverse(Point p, const CellColor& stone, int dy, int dx, bool print_flag);
     bool can_put(Point p, const CellColor& stone, int dy, int dx) const;
 
