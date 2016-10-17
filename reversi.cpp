@@ -21,6 +21,8 @@ Reversi::Reversi(const CellColor& player, Level level) : player_(player), now_(C
 Reversi::~Reversi()
 {
     delete board_;
+    delete enemy_;
+    delete logs_;
 }
 
 void Reversi::start() const
