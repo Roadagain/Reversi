@@ -89,34 +89,29 @@ void Board::put(const Cell& cell, bool print_flag)
 
 void Board::reverse(const Point& p, const CellColor& stone, bool print_flag)
 {
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-            if (DXY[i] == 0 && DXY[j] == 0){
-                continue;
-            }
-            reverse(p, stone, DXY[i], DXY[j], print_flag);
-        }
+    for (const Point& d : D){
+        reverse(p, stone, d, print_flag);
     }
 }
 
-void Board::reverse(Point p, const CellColor& stone, int dy, int dx, bool print_flag)
+void Board::reverse(Point p, const CellColor& stone, const Point& d, bool print_flag)
 {
     int cnt = 0;
 
-    p.y += dy;
-    p.x += dx;
+    p.y += d.y;
+    p.x += d.x;
     while (in_board(p) && matrix_[p.y][p.x] != CellColor::EMPTY && matrix_[p.y][p.x] != stone){
         cnt++;
-        p.y += dy;
-        p.x += dx;
+        p.y += d.y;
+        p.x += d.x;
     }
     if (not in_board(p) || matrix_[p.y][p.x] == CellColor::EMPTY){
         return;
     }
 
     while (cnt-- > 0){
-        p.y -= dy;
-        p.x -= dx;
+        p.y -= d.y;
+        p.x -= d.x;
         matrix_[p.y][p.x].reverse();
         if (print_flag){
             print_stone(p, stone, false);
@@ -128,28 +123,23 @@ int Board::reverse_num(const Point& p, const CellColor& stone) const
 {
     int cnt = 0;
 
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-            if (DXY[i] == 0 && DXY[j] == 0){
-                continue;
-            }
-            cnt += reverse_num(p, stone, DXY[i], DXY[j]);
-        }
+    for (const Point& d : D){
+        cnt += reverse_num(p, stone, d);
     }
 
     return (cnt);
 }
 
-int Board::reverse_num(Point p, const CellColor& stone, int dy, int dx) const
+int Board::reverse_num(Point p, const CellColor& stone, const Point& d) const
 {
     int cnt = 0;
 
-    p.y += dy;
-    p.x += dx;
+    p.y += d.y;
+    p.x += d.x;
     while (in_board(p) && matrix_[p.y][p.x] != CellColor::EMPTY && matrix_[p.y][p.x] != stone){
         cnt++;
-        p.y += dy;
-        p.x += dx;
+        p.y += d.y;
+        p.x += d.x;
     }
     if (not in_board(p) || matrix_[p.y][p.x] == CellColor::EMPTY){
         return (0);
@@ -161,14 +151,13 @@ int Board::reverse_num(Point p, const CellColor& stone, int dy, int dx) const
 int Board::count_neighbor(const Point& p, const CellColor& stone)
 {
     int cnt = 0;
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-            if ((DXY[i] == 0 && DXY[j] == 0) || not in_board(Point(p.y + DXY[i], p.x + DXY[j]))){
-                continue;
-            }
-            if (matrix_[p.y + DXY[i]][p.x + DXY[j]] == stone){
-                cnt++;
-            }
+
+    for (const Point& d : D){
+        if (not in_board(Point(p.y + d.y, p.x + d.x))){
+            continue;
+        }
+        if (matrix_[p.y + d.y][p.x + d.x] == stone){
+            cnt++;
         }
     }
 
@@ -243,29 +232,24 @@ bool Board::can_put(const Point& p, const CellColor& stone) const
     if (matrix_[p.y][p.x] != CellColor::EMPTY){
         return (false);
     }
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-            if (DXY[i] == 0 && DXY[j] == 0){
-                continue;
-            }
-            if (can_put(p, stone, DXY[i], DXY[j])){
-                return (true);
-            }
+    for (const Point& d : D){
+        if (can_put(p, stone, d)){
+            return (true);
         }
     }
 
     return (false);
 }
 
-bool Board::can_put(Point p, const CellColor& stone, int dy, int dx) const
+bool Board::can_put(Point p, const CellColor& stone, const Point& d) const
 {
     bool can_reverse = false;
-    p.y += dy;
-    p.x += dx;
+    p.y += d.y;
+    p.x += d.x;
     while (in_board(p) && matrix_[p.y][p.x] != CellColor::EMPTY && matrix_[p.y][p.x] != stone){
         can_reverse = true;
-        p.y += dy;
-        p.x += dx;
+        p.y += d.y;
+        p.x += d.x;
     }
 
     return (in_board(p) && can_reverse && matrix_[p.y][p.x] == stone);

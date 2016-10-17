@@ -23,7 +23,7 @@ private:
     Point maximized_select(const Board* board, const CellColor& stone) const;
     Point evaluated_select(const Board* board, const CellColor& stone, int depth = 1) const;
     int reverse_score(Board* board, const Point& p, const CellColor& stone, int depth = 1) const;
-    int reverse_score(const Board* board, const Point& p, const CellColor& stone, int dy, int dx) const;
+    int reverse_score(const Board* board, const Point& p, const CellColor& stone, const Point& d) const;
     Level level_;
 };
 
