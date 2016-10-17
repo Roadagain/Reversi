@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <algorithm>
 
 #include "board.hpp"
 #include "cell.hpp"
@@ -211,8 +212,8 @@ void Board::update_counter()
 {
     black_ = white_ = 0;
     for (int i = 0; i < Board::ROW; i++){
-        black_ += count(matrix_[i], matrix_[i] + Board::COL, CellColor::BLACK);
-        white_ += count(matrix_[i], matrix_[i] + Board::COL, CellColor::WHITE);
+        black_ += std::count(matrix_[i], matrix_[i] + Board::COL, CellColor::BLACK);
+        white_ += std::count(matrix_[i], matrix_[i] + Board::COL, CellColor::WHITE);
     }
 }
 
