@@ -54,7 +54,6 @@ private:
     CellColor** matrix_;
     int black_;
     int white_;
-    bool changed_;
 };
 
 } // namespace roadagain
