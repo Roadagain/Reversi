@@ -54,7 +54,7 @@ void Reversi::play()
         }
         board_->put(Cell(p, now_));
         change();
-        logs_->push_back(Log(p, now_));
+        logs_->emplace_back(p, now_);
     }
     end();
 }
