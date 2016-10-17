@@ -112,7 +112,7 @@ void Board::reverse(Point p, const CellColor& stone, int dy, int dx, bool print_
     while (cnt-- > 0){
         p.y -= dy;
         p.x -= dx;
-        matrix_[p.y][p.x] = stone;
+        matrix_[p.y][p.x].reverse();
         if (stone == CellColor::BLACK){
             black_++;
             white_--;
