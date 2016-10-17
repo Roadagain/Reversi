@@ -14,7 +14,16 @@ namespace roadagain
 const Point Board::START(1, 1);
 const Point Board::END(START.y + ROW * 2, START.x + COL * 3);
 
-const int Board::DXY[] = { -1, 0, 1 };
+const Point Board::D[] = {
+    Point(-1, -1),
+    Point(-1,  0),
+    Point(-1,  1),
+    Point( 0, -1),
+    Point( 0,  1),
+    Point( 1, -1),
+    Point( 1,  0),
+    Point( 1,  1),
+};
 
 Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
 {

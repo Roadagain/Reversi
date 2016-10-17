@@ -43,7 +43,8 @@ public:
     static const Point START;
     static const Point END;
 
-    static const int DXY[];
+    static const int NEIGHBOR = 8;
+    static const Point D[NEIGHBOR];
 
 private:
     void update_counter();
