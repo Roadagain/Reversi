@@ -211,7 +211,7 @@ bool Board::empty(const Point& p) const
     return (matrix_[p.y][p.x] == CellColor::EMPTY);
 }
 
-void update_counter()
+void Board::update_counter()
 {
     if (not changed_){
         return;
