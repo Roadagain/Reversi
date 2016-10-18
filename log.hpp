@@ -8,16 +8,8 @@
 namespace roadagain
 {
 
-struct Log
-{
-    Point p;
-    BoardState stone;
+void log_records(const std::vector<Cell>& logs, const CellColor& winner);
 
-    Log(const Point& p, BoardState stone);
-};
-
-void log_records(std::vector<Log>& logs, BoardState winner);
-
-}
+} // namespace roadagain
 
 #endif

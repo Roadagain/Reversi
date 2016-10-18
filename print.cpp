@@ -2,64 +2,65 @@
 
 #include "board.hpp"
 #include "color.hpp"
+#include "colormanager.hpp"
 #include "print.hpp"
 #include "reversi.hpp"
 
 namespace roadagain
 {
 
-void print_stone(const Point& p, BoardState state, bool coordinate)
+void print_stone(const Cell& cell, bool coordinate)
 {
     char stone;
-    switch (state){
-      case EMPTY:
-        Colors::change_color(Colors::BOARD);
+    switch (cell.color){
+      case CellColor::EMPTY:
+        ColorManager::instance().change_color(ColorManager::BOARD);
         stone = ' ';
         break;
-      case BLACK:
-        Colors::change_color(Colors::BLACK);
+      case CellColor::BLACK:
+        ColorManager::instance().change_color(ColorManager::BLACK);
         stone = 'o';
         break;
-      case WHITE:
-        Colors::change_color(Colors::WHITE);
+      case CellColor::WHITE:
+        ColorManager::instance().change_color(ColorManager::WHITE);
         stone = 'x';
         break;
       default:
         stone = '\0';
         break;
     }
-    mvaddch(p.y * 2 + 1 + Board::START_Y, p.x * 3 + 1 + Board::START_X, stone);
+    mvaddch(cell.point.y * 2 + 1 + Board::START.y, cell.point.x * 3 + 1 + Board::START.x, stone);
     addch(stone);
-    Colors::change_color(Colors::BOARD);
+    ColorManager::instance().change_color(ColorManager::BOARD);
     if (coordinate){
-        print_coordinate(p);
+        print_coordinate(cell.point);
     }
     else {
-        clear_coordinate(p);
+        clear_coordinate(cell.point);
     }
 }
 
 void clear_stone(const Point& p)
 {
-    print_stone(p, EMPTY, false);
+    print_stone(Cell(p, CellColor::EMPTY), false);
 }
 
 void print_coordinate(const Point& p)
 {
-    mvaddch(p.y * 2 + 1 + Board::START_Y, 0, '1' + p.y);
-    mvaddch(p.y * 2 + 1 + Board::START_X, Board::END_X + 1, '1' + p.y);
-    mvaddch(0, p.x * 3 + 1 + Board::START_X, 'a' + p.x);
-    mvaddch(Board::END_Y + 1, p.x * 3 + 2 + Board::START_X, 'a' + p.x);
+    mvaddch(p.y * 2 + 1 + Board::START.y, 0, '1' + p.y);
+    mvaddch(p.y * 2 + 1 + Board::START.x, Board::END.x + 1, '1' + p.y);
+    mvaddch(0, p.x * 3 + 1 + Board::START.x, 'a' + p.x);
+    mvaddch(Board::END.y + 1, p.x * 3 + 2 + Board::START.x, 'a' + p.x);
 }
 
 void clear_coordinate(const Point& p)
 {
     attrset(0);
-    mvaddch(p.y * 2 + 1 + Board::START_Y, 0, ' ');
-    mvaddch(p.y * 2 + 1 + Board::START_Y, Board::END_X + 1, ' ');
-    mvaddch(0, p.x * 3 + 1 + Board::START_X, ' ');
-    mvaddch(Board::END_Y + 1, p.x * 3 + 2 + Board::START_X, ' ');
-    Colors::change_color(Colors::BOARD);
+    mvaddch(p.y * 2 + 1 + Board::START.y, 0, ' ');
+    mvaddch(p.y * 2 + 1 + Board::START.y, Board::END.x + 1, ' ');
+    mvaddch(0, p.x * 3 + 1 + Board::START.x, ' ');
+    mvaddch(Board::END.y + 1, p.x * 3 + 2 + Board::START.x, ' ');
+    ColorManager::instance().change_color(ColorManager::BOARD);
 }
 
-}
+} // namespace roadagain

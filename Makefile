@@ -1,7 +1,7 @@
 # Roadagain's reversi game
 
 CXX = g++
-CXXFLAGS = -c -O3 -Wall -Wextra
+CXXFLAGS = -c -O3 -Wall -Wextra -std=c++11
 SRC = $(wildcard *.cpp)
 OBJ = $(patsubst %.cpp, %.o, $(SRC))
 LIBFLAGS = -lncurses -largp

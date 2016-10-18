@@ -9,7 +9,7 @@
 namespace roadagain
 {
 
-Config::Config() : color_(true), automatic_(false), player_(BLACK), level_(EASY)
+Config::Config() : color_(true), automatic_(false), player_(CellColor::BLACK), level_(EASY)
 {
 }
 
@@ -29,7 +29,7 @@ bool Config::init(int argc, char** argv)
         { nullptr , '\0', nullptr, 0, nullptr, 0 }
     };
     argp args = { options, parse_opt, ARGS_DOC.c_str(), nullptr, nullptr, nullptr, nullptr };
-    arguments a = { false, true, EASY, BLACK, "" };
+    arguments a = { false, true, EASY, CellColor::BLACK, "" };
     argp_parse(&args, argc, argv, 0, nullptr, &a);
 
     automatic_ = a.automatic;
@@ -51,10 +51,10 @@ bool Config::automatic() const
     return (automatic_);
 }
 
-BoardState Config::player() const
+CellColor Config::player() const
 {
     if (automatic_){
-        return (EMPTY);
+        return (CellColor::EMPTY);
     }
     else {
         return (player_);
@@ -124,10 +124,10 @@ error_t parse_opt(int key, char* arg, struct argp_state* state)
             break;
         case ARGP_KEY_ARG:
             if (arg == Config::WHITE_STR){
-                a->player = WHITE;
+                a->player = CellColor::WHITE;
             }
             else {
-                a->player = BLACK;
+                a->player = CellColor::BLACK;
             }
             break;
         default:
@@ -137,4 +137,4 @@ error_t parse_opt(int key, char* arg, struct argp_state* state)
     return 0;
 }
 
-}
+} // namespace roadagain

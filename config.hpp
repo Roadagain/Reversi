@@ -20,7 +20,7 @@ public:
 
     bool color() const;
     bool automatic() const;
-    BoardState player() const;
+    CellColor player() const;
     Level level() const;
     std::string log_file_name() const;
 
@@ -53,7 +53,7 @@ private:
 
     bool color_;
     bool automatic_;
-    BoardState player_;
+    CellColor player_;
     Level level_;
     std::string log_file_name_;
 };
@@ -63,12 +63,12 @@ struct arguments
     bool automatic;
     bool color;
     Level level;
-    BoardState player;
+    CellColor player;
     std::string log_file_name;
 };
 
 error_t parse_opt(int key, char* arg, struct argp_state* state);
 
-}
+} // namespace roadagain
 
 #endif

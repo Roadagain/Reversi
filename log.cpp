@@ -8,11 +8,7 @@
 namespace roadagain
 {
 
-Log::Log(const Point& p, BoardState stone) : p(p), stone(stone)
-{
-}
-
-void log_records(std::vector<Log>& logs, BoardState winner)
+void log_records(const std::vector<Cell>& logs, const CellColor& winner)
 {
     Config& config = Config::instance();
 
@@ -23,20 +19,20 @@ void log_records(std::vector<Log>& logs, BoardState winner)
     int size = logs.size();
     std::ofstream log_file(config.log_file_name().c_str());
     for (int i = 0; i < size; i++){
-        if (logs[i].stone == BLACK){
+        if (logs[i].color == CellColor::BLACK){
             log_file << 'B';
         }
         else {
             log_file << 'W';
         }
-        log_file << ' ' << static_cast<char>('a' + logs[i].p.x);
-        log_file << ' ' << logs[i].p.y;
+        log_file << ' ' << static_cast<char>('a' + logs[i].point.x);
+        log_file << ' ' << logs[i].point.y;
         log_file << '\n';
     }
-    if (winner == BLACK){
+    if (winner == CellColor::BLACK){
         log_file << "Winner is Black";
     }
-    else if (winner == WHITE){
+    else if (winner == CellColor::WHITE){
         log_file << "Winner is White";
     }
     else {
@@ -47,4 +43,4 @@ void log_records(std::vector<Log>& logs, BoardState winner)
     log_file.close();
 }
 
-}
+} // namespace roadagain
