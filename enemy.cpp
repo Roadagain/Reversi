@@ -133,7 +133,7 @@ int Enemy::reverse_score(Board* board, const Cell& cell, int depth) const
             }
         }
         if (not player_put){
-            score += 30;
+            score += 50;
             Point player_point = evaluated_select(board, cell.color, depth + 1);
             if (player_point.y != -1 && player_point.x != -1){
                 score += reverse_score(board, Cell(player_point, cell.color), depth + 1);
