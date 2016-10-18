@@ -118,7 +118,7 @@ Point Enemy::evaluated_select(const Board* board, const CellColor& stone, int de
 
 int Enemy::reverse_score(Board* board, const Cell& cell, int depth) const
 {
-    int score = SCORE_TABLE[cell.point.y][cell.point.x] + board->count_neighbor(cell.point, cell.color.reversed());
+    int score = SCORE_TABLE[cell.point.y][cell.point.x] + board->count_neighbor(cell.point, cell.color.reversed()) * 3;
     board->put(cell, false);
     for (const Point& d : Board::D){
         score += reverse_score(board, cell, d);
