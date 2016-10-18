@@ -14,6 +14,8 @@ struct Cell
 
     Cell();
     Cell(const Point& p, const CellColor& color);
+    Cell(int y, int x, const CellColor& color);
+    Cell(const CellColor& color);
 
     void reverse();
 };
