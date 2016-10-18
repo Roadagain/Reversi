@@ -13,3 +13,7 @@ Version 3.1 is latest
 + Printing help message
 + Printing result after game
 + Log the game records
+
+## Dependencies
++ ncurses
++ Argp
