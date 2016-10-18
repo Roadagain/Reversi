@@ -81,51 +81,51 @@ void Reversi::end() const
 
 Point Reversi::move() const
 {
-    Point p;
+    Cell cell(Point(), now_);
     char c;
 
-    if (board_->empty(p)){
-        print_stone(p, now_);
+    if (board_->empty(cell.point)){
+        print_stone(cell);
     }
     else {
-        print_coordinate(p);
+        print_coordinate(cell.point);
     }
 
     c = getch();
-    while (c != '\n' || not board_->can_put(p, now_)){
-        if (board_->empty(p)){
-            clear_stone(p);
+    while (c != '\n' || not board_->can_put(cell)){
+        if (board_->empty(cell.point)){
+            clear_stone(cell.point);
         }
         else {
-            clear_coordinate(p);
+            clear_coordinate(cell.point);
         }
         switch (c){
           case 'h':
-            p.x = (p.x + Board::COL - 1) % Board::COL;
+            cell.point.x = (cell.point.x + Board::COL - 1) % Board::COL;
             break;
           case 'j':
-            p.y = (p.y + 1) % Board::ROW;
+            cell.point.y = (cell.point.y + 1) % Board::ROW;
             break;
           case 'k':
-            p.y = (p.y + Board::ROW - 1) % Board::ROW;
+            cell.point.y = (cell.point.y + Board::ROW - 1) % Board::ROW;
             break;
           case 'l':
-            p.x = (p.x + 1) % Board::COL;
+            cell.point.x = (cell.point.x + 1) % Board::COL;
             break;
           case ' ':
             return (Point(-1, -1));
         }
-        if (board_->empty(p)){
-            print_stone(p, now_);
+        if (board_->empty(cell.point)){
+            print_stone(cell);
         }
         else {
-            print_coordinate(p);
+            print_coordinate(cell.point);
         }
         c = getch();
     }
-    clear_stone(p);
+    clear_stone(cell.point);
 
-    return (p);
+    return (cell.point);
 }
 
 void Reversi::change()
