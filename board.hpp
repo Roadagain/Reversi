@@ -19,8 +19,8 @@ public:
 
     void put(const Cell& cell, bool print_flag = true);
 
-    int reverse_num(const Point& p, const CellColor& stone) const;
-    int reverse_num(Point p, const CellColor& stone, const Point& d) const;
+    int reverse_num(const Cell& cell) const;
+    int reverse_num(const Cell& cell, const Point& d) const;
     int count_neighbor(const Point& p, const CellColor& stone);
 
     int black() const;
@@ -32,7 +32,7 @@ public:
     bool in_board(const Point& p) const;
     bool empty(const Point& p) const;
     bool can_put(const CellColor& stone) const;
-    bool can_put(const Point& p, const CellColor& stone) const;
+    bool can_put(const Cell& cell) const;
 
     static const int ROW = 8;
     static const int COL = 8;
@@ -48,9 +48,9 @@ public:
 
 private:
     void update_counter();
-    void reverse(const Point& p, const CellColor& stone, bool print_flag);
-    void reverse(Point p, const CellColor& stone, const Point& d, bool print_flag);
-    bool can_put(Point p, const CellColor& stone, const Point& d) const;
+    void reverse(const Cell& cell, bool print_flag);
+    void reverse(const Cell& stone, const Point& d, bool print_flag);
+    bool can_put(const Cell& stone, const Point& d) const;
 
     CellColor** matrix_;
     int black_;

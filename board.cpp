@@ -68,7 +68,7 @@ void Board::print(const Point& p) const
                     addch('|');
                 }
                 else {
-                    print_stone(Point(i / 2, j / 3), matrix_[i / 2][j / 3], false);
+                    print_stone(Cell(Point(i / 2, j / 3), matrix_[i / 2][j / 3]), false);
                 }
             }
         }
@@ -77,71 +77,71 @@ void Board::print(const Point& p) const
 
 void Board::put(const Cell& cell, bool print_flag)
 {
-    Point p = cell.point();
-    CellColor stone = cell.color();
-    matrix_[p.y][p.x] = stone;
+    matrix_[cell.point.y][cell.point.x] = cell.color;
     if (print_flag){
-        print_stone(p, stone, false);
+        print_stone(cell, false);
     }
-    reverse(p, stone, print_flag);
+    reverse(cell, print_flag);
     update_counter();
 }
 
-void Board::reverse(const Point& p, const CellColor& stone, bool print_flag)
+void Board::reverse(const Cell& cell, bool print_flag)
 {
     for (const Point& d : D){
-        reverse(p, stone, d, print_flag);
+        reverse(cell, d, print_flag);
     }
 }
 
-void Board::reverse(Point p, const CellColor& stone, const Point& d, bool print_flag)
+void Board::reverse(const Cell& cell, const Point& d, bool print_flag)
 {
     int cnt = 0;
+    Cell c = cell;
 
-    p.y += d.y;
-    p.x += d.x;
-    while (in_board(p) && matrix_[p.y][p.x] != CellColor::EMPTY && matrix_[p.y][p.x] != stone){
+    c.point.y += d.y;
+    c.point.x += d.x;
+    while (in_board(c.point) && matrix_[c.point.y][c.point.x] == cell.color.reversed()){
         cnt++;
-        p.y += d.y;
-        p.x += d.x;
+        c.point.y += d.y;
+        c.point.x += d.x;
     }
-    if (not in_board(p) || matrix_[p.y][p.x] == CellColor::EMPTY){
+    if (not in_board(c.point) || matrix_[c.point.y][c.point.x] == CellColor::EMPTY){
         return;
     }
 
     while (cnt-- > 0){
-        p.y -= d.y;
-        p.x -= d.x;
-        matrix_[p.y][p.x].reverse();
+        c.point.y -= d.y;
+        c.point.x -= d.x;
+        matrix_[c.point.y][c.point.x].reverse();
         if (print_flag){
-            print_stone(p, stone, false);
+            print_stone(c, false);
         }
     }
 }
 
-int Board::reverse_num(const Point& p, const CellColor& stone) const
+int Board::reverse_num(const Cell& cell) const
 {
     int cnt = 0;
 
     for (const Point& d : D){
-        cnt += reverse_num(p, stone, d);
+        cnt += reverse_num(cell, d);
     }
 
     return (cnt);
 }
 
-int Board::reverse_num(Point p, const CellColor& stone, const Point& d) const
+int Board::reverse_num(const Cell& cell, const Point& d) const
 {
     int cnt = 0;
+    Cell c = cell;
 
-    p.y += d.y;
-    p.x += d.x;
-    while (in_board(p) && matrix_[p.y][p.x] != CellColor::EMPTY && matrix_[p.y][p.x] != stone){
+    c.point.y += d.y;
+    c.point.x += d.x;
+    while (in_board(c.point) && matrix_[c.point.y][c.point.x] == cell.color.reversed()){
         cnt++;
-        p.y += d.y;
-        p.x += d.x;
+        c.point.y += d.y;
+        c.point.x += d.x;
     }
-    if (not in_board(p) || matrix_[p.y][p.x] == CellColor::EMPTY){
+    if (not in_board(c.point) || matrix_[c.point.y][c.point.x] == CellColor::EMPTY){
         return (0);
     }
 
@@ -219,7 +219,7 @@ bool Board::can_put(const CellColor& stone) const
 {
     for (int i = 0; i < ROW; i++){
         for (int j = 0; j < COL; j++){
-            if (can_put(Point(i, j), stone)){
+            if (can_put(Cell(Point(i, j), stone))){
                 return (true);
             }
         }
@@ -227,13 +227,13 @@ bool Board::can_put(const CellColor& stone) const
     return (false);
 }
 
-bool Board::can_put(const Point& p, const CellColor& stone) const
+bool Board::can_put(const Cell& cell) const
 {
-    if (matrix_[p.y][p.x] != CellColor::EMPTY){
+    if (matrix_[cell.point.y][cell.point.x] != CellColor::EMPTY){
         return (false);
     }
     for (const Point& d : D){
-        if (can_put(p, stone, d)){
+        if (can_put(cell, d)){
             return (true);
         }
     }
@@ -241,18 +241,20 @@ bool Board::can_put(const Point& p, const CellColor& stone) const
     return (false);
 }
 
-bool Board::can_put(Point p, const CellColor& stone, const Point& d) const
+bool Board::can_put(const Cell& cell, const Point& d) const
 {
     bool can_reverse = false;
-    p.y += d.y;
-    p.x += d.x;
-    while (in_board(p) && matrix_[p.y][p.x] != CellColor::EMPTY && matrix_[p.y][p.x] != stone){
+    Cell c = cell;
+
+    c.point.y += d.y;
+    c.point.x += d.x;
+    while (in_board(c.point) && matrix_[c.point.y][c.point.x] == cell.color.reversed()){
         can_reverse = true;
-        p.y += d.y;
-        p.x += d.x;
+        c.point.y += d.y;
+        c.point.x += d.x;
     }
 
-    return (in_board(p) && can_reverse && matrix_[p.y][p.x] == stone);
+    return (in_board(c.point) && can_reverse && matrix_[c.point.y][c.point.x] == cell.color);
 }
 
 } // namespace roadagain
