@@ -9,10 +9,10 @@
 namespace roadagain
 {
 
-void print_stone(const Point& p, const CellColor& cell, bool coordinate)
+void print_stone(const Cell& cell, bool coordinate)
 {
     char stone;
-    switch (cell){
+    switch (cell.color){
       case CellColor::EMPTY:
         ColorManager::instance().change_color(ColorManager::BOARD);
         stone = ' ';
@@ -29,20 +29,20 @@ void print_stone(const Point& p, const CellColor& cell, bool coordinate)
         stone = '\0';
         break;
     }
-    mvaddch(p.y * 2 + 1 + Board::START.y, p.x * 3 + 1 + Board::START.x, stone);
+    mvaddch(cell.point.y * 2 + 1 + Board::START.y, cell.point.x * 3 + 1 + Board::START.x, stone);
     addch(stone);
     ColorManager::instance().change_color(ColorManager::BOARD);
     if (coordinate){
-        print_coordinate(p);
+        print_coordinate(cell.point);
     }
     else {
-        clear_coordinate(p);
+        clear_coordinate(cell.point);
     }
 }
 
 void clear_stone(const Point& p)
 {
-    print_stone(p, CellColor::EMPTY, false);
+    print_stone(Cell(p, CellColor::EMPTY), false);
 }
 
 void print_coordinate(const Point& p)
