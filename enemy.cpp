@@ -40,7 +40,7 @@ const int Enemy::SCORE_TABLE[Board::ROW][Board::COL] = {
 Point Enemy::randomized_select(const Board* board, const CellColor& stone) const
 {
     int n = random();
-    Cell c(Point(), stone);
+    Cell c(stone);
 
     do {
         c.point.y++;
@@ -68,7 +68,7 @@ Point Enemy::maximized_select(const Board* board, const CellColor& stone) const
 
     for (int i = 0; i < Board::ROW; i++){
         for (int j = 0; j < Board::COL; j++){
-            Cell c(Point(i, j), stone);
+            Cell c(i, j, stone);
 
             if (board->can_put(c)){
                 int tmp = board->reverse_num(c);
@@ -97,7 +97,7 @@ Point Enemy::evaluated_select(const Board* board, const CellColor& stone, int de
 
     for (int i = 0; i < Board::ROW; i++){
         for (int j = 0; j < Board::COL; j++){
-            Cell c(Point(i, j), stone);
+            Cell c(i, j, stone);
 
             if (board->can_put(c)){
                 Board t_board(*board);
@@ -126,7 +126,7 @@ int Enemy::reverse_score(Board* board, const Cell& cell, int depth) const
         bool player_put = false;
         for (int i = 0; i < Board::ROW; i++){
             for (int j = 0; j < Board::COL; j++){
-                if (board->can_put(Cell(Point(i, j), cell.color.reversed()))){
+                if (board->can_put(Cell(i, j, cell.color.reversed()))){
                     score--;
                     player_put = true;
                 }

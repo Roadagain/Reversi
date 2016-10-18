@@ -68,7 +68,7 @@ void Board::print(const Point& p) const
                     addch('|');
                 }
                 else {
-                    print_stone(Cell(Point(i / 2, j / 3), matrix_[i / 2][j / 3]), false);
+                    print_stone(Cell(i / 2, j / 3, matrix_[i / 2][j / 3]), false);
                 }
             }
         }
@@ -219,7 +219,7 @@ bool Board::can_put(const CellColor& stone) const
 {
     for (int i = 0; i < ROW; i++){
         for (int j = 0; j < COL; j++){
-            if (can_put(Cell(Point(i, j), stone))){
+            if (can_put(Cell(i, j, stone))){
                 return (true);
             }
         }
