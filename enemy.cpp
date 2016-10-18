@@ -158,7 +158,7 @@ int Enemy::reverse_score(const Board* board, const Cell& cell, const Point& d) c
         score += SCORE_TABLE[cell.point.y + d.y * i][cell.point.x + d.x * i];
     }
 
-    return (score);
+    return (score - num * 3);
 }
 
 } // namespace roadagain
