@@ -21,6 +21,8 @@ public:
     void reverse();
     CellColor reversed() const;
 
+    bool empty() const;
+
     operator short() const;
 
 private:

@@ -57,6 +57,11 @@ CellColor CellColor::reversed() const
     }
 }
 
+bool CellColor::empty() const
+{
+    return (type_ == CellColor::EMPTY);
+}
+
 CellColor::operator short() const
 {
     return (type_);

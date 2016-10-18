@@ -104,7 +104,7 @@ void Board::reverse(const Cell& cell, const Point& d, bool print_flag)
         c.point.y += d.y;
         c.point.x += d.x;
     }
-    if (not in_board(c.point) || matrix_[c.point.y][c.point.x] == CellColor::EMPTY){
+    if (not in_board(c.point) || matrix_[c.point.y][c.point.x].empty()){
         return;
     }
 
@@ -141,7 +141,7 @@ int Board::reverse_num(const Cell& cell, const Point& d) const
         c.point.y += d.y;
         c.point.x += d.x;
     }
-    if (not in_board(c.point) || matrix_[c.point.y][c.point.x] == CellColor::EMPTY){
+    if (not in_board(c.point) || matrix_[c.point.y][c.point.x].empty()){
         return (0);
     }
 
@@ -203,7 +203,7 @@ bool Board::in_board(const Point& p) const
 
 bool Board::empty(const Point& p) const
 {
-    return (matrix_[p.y][p.x] == CellColor::EMPTY);
+    return (matrix_[p.y][p.x].empty());
 }
 
 void Board::update_counter()
@@ -229,7 +229,7 @@ bool Board::can_put(const CellColor& stone) const
 
 bool Board::can_put(const Cell& cell) const
 {
-    if (matrix_[cell.point.y][cell.point.x] != CellColor::EMPTY){
+    if (not matrix_[cell.point.y][cell.point.x].empty()){
         return (false);
     }
     for (const Point& d : D){
