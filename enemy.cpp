@@ -118,11 +118,10 @@ Point Enemy::evaluated_select(const Board* board, const CellColor& stone, int de
 
 int Enemy::reverse_score(Board* board, const Cell& cell, int depth) const
 {
-    int score = SCORE_TABLE[cell.point.y][cell.point.x];
+    int score = SCORE_TABLE[cell.point.y][cell.point.x] + board->count_neighbor(cell.point, cell.color.reversed());
+    board->put(cell, false);
     for (const Point& d : Board::D){
-        score += board->count_neighbor(cell.point, cell.color.reversed());
         score += reverse_score(board, cell, d);
-        board->put(cell, false);
         bool player_put = false;
         for (int i = 0; i < Board::ROW; i++){
             for (int j = 0; j < Board::COL; j++){
