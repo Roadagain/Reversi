@@ -7,23 +7,13 @@ Cell::Cell()
 {
 }
 
-Cell::Cell(const Point& point, const CellColor& color) : point_(point), color_(color)
+Cell::Cell(const Point& point, const CellColor& color) : point(point), color(color)
 {
 }
 
 void Cell::reverse()
 {
-    color_.reverse();
-}
-
-Point Cell::point() const
-{
-    return (point_);
-}
-
-CellColor Cell::color() const
-{
-    return (color_);
+    color.reverse();
 }
 
 } // namespace roadagain

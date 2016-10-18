@@ -7,20 +7,15 @@
 namespace roadagain
 {
 
-class Cell
+struct Cell
 {
-public:
+    Point point;
+    CellColor color;
+
     Cell();
     Cell(const Point& p, const CellColor& color);
 
     void reverse();
-
-    Point point() const;
-    CellColor color() const;
-
-private:
-    Point point_;
-    CellColor color_;
 };
 
 } // namespace roadagain
