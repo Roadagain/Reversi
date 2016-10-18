@@ -127,7 +127,7 @@ int Enemy::reverse_score(Board* board, const Cell& cell, int depth) const
         for (int i = 0; i < Board::ROW; i++){
             for (int j = 0; j < Board::COL; j++){
                 if (board->can_put(Cell(i, j, cell.color.reversed()))){
-                    score--;
+                    score -= 3;
                     player_put = true;
                 }
             }
