@@ -122,27 +122,27 @@ int Enemy::reverse_score(Board* board, const Cell& cell, int depth) const
     board->put(cell, false);
     for (const Point& d : Board::D){
         score += reverse_score(board, cell, d);
-        bool player_put = false;
-        for (int i = 0; i < Board::ROW; i++){
-            for (int j = 0; j < Board::COL; j++){
-                if (board->can_put(Cell(i, j, cell.color.reversed()))){
-                    score -= 3;
-                    player_put = true;
-                }
+    }
+    bool player_put = false;
+    for (int i = 0; i < Board::ROW; i++){
+        for (int j = 0; j < Board::COL; j++){
+            if (board->can_put(Cell(i, j, cell.color.reversed()))){
+                score -= 3;
+                player_put = true;
             }
         }
-        if (not player_put){
-            score += 50;
-            Point player_point = evaluated_select(board, cell.color, depth + 1);
-            if (player_point.y != -1 && player_point.x != -1){
-                score += reverse_score(board, Cell(player_point, cell.color), depth + 1);
-            }
+    }
+    if (not player_put){
+        score += 50;
+        Point player_point = evaluated_select(board, cell.color, depth + 1);
+        if (player_point.y != -1 && player_point.x != -1){
+            score += reverse_score(board, Cell(player_point, cell.color), depth + 1);
         }
-        else {
-            Point player_point = evaluated_select(board, cell.color.reversed(), depth + 1);
-            if (player_point.y != -1 && player_point.x != -1){
-                score -= reverse_score(board, Cell(player_point, cell.color.reversed()), depth + 1);
-            }
+    }
+    else {
+        Point player_point = evaluated_select(board, cell.color.reversed(), depth + 1);
+        if (player_point.y != -1 && player_point.x != -1){
+            score -= reverse_score(board, Cell(player_point, cell.color.reversed()), depth + 1);
         }
     }
 
