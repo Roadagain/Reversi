@@ -14,7 +14,7 @@ Reversi::Reversi(const CellColor& player, Level level) : player_(player), now_(C
 {
     board_ = new Board();
     enemy_ = new Enemy(level);
-    logs_ = new std::vector<Log>();
+    logs_ = new std::vector<Cell>();
     logs_->reserve(Board::MAX_PUT);
 }
 

@@ -29,7 +29,7 @@ private:
     CellColor player_;
     CellColor now_;
     CellColor next_;
-    std::vector<Log> *logs_;
+    std::vector<Cell> *logs_;
 };
 
 } // namespace roadagain
