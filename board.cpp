@@ -97,20 +97,17 @@ void Board::reverse(const Cell& cell, const Point& d, bool print_flag)
     int cnt = 0;
     Cell c = cell;
 
-    c.point.y += d.y;
-    c.point.x += d.x;
+    c.point += d;
     while (in_board(c.point) && matrix_[c.point.y][c.point.x] == cell.color.reversed()){
         cnt++;
-        c.point.y += d.y;
-        c.point.x += d.x;
+        c.point += d;
     }
     if (not in_board(c.point) || matrix_[c.point.y][c.point.x].empty()){
         return;
     }
 
     while (cnt-- > 0){
-        c.point.y -= d.y;
-        c.point.x -= d.x;
+        c.point -= d;
         matrix_[c.point.y][c.point.x].reverse();
         if (print_flag){
             print_stone(c, false);
@@ -134,12 +131,10 @@ int Board::reverse_num(const Cell& cell, const Point& d) const
     int cnt = 0;
     Cell c = cell;
 
-    c.point.y += d.y;
-    c.point.x += d.x;
+    c.point += d;
     while (in_board(c.point) && matrix_[c.point.y][c.point.x] == cell.color.reversed()){
         cnt++;
-        c.point.y += d.y;
-        c.point.x += d.x;
+        c.point += d;
     }
     if (not in_board(c.point) || matrix_[c.point.y][c.point.x].empty()){
         return (0);
@@ -153,10 +148,11 @@ int Board::count_neighbor(const Point& p, const CellColor& stone)
     int cnt = 0;
 
     for (const Point& d : D){
-        if (not in_board(Point(p.y + d.y, p.x + d.x))){
+        Point tmp = p + d;
+        if (not in_board(tmp)){
             continue;
         }
-        if (matrix_[p.y + d.y][p.x + d.x] == stone){
+        if (matrix_[tmp.y][tmp.x] == stone){
             cnt++;
         }
     }
@@ -246,12 +242,10 @@ bool Board::can_put(const Cell& cell, const Point& d) const
     bool can_reverse = false;
     Cell c = cell;
 
-    c.point.y += d.y;
-    c.point.x += d.x;
+    c.point += d;
     while (in_board(c.point) && matrix_[c.point.y][c.point.x] == cell.color.reversed()){
         can_reverse = true;
-        c.point.y += d.y;
-        c.point.x += d.x;
+        c.point += d;
     }
 
     return (in_board(c.point) && can_reverse && matrix_[c.point.y][c.point.x] == cell.color);
