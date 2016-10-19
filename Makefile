@@ -24,6 +24,6 @@ clean:
 rebuild: clean all
 
 .cpp.o:
-	$(CXX) $(CXXFLAGS) $^
+	$(CXX) $(CXXFLAGS) $<
 
 -include $(DEP)
