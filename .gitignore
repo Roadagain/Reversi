@@ -37,3 +37,7 @@ reversi
 !.vscode/launch.json
 
 
+# Depending files
+*.d
+
+
