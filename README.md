@@ -1,4 +1,4 @@
-# Reversi v3.0
+# Reversi v0.1
 A reversi game for one person's use
 Version 3.1 is latest
 
