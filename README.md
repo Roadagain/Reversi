@@ -1,6 +1,6 @@
-# Reversi v0.1
+# Reversi v0.1.1
 A reversi game for one person's use
-Version 0.1 is latest
+Version 0.1.1 is latest
 
 ## Implemented function
 + Moving in board by hjkl
