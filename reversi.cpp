@@ -92,7 +92,7 @@ Point Reversi::move() const
     }
 
     c = getch();
-    while (c != '\n' || not board_->can_put(cell)){
+    while (c != ' ' || not board_->can_put(cell)){
         if (board_->empty(cell.point)){
             clear_stone(cell.point);
         }
@@ -116,7 +116,7 @@ Point Reversi::move() const
           case KEY_RIGHT:
             cell.point.x = (cell.point.x + 1) % Board::COL;
             break;
-          case ' ':
+          case 'q':
             return (Point(-1, -1));
         }
         if (board_->empty(cell.point)){
