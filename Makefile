@@ -1,9 +1,10 @@
 # Roadagain's reversi game
 
 CXX = g++
-CXXFLAGS = -c -O3 -Wall -Wextra -std=c++11
+CXXFLAGS = -c -O3 -Wall -Wextra -std=c++11 -MMD
 SRC = $(wildcard *.cpp)
 OBJ = $(patsubst %.cpp, %.o, $(SRC))
+DEP = $(patsubst %.cpp, %.d, $(SRC))
 LIBFLAGS = -lncurses -largp
 EXE = reversi
 
@@ -17,10 +18,12 @@ $(EXE): $(OBJ)
 
 .PHONY: clean
 clean:
-	rm -f $(OBJ) $(EXE)
+	rm -f $(OBJ) $(DEP) $(EXE)
 
 .PHONY: rebuild
 rebuild: clean all
 
 .cpp.o:
 	$(CXX) $(CXXFLAGS) $^
+
+-include $(DEP)
