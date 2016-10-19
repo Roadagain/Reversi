@@ -82,7 +82,7 @@ void Reversi::end() const
 Point Reversi::move() const
 {
     Cell cell(Point(), now_);
-    char c;
+    int c;
 
     if (board_->empty(cell.point)){
         print_stone(cell);
@@ -101,15 +101,19 @@ Point Reversi::move() const
         }
         switch (c){
           case 'h':
+          case KEY_LEFT:
             cell.point.x = (cell.point.x + Board::COL - 1) % Board::COL;
             break;
           case 'j':
+          case KEY_DOWN:
             cell.point.y = (cell.point.y + 1) % Board::ROW;
             break;
           case 'k':
+          case KEY_UP:
             cell.point.y = (cell.point.y + Board::ROW - 1) % Board::ROW;
             break;
           case 'l':
+          case KEY_RIGHT:
             cell.point.x = (cell.point.x + 1) % Board::COL;
             break;
           case ' ':
