@@ -6,9 +6,9 @@ Version 0.1 is latest
 + Moving in board by hjkl
 + Selecting color by a program argument
 + Enemy
-    + Randomized (EASY)
-    + Maximized (MEDIUM)
-    + Evalute Function (HARD)
+  + Randomized (EASY)
+  + Maximized (MEDIUM)
+  + Evalute Function (HARD)
 + Automatical mode
 + Selecting output colorization
 + Printing help message
