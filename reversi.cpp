@@ -47,7 +47,9 @@ void Reversi::play()
         }
         else {
             p = enemy_->select(board_, now_);
-            getch();
+            if (getch() == 'q'){
+                p = Point(-1, -1);
+            }
         }
         if (p.y == -1 && p.x == -1){
             break;
