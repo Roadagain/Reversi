@@ -16,6 +16,7 @@ int main(int argc, char** argv)
     initscr();
     cbreak();
     noecho();
+    keypad(stdscr, true);
     curs_set(0);
     if (config.color()){
         ColorManager::instance().init();

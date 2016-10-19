@@ -47,7 +47,9 @@ void Reversi::play()
         }
         else {
             p = enemy_->select(board_, now_);
-            getch();
+            if (getch() == 'q'){
+                p = Point(-1, -1);
+            }
         }
         if (p.y == -1 && p.x == -1){
             break;
@@ -82,7 +84,7 @@ void Reversi::end() const
 Point Reversi::move() const
 {
     Cell cell(Point(), now_);
-    char c;
+    int c;
 
     if (board_->empty(cell.point)){
         print_stone(cell);
@@ -92,7 +94,7 @@ Point Reversi::move() const
     }
 
     c = getch();
-    while (c != '\n' || not board_->can_put(cell)){
+    while (c != ' ' || not board_->can_put(cell)){
         if (board_->empty(cell.point)){
             clear_stone(cell.point);
         }
@@ -101,18 +103,22 @@ Point Reversi::move() const
         }
         switch (c){
           case 'h':
+          case KEY_LEFT:
             cell.point.x = (cell.point.x + Board::COL - 1) % Board::COL;
             break;
           case 'j':
+          case KEY_DOWN:
             cell.point.y = (cell.point.y + 1) % Board::ROW;
             break;
           case 'k':
+          case KEY_UP:
             cell.point.y = (cell.point.y + Board::ROW - 1) % Board::ROW;
             break;
           case 'l':
+          case KEY_RIGHT:
             cell.point.x = (cell.point.x + 1) % Board::COL;
             break;
-          case ' ':
+          case 'q':
             return (Point(-1, -1));
         }
         if (board_->empty(cell.point)){
