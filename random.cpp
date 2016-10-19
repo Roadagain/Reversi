@@ -22,4 +22,4 @@ unsigned int random()
     return (w % 64);
 }
 
-}
+} // namespace roadagain

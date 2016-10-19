@@ -1,5 +1,6 @@
 #include "board.hpp"
 #include "enemy.hpp"
+#include "level.hpp"
 #include "random.hpp"
 
 namespace roadagain
@@ -13,7 +14,7 @@ Enemy::~Enemy()
 {
 }
 
-Point Enemy::select(const Board* board, BoardState stone) const
+Point Enemy::select(const Board* board, const CellColor& stone) const
 {
     switch (level_){
         case EASY:
@@ -26,57 +27,57 @@ Point Enemy::select(const Board* board, BoardState stone) const
 }
 
 const int Enemy::SCORE_TABLE[Board::ROW][Board::COL] = {
-    {  30, -10,  10,  10,  10,  10, -10,  30 },
-    { -10, -10,  10,  -5,  -5,  10, -10, -10 },
-    {  15,  10,   8,   5,   5,   8,  10,  15 },
-    {  10,  -5,   5,   0,   0,   5,  -5,  10 },
-    {  10,  -5,   5,   0,   0,   5,  -5,  10 },
-    {  15,  10,   8,   5,   5,   8,  10,  15 },
-    { -10, -10,  10,  -5,  -5,  10, -10, -10 },
-    {  30, -10,  15,  10,  10,  15, -10,  30 },
+    {  50, -20,  20,  15,  15,  20, -20,  50 },
+    { -20, -20,  20, -10, -10,  20, -20, -20 },
+    {  20,  20,  20,   0,   0,  20,  20,  20 },
+    {  15, -10,   0,  15,  15,   0, -10,  15 },
+    {  15, -10,   0,  15,  15,   0, -10,  15 },
+    {  20,  20,  20,   0,   0,  20,  20,  20 },
+    { -20, -20,  20, -10, -10,  20, -20, -20 },
+    {  50, -20,  20,  15,  15,  20, -20,  50 },
 };
 
-Point Enemy::randomized_select(const Board* board, BoardState stone) const
+Point Enemy::randomized_select(const Board* board, const CellColor& stone) const
 {
     int n = random();
-    Point p;
+    Cell c(stone);
 
     do {
-        p.y++;
-        if (p.y >= Board::ROW){
-            p.y = 0;
-            p.x = (p.x + 1) % Board::COL;
+        c.point.y++;
+        if (c.point.y >= Board::ROW){
+            c.point.y = 0;
+            c.point.x = (c.point.x + 1) % Board::COL;
         }
-        while (!board->can_put(p, stone)){
-            p.y++;
-            if (p.y >= Board::ROW){
-                p.y = 0;
-                p.x = (p.x + 1) % Board::COL;
+        while (not board->can_put(c)){
+            c.point.y++;
+            if (c.point.y >= Board::ROW){
+                c.point.y = 0;
+                c.point.x = (c.point.x + 1) % Board::COL;
             }
         }
         n--;
     } while (n > 0);
 
-    return (p);
+    return (c.point);
 }
 
-Point Enemy::maximized_select(const Board* board, BoardState stone) const
+Point Enemy::maximized_select(const Board* board, const CellColor& stone) const
 {
     Point p;
     int maximum = 0;
 
     for (int i = 0; i < Board::ROW; i++){
         for (int j = 0; j < Board::COL; j++){
-            if (board->can_put(Point(i, j), stone)){
-                int tmp = board->reverse_num(Point(i, j), stone);
+            Cell c(i, j, stone);
+
+            if (board->can_put(c)){
+                int tmp = board->reverse_num(c);
                 if (maximum < tmp){
                     maximum = tmp;
-                    p.y = i;
-                    p.x = j;
+                    p = c.point;
                 }
                 else if (maximum == tmp && random() % 2 == 0){
-                    p.y = i;
-                    p.x = j;
+                    p = c.point;
                 }
             }
         }
@@ -85,7 +86,7 @@ Point Enemy::maximized_select(const Board* board, BoardState stone) const
     return (p);
 }
 
-Point Enemy::evaluated_select(const Board* board, BoardState stone, int depth) const
+Point Enemy::evaluated_select(const Board* board, const CellColor& stone, int depth) const
 {
     if (depth >= MAX_DEPTH){
         return Point(-1, -1);
@@ -96,17 +97,17 @@ Point Enemy::evaluated_select(const Board* board, BoardState stone, int depth) c
 
     for (int i = 0; i < Board::ROW; i++){
         for (int j = 0; j < Board::COL; j++){
-            if (board->can_put(Point(i, j), stone)){
+            Cell c(i, j, stone);
+
+            if (board->can_put(c)){
                 Board t_board(*board);
-                int tmp = reverse_score(&t_board, Point(i, j), stone, depth);
+                int tmp = reverse_score(&t_board, c, depth);
                 if (maximum < tmp){
                     maximum = tmp;
-                    p.y = i;
-                    p.x = j;
+                    p = c.point;
                 }
                 else if (maximum == tmp && random() % 2 == 0){
-                    p.y = i;
-                    p.x = j;
+                    p = c.point;
                 }
             }
         }
@@ -115,54 +116,48 @@ Point Enemy::evaluated_select(const Board* board, BoardState stone, int depth) c
     return (p);
 }
 
-int Enemy::reverse_score(Board* board, const Point& p, BoardState stone, int depth) const
+int Enemy::reverse_score(Board* board, const Cell& cell, int depth) const
 {
-    int score = SCORE_TABLE[p.y][p.x];
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-            if (Board::DXY[i] == 0 && Board::DXY[j] == 0){
-                continue;
+    int score = SCORE_TABLE[cell.point.y][cell.point.x] + board->count_neighbor(cell.point, cell.color.reversed()) * 3;
+    board->put(cell, false);
+    for (const Point& d : Board::D){
+        score += reverse_score(board, cell, d);
+    }
+    bool player_put = false;
+    for (int i = 0; i < Board::ROW; i++){
+        for (int j = 0; j < Board::COL; j++){
+            if (board->can_put(Cell(i, j, cell.color.reversed()))){
+                score -= 3;
+                player_put = true;
             }
-            score += board->count_neighbor(p, reversed(stone));
-            score += reverse_score(board, p, stone, Board::DXY[i], Board::DXY[j]);
-            board->put(p, stone, false);
-            bool player_put = false;
-            for (int i = 0; i < Board::ROW; i++){
-                for (int j = 0; j < Board::COL; j++){
-                    if (board->can_put(Point(i, j), reversed(stone))){
-                        score--;
-                        player_put = true;
-                    }
-                }
-            }
-            if (!player_put){
-                score += 30;
-                Point player_point = evaluated_select(board, stone, depth + 1);
-                if (player_point.y != -1 && player_point.x != -1){
-                    score += reverse_score(board, player_point, stone, depth + 1);
-                }
-            }
-            else {
-                Point player_point = evaluated_select(board, reversed(stone), depth + 1);
-                if (player_point.y != -1 && player_point.x != -1){
-                    score -= reverse_score(board, player_point, reversed(stone), depth + 1);
-                }
-            }
+        }
+    }
+    if (not player_put){
+        score += 50;
+        Point player_point = evaluated_select(board, cell.color, depth + 1);
+        if (player_point.y != -1 && player_point.x != -1){
+            score += reverse_score(board, Cell(player_point, cell.color), depth + 1);
+        }
+    }
+    else {
+        Point player_point = evaluated_select(board, cell.color.reversed(), depth + 1);
+        if (player_point.y != -1 && player_point.x != -1){
+            score -= reverse_score(board, Cell(player_point, cell.color.reversed()), depth + 1);
         }
     }
 
     return (score);
 }
 
-int Enemy::reverse_score(const Board* board, const Point& p, BoardState stone, int dy, int dx) const
+int Enemy::reverse_score(const Board* board, const Cell& cell, const Point& d) const
 {
     int score = 0;
-    int num = board->reverse_num(p, stone, dy, dx);
+    int num = board->reverse_num(cell, d);
     for (int i = 1; i < num; i++){
-        score += SCORE_TABLE[p.y + dy * i][p.x + dx * i];
+        score += SCORE_TABLE[cell.point.y + d.y * i][cell.point.x + d.x * i];
     }
 
-    return (score);
+    return (score - num * 3);
 }
 
-}
+} // namespace roadagain

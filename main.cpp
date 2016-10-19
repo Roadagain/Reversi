@@ -1,7 +1,7 @@
 #include <ncurses.h>
 
 #include "board.hpp"
-#include "color.hpp"
+#include "colormanager.hpp"
 #include "config.hpp"
 #include "reversi.hpp"
 using namespace roadagain;
@@ -9,7 +9,7 @@ using namespace roadagain;
 int main(int argc, char** argv)
 {
     Config& config = Config::instance();
-    if (!config.init(argc, argv)){
+    if (not config.init(argc, argv)){
         return (-1);
     }
 
@@ -18,7 +18,7 @@ int main(int argc, char** argv)
     noecho();
     curs_set(0);
     if (config.color()){
-        Colors::init();
+        ColorManager::instance().init();
     }
 
     Reversi *reversi;

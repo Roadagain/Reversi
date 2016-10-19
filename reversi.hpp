@@ -1,5 +1,5 @@
-#ifndef INCLUDE_ROADAGAIN_GAME_HPP
-#define INCLUDE_ROADAGAIN_GAME_HPP
+#ifndef INCLUDE_ROADAGAIN_REVERSI
+#define INCLUDE_ROADAGAIN_REVERSI
 
 #include <vector>
 
@@ -13,7 +13,7 @@ namespace roadagain
 class Reversi
 {
 public:
-    Reversi(BoardState player, Level level);
+    Reversi(const CellColor& player, Level level);
     ~Reversi();
 
     void start() const;
@@ -26,12 +26,12 @@ private:
 
     Board *board_;
     Enemy *enemy_;
-    BoardState player_;
-    BoardState now_;
-    BoardState next_;
-    std::vector<Log> *logs_;
+    CellColor player_;
+    CellColor now_;
+    CellColor next_;
+    std::vector<Cell> *logs_;
 };
 
-}
+} // namespace roadagain
 
 #endif
