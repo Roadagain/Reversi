@@ -3,6 +3,7 @@ A reversi game for one person's use
 Version 0.1 is latest
 
 ## Implemented function
++ Moving in board by hjkl
 + Selecting color by a program argument
 + Enemy
     + Randomized (EASY)
