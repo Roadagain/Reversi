@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <utility>
+#include <vector>
 
 #include "board.hpp"
 #include "enemy.hpp"
@@ -35,9 +36,11 @@ void Reversi::play()
     start();
 
     for (int i = 0; i < Board::MAX_PUT; i++){
-        if (not board_->can_put(now_)){
+        std::vector<Point> choices = board_->can_put(now_);
+        if (choices.empty()){
             change();
-            if (not board_->can_put(now_)){
+            choices = board_->can_put(now_);
+            if (choices.empty()){
                 break;
             }
         }
