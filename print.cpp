@@ -69,10 +69,10 @@ void print_choice(const Cell& cell)
 
     switch (cell.color){
       case CellColor::BLACK:
-        ColorManager::instance().change_color(ColorManager::BLACK);
+        ColorManager::instance().change_color(ColorManager::BLACK_CHOICE);
         break;
       case CellColor::WHITE:
-        ColorManager::instance().change_color(ColorManager::WHITE);
+        ColorManager::instance().change_color(ColorManager::WHITE_CHOICE);
         break;
       default:
         return;
