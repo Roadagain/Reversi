@@ -20,6 +20,7 @@ public:
 
     bool color() const;
     bool automatic() const;
+    bool choice() const;
     CellColor player() const;
     Level level() const;
     std::string log_file_name() const;
@@ -44,6 +45,10 @@ public:
     static const std::string LOG_STR;
     static const std::string LOG_DESCRIPTION;
     static const char LOG_CHAR;
+    static const std::string CHOICE_STR;
+    static const std::string CHOICE_DESCRIPTION;
+    static const char CHOICE_CHAR;
+    static const std::string FALSE_STR;
     static const std::string ARGS_DOC;
 
 private:
@@ -53,6 +58,7 @@ private:
 
     bool color_;
     bool automatic_;
+    bool choice_;
     CellColor player_;
     Level level_;
     std::string log_file_name_;
@@ -62,6 +68,7 @@ struct arguments
 {
     bool automatic;
     bool color;
+    bool choice;
     Level level;
     CellColor player;
     std::string log_file_name;

@@ -9,7 +9,7 @@
 namespace roadagain
 {
 
-Config::Config() : color_(true), automatic_(false), player_(CellColor::BLACK), level_(EASY)
+Config::Config() : color_(true), automatic_(false), choice_(true), player_(CellColor::BLACK), level_(EASY)
 {
 }
 
@@ -24,16 +24,18 @@ bool Config::init(int argc, char** argv)
     argp_option options[] = {
         { AUTOMATIC_STR.c_str(), AUTOMATIC_STR[0], nullptr, 0, AUTOMATIC_DESCRIPTION.c_str(), 0 },
         { COLOR_STR.c_str(), COLOR_STR[0], "WHEN", 0, COLOR_DESCRIPTION.c_str(), 0 },
+        { CHOICE_STR.c_str(), CHOICE_STR[0], "true/false", 0, CHOICE_DESCRIPTION.c_str(), 0 },
         { LEVEL_STR.c_str(), LEVEL_STR[0], "LEVEL", 0, LEVEL_DESCRIPTION.c_str(), 0 },
         { LOG_STR.c_str(), LOG_STR[0], "FILE", 0, LOG_DESCRIPTION.c_str(), 0 },
         { nullptr , '\0', nullptr, 0, nullptr, 0 }
     };
     argp args = { options, parse_opt, ARGS_DOC.c_str(), nullptr, nullptr, nullptr, nullptr };
-    arguments a = { false, true, EASY, CellColor::BLACK, "" };
+    arguments a = { false, true, true, EASY, CellColor::BLACK, "" };
     argp_parse(&args, argc, argv, 0, nullptr, &a);
 
     automatic_ = a.automatic;
     color_ = a.color;
+    choice_ = a.choice;
     level_ = a.level;
     player_ = a.player;
     log_file_name_ = a.log_file_name;
@@ -49,6 +51,11 @@ bool Config::color() const
 bool Config::automatic() const
 {
     return (automatic_);
+}
+
+bool Config::choice() const
+{
+    return (choice_);
 }
 
 CellColor Config::player() const
@@ -91,6 +98,10 @@ const std::string Config::HARD_STR("hard");
 const std::string Config::LOG_STR("Log");
 const std::string Config::LOG_DESCRIPTION("Log the game records to FILENAME.");
 const char Config::LOG_CHAR = 'L';
+const std::string Config::CHOICE_STR("Choice");
+const std::string Config::CHOICE_DESCRIPTION("Print the choices you can put.");
+const char Config::CHOICE_CHAR = 'C';
+const std::string Config::FALSE_STR("false");
 const std::string Config::ARGS_DOC("[ARG1]");
 
 error_t parse_opt(int key, char* arg, struct argp_state* state)
@@ -122,6 +133,13 @@ error_t parse_opt(int key, char* arg, struct argp_state* state)
         case Config::LOG_CHAR:
             a->log_file_name = arg;
             break;
+        case Config::CHOICE_CHAR:
+            if (arg == Config::FALSE_STR){
+                a->choice = false;
+            }
+            else {
+                a->choice = true;
+            }
         case ARGP_KEY_ARG:
             if (arg == Config::WHITE_STR){
                 a->player = CellColor::WHITE;
