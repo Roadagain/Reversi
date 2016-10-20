@@ -21,7 +21,7 @@ public:
     void end() const;
 
 private:
-    Point move() const;
+    Point move(const std::vector<Point>& choices) const;
     void change();
 
     Board *board_;
