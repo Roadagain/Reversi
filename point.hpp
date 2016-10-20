@@ -16,6 +16,7 @@ struct Point
     Point operator+=(const Point& p);
     Point operator-(const Point& p) const;
     Point operator-=(const Point& p);
+    bool operator==(const Point& p) const;
 };
 
 } // namespace roadagain

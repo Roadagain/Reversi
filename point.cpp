@@ -35,4 +35,9 @@ Point Point::operator-=(const Point& p)
     return (*this);
 }
 
+bool Point::operator==(const Point& p) const
+{
+    return (y == p.y && x == p.x);
+}
+
 } // namespace roadagain
