@@ -3,6 +3,7 @@
 #include "board.hpp"
 #include "color.hpp"
 #include "colormanager.hpp"
+#include "config.hpp"
 #include "print.hpp"
 #include "reversi.hpp"
 
@@ -65,6 +66,10 @@ void clear_coordinate(const Point& p)
 
 void print_choice(const Cell& cell)
 {
+    if (not Config::instance().choice()){
+        return;
+    }
+
     const char choice = '#';
 
     switch (cell.color){
