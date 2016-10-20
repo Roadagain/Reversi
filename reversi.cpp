@@ -1,5 +1,7 @@
 #include <ncurses.h>
+#include <algorithm>
 #include <utility>
+#include <vector>
 
 #include "board.hpp"
 #include "enemy.hpp"
@@ -35,15 +37,21 @@ void Reversi::play()
     start();
 
     for (int i = 0; i < Board::MAX_PUT; i++){
-        if (not board_->can_put(now_)){
+        std::vector<Point> choices = board_->can_put(now_);
+        if (choices.empty()){
             change();
-            if (not board_->can_put(now_)){
+            choices = board_->can_put(now_);
+            if (choices.empty()){
                 break;
             }
         }
+        for (Point& j : choices){
+            print_choice(Cell(j, now_));
+        }
+
         Point p;
         if (now_ == player_){
-            p = move();
+            p = move(choices);
         }
         else {
             p = enemy_->select(board_, now_);
@@ -57,6 +65,13 @@ void Reversi::play()
         board_->put(Cell(p, now_));
         change();
         logs_->emplace_back(p, now_);
+
+        for (Point& j : choices){
+            if (j == p){
+                continue;
+            }
+            clear_stone(j);
+        }
     }
     end();
 }
@@ -81,7 +96,7 @@ void Reversi::end() const
     log_records(*logs_, winner);
 }
 
-Point Reversi::move() const
+Point Reversi::move(const std::vector<Point>& choices) const
 {
     Cell cell(Point(), now_);
     int c;
@@ -97,6 +112,9 @@ Point Reversi::move() const
     while (c != ' ' || not board_->can_put(cell)){
         if (board_->empty(cell.point)){
             clear_stone(cell.point);
+            if (std::find(choices.begin(), choices.end(), cell.point) != choices.end()){
+                print_choice(cell);
+            }
         }
         else {
             clear_coordinate(cell.point);

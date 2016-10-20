@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <algorithm>
+#include <vector>
 
 #include "board.hpp"
 #include "cell.hpp"
@@ -211,16 +212,18 @@ void Board::update_counter()
     }
 }
 
-bool Board::can_put(const CellColor& stone) const
+std::vector<Point> Board::can_put(const CellColor& stone) const
 {
+    std::vector<Point> choices;
+
     for (int i = 0; i < ROW; i++){
         for (int j = 0; j < COL; j++){
             if (can_put(Cell(i, j, stone))){
-                return (true);
+                choices.emplace_back(i, j);
             }
         }
     }
-    return (false);
+    return (choices);
 }
 
 bool Board::can_put(const Cell& cell) const

@@ -1,6 +1,8 @@
 #ifndef INCLUDE_ROADAGAIN_BOARD
 #define INCLUDE_ROADAGAIN_BOARD
 
+#include <vector>
+
 #include "point.hpp"
 #include "cell.hpp"
 #include "cellcolor.hpp"
@@ -31,7 +33,7 @@ public:
 
     bool in_board(const Point& p) const;
     bool empty(const Point& p) const;
-    bool can_put(const CellColor& stone) const;
+    std::vector<Point> can_put(const CellColor& stone) const;
     bool can_put(const Cell& cell) const;
 
     static const int ROW = 8;

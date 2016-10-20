@@ -14,6 +14,8 @@ Version 0.1.1 is latest
 + Printing help message
 + Printing result after game
 + Log the game records
++ Printing choices you can put
+  + Selecting enable or disable
 
 ## Dependencies
 + ncurses

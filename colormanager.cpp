@@ -9,6 +9,8 @@ namespace roadagain
 const Color ColorManager::BOARD = { BOARD_NUMBER, COLOR_BLACK, COLOR_GREEN };
 const Color ColorManager::BLACK = { BLACK_NUMBER, COLOR_BLACK, COLOR_BLACK };
 const Color ColorManager::WHITE = { WHITE_NUMBER, COLOR_WHITE, COLOR_WHITE };
+const Color ColorManager::BLACK_CHOICE = { BLACK_CHOICE_NUMBER, COLOR_BLACK, COLOR_GREEN };
+const Color ColorManager::WHITE_CHOICE = { WHITE_CHOICE_NUMBER, COLOR_WHITE, COLOR_GREEN };
 
 ColorManager& ColorManager::instance()
 {
@@ -27,6 +29,8 @@ void ColorManager::init()
     register_color(BOARD);
     register_color(BLACK);
     register_color(WHITE);
+    register_color(BLACK_CHOICE);
+    register_color(WHITE_CHOICE);
 }
 
 void ColorManager::register_color(const Color& color)
