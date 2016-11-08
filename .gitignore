@@ -40,4 +40,7 @@ reversi
 # Depending files
 *.d
 
+# Log files
+logs/
+
 
