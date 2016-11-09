@@ -20,6 +20,7 @@ public:
 
     void reverse();
     CellColor reversed() const;
+    bool is_reversed(const CellColor& cc) const;
 
     bool empty() const;
 

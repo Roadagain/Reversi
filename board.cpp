@@ -99,7 +99,7 @@ void Board::reverse(const Cell& cell, const Point& d, bool print_flag)
     Cell c = cell;
 
     c.point += d;
-    while (in_board(c.point) && matrix_[c.point.y][c.point.x] == cell.color.reversed()){
+    while (in_board(c.point) && cell.color.is_reversed(matrix_[c.point.y][c.point.x])){
         cnt++;
         c.point += d;
     }
@@ -133,7 +133,7 @@ int Board::reverse_num(const Cell& cell, const Point& d) const
     Cell c = cell;
 
     c.point += d;
-    while (in_board(c.point) && matrix_[c.point.y][c.point.x] == cell.color.reversed()){
+    while (in_board(c.point) && cell.color.is_reversed(matrix_[c.point.y][c.point.x])){
         cnt++;
         c.point += d;
     }
@@ -246,7 +246,7 @@ bool Board::can_put(const Cell& cell, const Point& d) const
     Cell c = cell;
 
     c.point += d;
-    while (in_board(c.point) && matrix_[c.point.y][c.point.x] == cell.color.reversed()){
+    while (in_board(c.point) && cell.color.is_reversed(matrix_[c.point.y][c.point.x])){
         can_reverse = true;
         c.point += d;
     }
