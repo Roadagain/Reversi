@@ -12,8 +12,8 @@
 namespace roadagain
 {
 
-const Vec2 Board::START = convert_to_printable(Vec2(1, 1));
-const Vec2 Board::END = convert_to_printable(Vec2(Board::ROW, Board::COL));
+const Vec2 Board::START(1, 1);
+const Vec2 Board::END(START.y + COL * 2, START.x + ROW * 3);
 
 const Vec2 Board::D[] = {
     Vec2(-1, -1),
