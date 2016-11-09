@@ -30,7 +30,9 @@ void print_stone(const Cell& cell, bool coordinate)
         stone = '\0';
         break;
     }
-    mvaddch(cell.point.y * 2 + 1 + Board::START.y, cell.point.x * 3 + 1 + Board::START.x, stone);
+
+    Vec2 point = convert_to_printable(cell.point);
+    mvaddch(point.y, point.x, stone);
     addch(stone);
     ColorManager::instance().change_color(ColorManager::BOARD);
     if (coordinate){
@@ -48,19 +50,23 @@ void clear_stone(const Vec2& p)
 
 void print_coordinate(const Vec2& p)
 {
-    mvaddch(p.y * 2 + 1 + Board::START.y, 0, '1' + p.y);
-    mvaddch(p.y * 2 + 1 + Board::START.x, Board::END.x + 1, '1' + p.y);
-    mvaddch(0, p.x * 3 + 1 + Board::START.x, 'a' + p.x);
-    mvaddch(Board::END.y + 1, p.x * 3 + 2 + Board::START.x, 'a' + p.x);
+    Vec2 printable = convert_to_printable(p);
+
+    mvaddch(printable.y, 0, '1' + p.y);
+    mvaddch(printable.y, Board::END.x + 1, '1' + p.y);
+    mvaddch(0, printable.x, 'a' + p.x);
+    mvaddch(Board::END.y + 1, printable.x, 'a' + p.x);
 }
 
 void clear_coordinate(const Vec2& p)
 {
+    Vec2 printable = convert_to_printable(p);
+
     attrset(0);
-    mvaddch(p.y * 2 + 1 + Board::START.y, 0, ' ');
-    mvaddch(p.y * 2 + 1 + Board::START.y, Board::END.x + 1, ' ');
-    mvaddch(0, p.x * 3 + 1 + Board::START.x, ' ');
-    mvaddch(Board::END.y + 1, p.x * 3 + 2 + Board::START.x, ' ');
+    mvaddch(printable.y, 0, ' ');
+    mvaddch(printable.y, Board::END.x + 1, ' ');
+    mvaddch(0, printable.x, ' ');
+    mvaddch(Board::END.y + 1, printable.x, ' ');
     ColorManager::instance().change_color(ColorManager::BOARD);
 }
 
@@ -82,9 +88,16 @@ void print_choice(const Cell& cell)
       default:
         return;
     }
-    mvaddch(cell.point.y * 2 + 1 + Board::START.y, cell.point.x * 3 + 1 + Board::START.x, choice);
+
+    Vec2 printable = convert_to_printable(cell.point);
+    mvaddch(printable.y, printable.x, choice);
     addch(choice);
     ColorManager::instance().change_color(ColorManager::BOARD);
+}
+
+Vec2 convert_to_printable(const Vec2& p)
+{
+    return (Vec2(p.y * 2 + 1 + Board::START.y, p.x * 3 + 1 + Board::START.x));
 }
 
 } // namespace roadagain
