@@ -37,7 +37,7 @@ void Reversi::play()
     start();
 
     for (int i = 0; i < Board::MAX_PUT; i++){
-        std::vector<Point> choices = board_->can_put(now_);
+        std::vector<Vec2> choices = board_->can_put(now_);
         if (choices.empty()){
             change();
             choices = board_->can_put(now_);
@@ -45,18 +45,18 @@ void Reversi::play()
                 break;
             }
         }
-        for (Point& j : choices){
+        for (Vec2& j : choices){
             print_choice(Cell(j, now_));
         }
 
-        Point p;
+        Vec2 p;
         if (now_ == player_){
             p = move(choices);
         }
         else {
             p = enemy_->select(board_, now_);
             if (getch() == 'q'){
-                p = Point(-1, -1);
+                p = Vec2(-1, -1);
             }
         }
         if (p.y == -1 && p.x == -1){
@@ -66,7 +66,7 @@ void Reversi::play()
         change();
         logs_->emplace_back(p, now_);
 
-        for (Point& j : choices){
+        for (Vec2& j : choices){
             if (j == p){
                 continue;
             }
@@ -96,9 +96,9 @@ void Reversi::end() const
     log_records(*logs_, winner);
 }
 
-Point Reversi::move(const std::vector<Point>& choices) const
+Vec2 Reversi::move(const std::vector<Vec2>& choices) const
 {
-    Cell cell(Point(), now_);
+    Cell cell(Vec2(), now_);
     int c;
 
     if (board_->empty(cell.point)){
@@ -137,7 +137,7 @@ Point Reversi::move(const std::vector<Point>& choices) const
             cell.point.x = (cell.point.x + 1) % Board::COL;
             break;
           case 'q':
-            return (Point(-1, -1));
+            return (Vec2(-1, -1));
         }
         if (board_->empty(cell.point)){
             print_stone(cell);

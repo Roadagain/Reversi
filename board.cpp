@@ -12,18 +12,18 @@
 namespace roadagain
 {
 
-const Point Board::START(1, 1);
-const Point Board::END(START.y + ROW * 2, START.x + COL * 3);
+const Vec2 Board::START(1, 1);
+const Vec2 Board::END(START.y + ROW * 2, START.x + COL * 3);
 
-const Point Board::D[] = {
-    Point(-1, -1),
-    Point(-1,  0),
-    Point(-1,  1),
-    Point( 0, -1),
-    Point( 0,  1),
-    Point( 1, -1),
-    Point( 1,  0),
-    Point( 1,  1),
+const Vec2 Board::D[] = {
+    Vec2(-1, -1),
+    Vec2(-1,  0),
+    Vec2(-1,  1),
+    Vec2( 0, -1),
+    Vec2( 0,  1),
+    Vec2( 1, -1),
+    Vec2( 1,  0),
+    Vec2( 1,  1),
 };
 
 Board::Board() : black_(DEFAULT_STONE / 2), white_(DEFAULT_STONE / 2)
@@ -55,7 +55,7 @@ Board::~Board()
     delete[] matrix_;
 }
 
-void Board::print(const Point& p) const
+void Board::print(const Vec2& p) const
 {
     ColorManager::instance().change_color(ColorManager::BOARD);
     for (int i = 0; i < ROW * 2 + 1; i++){
@@ -88,12 +88,12 @@ void Board::put(const Cell& cell, bool print_flag)
 
 void Board::reverse(const Cell& cell, bool print_flag)
 {
-    for (const Point& d : D){
+    for (const Vec2& d : D){
         reverse(cell, d, print_flag);
     }
 }
 
-void Board::reverse(const Cell& cell, const Point& d, bool print_flag)
+void Board::reverse(const Cell& cell, const Vec2& d, bool print_flag)
 {
     int cnt = 0;
     Cell c = cell;
@@ -120,14 +120,14 @@ int Board::reverse_num(const Cell& cell) const
 {
     int cnt = 0;
 
-    for (const Point& d : D){
+    for (const Vec2& d : D){
         cnt += reverse_num(cell, d);
     }
 
     return (cnt);
 }
 
-int Board::reverse_num(const Cell& cell, const Point& d) const
+int Board::reverse_num(const Cell& cell, const Vec2& d) const
 {
     int cnt = 0;
     Cell c = cell;
@@ -144,12 +144,12 @@ int Board::reverse_num(const Cell& cell, const Point& d) const
     return (cnt);
 }
 
-int Board::count_neighbor(const Point& p, const CellColor& stone)
+int Board::count_neighbor(const Vec2& p, const CellColor& stone)
 {
     int cnt = 0;
 
-    for (const Point& d : D){
-        Point tmp = p + d;
+    for (const Vec2& d : D){
+        Vec2 tmp = p + d;
         if (not in_board(tmp)){
             continue;
         }
@@ -193,12 +193,12 @@ CellColor Board::winner() const
     }
 }
 
-bool Board::in_board(const Point& p) const
+bool Board::in_board(const Vec2& p) const
 {
     return (0 <= p.y && p.y < ROW && 0 <= p.x && p.x < COL);
 }
 
-bool Board::empty(const Point& p) const
+bool Board::empty(const Vec2& p) const
 {
     return (matrix_[p.y][p.x].empty());
 }
@@ -212,9 +212,9 @@ void Board::update_counter()
     }
 }
 
-std::vector<Point> Board::can_put(const CellColor& stone) const
+std::vector<Vec2> Board::can_put(const CellColor& stone) const
 {
-    std::vector<Point> choices;
+    std::vector<Vec2> choices;
 
     for (int i = 0; i < ROW; i++){
         for (int j = 0; j < COL; j++){
@@ -231,7 +231,7 @@ bool Board::can_put(const Cell& cell) const
     if (not matrix_[cell.point.y][cell.point.x].empty()){
         return (false);
     }
-    for (const Point& d : D){
+    for (const Vec2& d : D){
         if (can_put(cell, d)){
             return (true);
         }
@@ -240,7 +240,7 @@ bool Board::can_put(const Cell& cell) const
     return (false);
 }
 
-bool Board::can_put(const Cell& cell, const Point& d) const
+bool Board::can_put(const Cell& cell, const Vec2& d) const
 {
     bool can_reverse = false;
     Cell c = cell;

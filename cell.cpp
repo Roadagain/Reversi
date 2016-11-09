@@ -7,7 +7,7 @@ Cell::Cell()
 {
 }
 
-Cell::Cell(const Point& point, const CellColor& color) : point(point), color(color)
+Cell::Cell(const Vec2& point, const CellColor& color) : point(point), color(color)
 {
 }
 

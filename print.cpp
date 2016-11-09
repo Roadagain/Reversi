@@ -41,12 +41,12 @@ void print_stone(const Cell& cell, bool coordinate)
     }
 }
 
-void clear_stone(const Point& p)
+void clear_stone(const Vec2& p)
 {
     print_stone(Cell(p, CellColor::EMPTY), false);
 }
 
-void print_coordinate(const Point& p)
+void print_coordinate(const Vec2& p)
 {
     mvaddch(p.y * 2 + 1 + Board::START.y, 0, '1' + p.y);
     mvaddch(p.y * 2 + 1 + Board::START.x, Board::END.x + 1, '1' + p.y);
@@ -54,7 +54,7 @@ void print_coordinate(const Point& p)
     mvaddch(Board::END.y + 1, p.x * 3 + 2 + Board::START.x, 'a' + p.x);
 }
 
-void clear_coordinate(const Point& p)
+void clear_coordinate(const Vec2& p)
 {
     attrset(0);
     mvaddch(p.y * 2 + 1 + Board::START.y, 0, ' ');

@@ -14,7 +14,7 @@ Enemy::~Enemy()
 {
 }
 
-Point Enemy::select(const Board* board, const CellColor& stone) const
+Vec2 Enemy::select(const Board* board, const CellColor& stone) const
 {
     switch (level_){
         case EASY:
@@ -37,7 +37,7 @@ const int Enemy::SCORE_TABLE[Board::ROW][Board::COL] = {
     {  50, -20,  20,  15,  15,  20, -20,  50 },
 };
 
-Point Enemy::randomized_select(const Board* board, const CellColor& stone) const
+Vec2 Enemy::randomized_select(const Board* board, const CellColor& stone) const
 {
     int n = random();
     Cell c(stone);
@@ -61,9 +61,9 @@ Point Enemy::randomized_select(const Board* board, const CellColor& stone) const
     return (c.point);
 }
 
-Point Enemy::maximized_select(const Board* board, const CellColor& stone) const
+Vec2 Enemy::maximized_select(const Board* board, const CellColor& stone) const
 {
-    Point p;
+    Vec2 p;
     int maximum = 0;
 
     for (int i = 0; i < Board::ROW; i++){
@@ -86,13 +86,13 @@ Point Enemy::maximized_select(const Board* board, const CellColor& stone) const
     return (p);
 }
 
-Point Enemy::evaluated_select(const Board* board, const CellColor& stone, int depth) const
+Vec2 Enemy::evaluated_select(const Board* board, const CellColor& stone, int depth) const
 {
     if (depth >= MAX_DEPTH){
-        return Point(-1, -1);
+        return Vec2(-1, -1);
     }
 
-    Point p;
+    Vec2 p;
     int maximum = MIN_EVALUTE_VALUE;
 
     for (int i = 0; i < Board::ROW; i++){
@@ -120,7 +120,7 @@ int Enemy::reverse_score(Board* board, const Cell& cell, int depth) const
 {
     int score = SCORE_TABLE[cell.point.y][cell.point.x] + board->count_neighbor(cell.point, cell.color.reversed()) * 3;
     board->put(cell, false);
-    for (const Point& d : Board::D){
+    for (const Vec2& d : Board::D){
         score += reverse_score(board, cell, d);
     }
     bool player_put = false;
@@ -134,13 +134,13 @@ int Enemy::reverse_score(Board* board, const Cell& cell, int depth) const
     }
     if (not player_put){
         score += 50;
-        Point player_point = evaluated_select(board, cell.color, depth + 1);
+        Vec2 player_point = evaluated_select(board, cell.color, depth + 1);
         if (player_point.y != -1 && player_point.x != -1){
             score += reverse_score(board, Cell(player_point, cell.color), depth + 1);
         }
     }
     else {
-        Point player_point = evaluated_select(board, cell.color.reversed(), depth + 1);
+        Vec2 player_point = evaluated_select(board, cell.color.reversed(), depth + 1);
         if (player_point.y != -1 && player_point.x != -1){
             score -= reverse_score(board, Cell(player_point, cell.color.reversed()), depth + 1);
         }
@@ -149,7 +149,7 @@ int Enemy::reverse_score(Board* board, const Cell& cell, int depth) const
     return (score);
 }
 
-int Enemy::reverse_score(const Board* board, const Cell& cell, const Point& d) const
+int Enemy::reverse_score(const Board* board, const Cell& cell, const Vec2& d) const
 {
     int score = 0;
     int num = board->reverse_num(cell, d);

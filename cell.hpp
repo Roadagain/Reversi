@@ -2,18 +2,18 @@
 #define INCLUDE_ROADAGAIN_CELL
 
 #include "cellcolor.hpp"
-#include "point.hpp"
+#include "vec2.hpp"
 
 namespace roadagain
 {
 
 struct Cell
 {
-    Point point;
+    Vec2 point;
     CellColor color;
 
     Cell();
-    Cell(const Point& p, const CellColor& color);
+    Cell(const Vec2& p, const CellColor& color);
     Cell(int y, int x, const CellColor& color);
     Cell(const CellColor& color);
 
