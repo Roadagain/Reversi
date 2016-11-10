@@ -62,11 +62,11 @@ void Board::print() const
         for (int j = 0; j < COL * 3 + 1; j++){
             Vec2 point(START.y + i, START.x + j);
             if (i % 2 == 0){
-                mvputc(point, j % 3 == 0 ? '+' : '-');
+                mvputc(point, j % 3 == 0 ? '+' : '-', true);
             }
             else {
                 if (j % 3 == 0){
-                    mvputc(point, '|');
+                    mvputc(point, '|', true);
                 }
                 else {
                     Cell(i / 2, j / 3, matrix_[i / 2][j / 3]).print(false);
