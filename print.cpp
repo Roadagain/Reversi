@@ -20,41 +20,9 @@ void mvputc(const Vec2& p, char c, bool is_printable)
     mvaddch(point.y, point.x, c);
 }
 
-void print_cell(const Cell& cell, bool coordinate)
-{
-    char stone;
-    switch (cell.color){
-      case CellColor::EMPTY:
-        ColorManager::instance().change_color(ColorManager::BOARD);
-        stone = ' ';
-        break;
-      case CellColor::BLACK:
-        ColorManager::instance().change_color(ColorManager::BLACK);
-        stone = 'o';
-        break;
-      case CellColor::WHITE:
-        ColorManager::instance().change_color(ColorManager::WHITE);
-        stone = 'x';
-        break;
-      default:
-        stone = '\0';
-        break;
-    }
-
-    mvputc(cell.point, stone);
-    addch(stone);
-    ColorManager::instance().change_color(ColorManager::BOARD);
-    if (coordinate){
-        print_coordinate(cell.point);
-    }
-    else {
-        clear_coordinate(cell.point);
-    }
-}
-
 void clear_stone(const Vec2& p)
 {
-    print_cell(Cell(p, CellColor::EMPTY), false);
+    Cell(p, CellColor::EMPTY).print(false);
 }
 
 void print_coordinate(const Vec2& p)

@@ -1,4 +1,6 @@
 #include "cell.hpp"
+#include "colormanager.hpp"
+#include "print.hpp"
 
 namespace roadagain
 {
@@ -22,6 +24,38 @@ Cell::Cell(const CellColor& color) : color(color)
 void Cell::reverse()
 {
     color.reverse();
+}
+
+void Cell::print(bool coordinate) const
+{
+    char stone;
+    switch (color){
+      case CellColor::EMPTY:
+        ColorManager::instance().change_color(ColorManager::BOARD);
+        stone = ' ';
+        break;
+      case CellColor::BLACK:
+        ColorManager::instance().change_color(ColorManager::BLACK);
+        stone = 'o';
+        break;
+      case CellColor::WHITE:
+        ColorManager::instance().change_color(ColorManager::WHITE);
+        stone = 'x';
+        break;
+      default:
+        stone = '\0';
+        break;
+    }
+
+    mvputc(point, stone);
+    mvputc(point + Vec2(0, 1), stone);
+    ColorManager::instance().change_color(ColorManager::BOARD);
+    if (coordinate){
+        print_coordinate(point);
+    }
+    else {
+        clear_coordinate(point);
+    }
 }
 
 } // namespace roadagain

@@ -18,6 +18,7 @@ struct Cell
     Cell(const CellColor& color);
 
     void reverse();
+    void print(bool coordinate = true) const;
 };
 
 } // namespace roadagain

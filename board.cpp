@@ -69,7 +69,7 @@ void Board::print() const
                     mvputc(point, '|');
                 }
                 else {
-                    print_cell(Cell(i / 2, j / 3, matrix_[i / 2][j / 3]), false);
+                    Cell(i / 2, j / 3, matrix_[i / 2][j / 3]).print(false);
                 }
             }
         }
@@ -80,7 +80,7 @@ void Board::put(const Cell& cell, bool print_flag)
 {
     matrix_[cell.point.y][cell.point.x] = cell.color;
     if (print_flag){
-        print_cell(cell, false);
+        cell.print(false);
     }
     reverse(cell, print_flag);
     update_counter();
@@ -111,7 +111,7 @@ void Board::reverse(const Cell& cell, const Vec2& d, bool print_flag)
         c.point -= d;
         matrix_[c.point.y][c.point.x].reverse();
         if (print_flag){
-            print_cell(c, false);
+            c.print(false);
         }
     }
 }

@@ -8,7 +8,6 @@ namespace roadagain
 
 void mvputc(const Vec2& p, char c, bool is_printable = false);
 
-void print_cell(const Cell& cell, bool coordinate = true);
 void clear_stone(const Vec2& p);
 void print_coordinate(const Vec2& p);
 void clear_coordinate(const Vec2& p);
