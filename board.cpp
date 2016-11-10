@@ -60,16 +60,16 @@ void Board::print() const
     ColorManager::instance().change_color(ColorManager::BOARD);
     for (int i = 0; i < ROW * 2 + 1; i++){
         for (int j = 0; j < COL * 3 + 1; j++){
-            move(START.y + i, START.x + j);
+            Vec2 point(START.y + i, START.x + j);
             if (i % 2 == 0){
-                addch(j % 3 == 0 ? '+' : '-');
+                mvputc(point, j % 3 == 0 ? '+' : '-');
             }
             else {
                 if (j % 3 == 0){
-                    addch('|');
+                    mvputc(point, '|');
                 }
                 else {
-                    print_stone(Cell(i / 2, j / 3, matrix_[i / 2][j / 3]), false);
+                    print_cell(Cell(i / 2, j / 3, matrix_[i / 2][j / 3]), false);
                 }
             }
         }
@@ -80,7 +80,7 @@ void Board::put(const Cell& cell, bool print_flag)
 {
     matrix_[cell.point.y][cell.point.x] = cell.color;
     if (print_flag){
-        print_stone(cell, false);
+        print_cell(cell, false);
     }
     reverse(cell, print_flag);
     update_counter();
@@ -111,7 +111,7 @@ void Board::reverse(const Cell& cell, const Vec2& d, bool print_flag)
         c.point -= d;
         matrix_[c.point.y][c.point.x].reverse();
         if (print_flag){
-            print_stone(c, false);
+            print_cell(c, false);
         }
     }
 }

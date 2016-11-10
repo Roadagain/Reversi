@@ -10,7 +10,17 @@
 namespace roadagain
 {
 
-void print_stone(const Cell& cell, bool coordinate)
+void mvputc(const Vec2& p, char c, bool is_printable)
+{
+    Vec2 point = p;
+    if (not is_printable){
+        point = convert_to_printable(p);
+    }
+
+    mvaddch(point.y, point.x, c);
+}
+
+void print_cell(const Cell& cell, bool coordinate)
 {
     char stone;
     switch (cell.color){
@@ -31,8 +41,7 @@ void print_stone(const Cell& cell, bool coordinate)
         break;
     }
 
-    Vec2 point = convert_to_printable(cell.point);
-    mvaddch(point.y, point.x, stone);
+    mvputc(cell.point, stone);
     addch(stone);
     ColorManager::instance().change_color(ColorManager::BOARD);
     if (coordinate){
@@ -45,17 +54,17 @@ void print_stone(const Cell& cell, bool coordinate)
 
 void clear_stone(const Vec2& p)
 {
-    print_stone(Cell(p, CellColor::EMPTY), false);
+    print_cell(Cell(p, CellColor::EMPTY), false);
 }
 
 void print_coordinate(const Vec2& p)
 {
     Vec2 printable = convert_to_printable(p);
 
-    mvaddch(printable.y, 0, '1' + p.y);
-    mvaddch(printable.y, Board::END.x + 1, '1' + p.y);
-    mvaddch(0, printable.x, 'a' + p.x);
-    mvaddch(Board::END.y + 1, printable.x, 'a' + p.x);
+    mvputc(Vec2(printable.y, 0), '1' + p.y, true);
+    mvputc(Vec2(printable.y, Board::END.x + 1), '1' + p.y, true);
+    mvputc(Vec2(0, printable.x), 'a' + p.x, true);
+    mvputc(Vec2(Board::END.y + 1, printable.x), 'a' + p.x, true);
 }
 
 void clear_coordinate(const Vec2& p)
@@ -63,10 +72,10 @@ void clear_coordinate(const Vec2& p)
     Vec2 printable = convert_to_printable(p);
 
     attrset(0);
-    mvaddch(printable.y, 0, ' ');
-    mvaddch(printable.y, Board::END.x + 1, ' ');
-    mvaddch(0, printable.x, ' ');
-    mvaddch(Board::END.y + 1, printable.x, ' ');
+    mvputc(Vec2(printable.y, 0), ' ', true);
+    mvputc(Vec2(printable.y, Board::END.x + 1), ' ', true);
+    mvputc(Vec2(0, printable.x), ' ', true);
+    mvputc(Vec2(Board::END.y + 1, printable.x), ' ', true);
     ColorManager::instance().change_color(ColorManager::BOARD);
 }
 
@@ -90,8 +99,8 @@ void print_choice(const Cell& cell)
     }
 
     Vec2 printable = convert_to_printable(cell.point);
-    mvaddch(printable.y, printable.x, choice);
-    addch(choice);
+    mvputc(printable, choice, true);
+    mvputc(Vec2(printable.y, printable.x + 1), choice, true);
     ColorManager::instance().change_color(ColorManager::BOARD);
 }
 

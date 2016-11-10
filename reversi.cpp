@@ -102,7 +102,7 @@ Vec2 Reversi::move(const std::vector<Vec2>& choices) const
     int c;
 
     if (board_->empty(cell.point)){
-        print_stone(cell);
+        print_cell(cell);
     }
     else {
         print_coordinate(cell.point);
@@ -140,7 +140,7 @@ Vec2 Reversi::move(const std::vector<Vec2>& choices) const
             return (Vec2(-1, -1));
         }
         if (board_->empty(cell.point)){
-            print_stone(cell);
+            print_cell(cell);
         }
         else {
             print_coordinate(cell.point);
