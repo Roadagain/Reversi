@@ -55,12 +55,12 @@ Board::~Board()
     delete[] matrix_;
 }
 
-void Board::print(const Vec2& p) const
+void Board::print() const
 {
     ColorManager::instance().change_color(ColorManager::BOARD);
     for (int i = 0; i < ROW * 2 + 1; i++){
         for (int j = 0; j < COL * 3 + 1; j++){
-            move(START.y + p.y + i, START.x + p.x + j);
+            move(START.y + i, START.x + j);
             if (i % 2 == 0){
                 addch(j % 3 == 0 ? '+' : '-');
             }

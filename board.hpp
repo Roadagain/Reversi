@@ -17,7 +17,7 @@ public:
     Board(const Board& board);
     ~Board();
 
-    void print(const Vec2& p = Vec2(0, 0)) const;
+    void print() const;
 
     void put(const Cell& cell, bool print_flag = true);
 
