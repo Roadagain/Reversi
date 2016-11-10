@@ -47,8 +47,9 @@ void Cell::print(bool coordinate) const
         break;
     }
 
-    mvputc(point, stone);
-    mvputc(point + Vec2(0, 1), stone);
+    Vec2 printable = convert_to_printable(point);
+    mvputc(printable, stone, true);
+    mvputc(printable + Vec2(0, 1), stone, true);
     ColorManager::instance().change_color(ColorManager::BOARD);
     if (coordinate){
         print_coordinate(point);
